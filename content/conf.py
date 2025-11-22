@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "LESSON NAME"
-copyright = "2020, The contributors"
-author = "The contributors"
+project = "Learn LLMs"
+copyright = "Pubudu Samarakoon"
+author = "Pubudu Samarakoon"
 github_user = "coderefinery"
 github_repo_name = ""  # auto-detected from dirname if blank
 github_version = "main"
