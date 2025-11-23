@@ -29,7 +29,10 @@ Prerequisites
 :caption: The lesson
 :maxdepth: 1
 
-episode.md
+01.LLM_intro.md
+02.GPT_intro.md
+03.tokenizer.md
+
 ```
 
 ```{toctree}
