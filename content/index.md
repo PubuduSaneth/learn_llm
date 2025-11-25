@@ -32,6 +32,7 @@ Prerequisites
 01.LLM_intro.md
 02.GPT_intro.md
 03.tokenizer.md
+04.Embeddings.md
 
 ```
 
