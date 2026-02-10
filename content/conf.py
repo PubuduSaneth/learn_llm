@@ -48,6 +48,7 @@ nb_execution_mode = "cache"
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
 myst_enable_extensions = [
     "colon_fence",
+    "dollarmath",
 ]
 
 # Settings for sphinx-copybutton

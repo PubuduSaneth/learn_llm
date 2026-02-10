@@ -33,7 +33,8 @@ Prerequisites
 02.GPT_intro.md
 03.tokenizer.md
 04.Embeddings.md
-
+05.Transformer_block.md
+06.Attention_mechanism.md
 ```
 
 ```{toctree}
