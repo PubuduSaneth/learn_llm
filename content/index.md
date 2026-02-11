@@ -37,6 +37,7 @@ Prerequisites
 04.Embeddings.md
 05.Transformer_block.md
 06.Attention_mechanism.md
+07.masked_attention.md
 ```
 
 ```{toctree}
