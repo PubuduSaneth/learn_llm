@@ -6,4 +6,4 @@
 
 ## [Hands-On Large Language Models, Jay Alammar, Maarten Grootendorst](https://www.llm-book.com/)
 
-![Hands-On Large Language Models](image.png)
+![Hands-On Large Language Models](images/handson_llm.png)
