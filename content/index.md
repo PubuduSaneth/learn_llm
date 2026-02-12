@@ -39,6 +39,9 @@ Prerequisites
 06.Attention_mechanism.md
 07.masked_attention.md
 08.Multihead-attention.md
+09.FNN.md
+10.LM_head.md
+11.LLM_dataflow.md
 ```
 
 ```{toctree}
