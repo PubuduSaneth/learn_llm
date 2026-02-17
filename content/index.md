@@ -2,21 +2,21 @@
 
 ## Introduction
 
-This tutorial is designed to
+This lesson is designed to
 
 - Explore the architecture of LLMs with a special focus on GPT-2 model
 - Introduce fundamental components of LLM (i.e., building blocks of LLM architecture)
-- Provide overall understanding of basic LLM architecture
-  - Links to resources that help readers gain deeper comprehension of each of the component are provided in resources
+- Provide understanding of basic LLM architecture
 
 ## Objective
 
+- Identify key components (building blocks) of LLM (Decoder-only LLMs)
 - Understand
-  - why each building block (key component) of a LLM important ?
+  - why each building block of a LLM important ?
   - how these building blocks work ?
 - Understand the dataflow and data parallelization of LLMs
 
-At the end of the tutorial, learners will gain knowledge to interpret the processes that enable LLMs to predict the next word from a sequence of input words.
+At the end of the lesson, learners will gain knowledge to interpret the processes that enable LLMs to predict the next word from a sequence of input words
 
 :::{prereq}
 Prerequisites
@@ -55,6 +55,6 @@ quick-reference
 
 ## Who is the tutorial for?
 
-This tutorial is for individuals with deep learning knowledge and want to have a basic overview of the architecture of LLMs. The tutorial is designed not to dive deep into each component but to interpret the underline processes of LLM's key components.
+This lesson is for individuals with deep learning knowledge and want to have a basic overview of the architecture of LLMs. The lesson is designed not to dive deep into each component but to interpret the underline processes of LLM's key components.
 
 ## Credits
