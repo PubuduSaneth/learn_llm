@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-head self-attention &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Feedforward neural network (FNN)" href="../09.FNN/" />
+    <link rel="prev" title="Masked Attention" href="../07.masked_attention/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multi-head self-attention</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-multi-head-attention">What is Multi-head attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-it-important">Why is it important?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multi-head-attention-mechanism">Multi-head attention mechanism</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11.LLM_dataflow/">Dataflow across LLM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Multi-head self-attention</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/08.Multihead-attention.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="multi-head-self-attention">
+<h1>Multi-head self-attention<a class="headerlink" href="#multi-head-self-attention" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand what Multi-head self-attention is and why it is important</p></li>
+<li><p>Explore how it implemented in a transformer block</p></li>
+</ul>
+</div>
+<section id="what-is-multi-head-attention">
+<h2>What is Multi-head attention<a class="headerlink" href="#what-is-multi-head-attention" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Multi-head attention divides the attention process into multiple independent parallel instances</p>
+<ul>
+<li><p>Each parallel processes is called an “attention head”</p></li>
+<li><p>Extend attention mechanism to multiple parallel processes</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="why-is-it-important">
+<h2>Why is it important?<a class="headerlink" href="#why-is-it-important" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Independent parallel attention heads allow the model to focus on different aspects of the input simultaneously</p></li>
+<li><p>Help model recognize more intricate and nuanced patterns in the text than a single-head attention mechanism</p>
+<ul>
+<li><p>E.g., One head might capture grammatical structure while another captures semantic meaning</p></li>
+</ul>
+</li>
+</ul>
+<section id="multi-head-attention-mechanism">
+<h3>Multi-head attention mechanism<a class="headerlink" href="#multi-head-attention-mechanism" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../_images/multi-head-attention.png" /></p>
+<ul class="simple">
+<li><p>Independent Projections using multiple sets of learnable weight matrices (<span class="math notranslate nohighlight">\(W_{q}\)</span>, <span class="math notranslate nohighlight">\(W_{k}\)</span>, <span class="math notranslate nohighlight">\(W_{v}\)</span>) creates distinct Query, Key, and Value matrices for each head</p></li>
+<li><p>Each head executes attention mechanism in parallel generate multiple context vectors</p></li>
+</ul>
+<p><img alt="alt text" src="../_images/multihead-concatenation.png" /></p>
+<ul class="simple">
+<li><p>Concatenation:</p>
+<ul>
+<li><p>The output vectors from all the parallel heads are joined (concatenated) together to form a single, longer vector</p></li>
+</ul>
+</li>
+<li><p>Final Linear Projection:</p>
+<ul>
+<li><p>Combine the information from all heads into the final output dimension required by the next layer</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In efficient implementations, rather than literally stacking separate layers, Multi-head attention is often achieved by projecting the input into a large dimension and then mathematically “splitting” it into heads for processing</p>
+</div>
+<div class="admonition-coding instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Coding</p>
+<p><strong>Coding Multi-head Attention Mechanisms:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rasbt/LLMs-from-scratch/blob/main/ch03/01_main-chapter-code/multihead-attention.ipynb">Multi-head Attention by by Sebastian Raschka</a></p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../07.masked_attention/" class="btn btn-neutral float-left" title="Masked Attention" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../09.FNN/" class="btn btn-neutral float-right" title="Feedforward neural network (FNN)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

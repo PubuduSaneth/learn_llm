@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masked Attention &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Multi-head self-attention" href="../08.Multihead-attention/" />
+    <link rel="prev" title="Self-attention mechanism" href="../06.Attention_mechanism/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Masked Attention</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-masked-self-attention">What is Masked Self-Attention?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-it-important">Why is it Important?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prevents-cheating-during-training">Prevents “Cheating” During Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autoregressive-text-generation">Autoregressive text generation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#masking-during-the-attention-mechanism">Masking during the attention mechanism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#when-is-the-mask-applied">When is the mask applied?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-apply-attention-mask">How to apply attention mask?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11.LLM_dataflow/">Dataflow across LLM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Masked Attention</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/07.masked_attention.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="masked-attention">
+<h1>Masked Attention<a class="headerlink" href="#masked-attention" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand what masked Self-Attention is and how it is applied</p></li>
+</ul>
+</div>
+<section id="what-is-masked-self-attention">
+<h2>What is Masked Self-Attention?<a class="headerlink" href="#what-is-masked-self-attention" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Mechanism specific to the <strong>decoder</strong> blocks of a Transformer (like GPT).</p></li>
+<li><p>Restricts the model’s to <strong>“only pay attention to previous token embeddings”</strong> when it is processing a specific token in the sequence</p></li>
+<li><p>Masks model’s ability to <strong>pay to any future token embeddings</strong></p></li>
+</ul>
+</section>
+<section id="why-is-it-important">
+<h2>Why is it Important?<a class="headerlink" href="#why-is-it-important" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Without <em>mask</em></p></th>
+<th class="head"><p>With <em>mask</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Attention mechanism</strong></p></td>
+<td><p>Exposed to future tokens</p></td>
+<td><p>Not exposed to future tokens</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Training &amp; Inference</strong></p></td>
+<td><p>Attend to future tokens</p></td>
+<td><p>Predict future tokens</p></td>
+</tr>
+</tbody>
+</table>
+<section id="prevents-cheating-during-training">
+<h3>Prevents “Cheating” During Training<a class="headerlink" href="#prevents-cheating-during-training" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>During training, model should learn how to predict the next token without “peeking” into the future</p></li>
+<li><p>Masked attention ensures the model relies solely on the past to predict the future</p></li>
+</ul>
+</section>
+<section id="autoregressive-text-generation">
+<h3>Autoregressive text generation<a class="headerlink" href="#autoregressive-text-generation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Key to enable sequential generation <strong>autoregressive text generation</strong> (predicting the next word)</p></li>
+<li><p>Forces the model to generate text one token at a time without peaking into the future tokens (model predicts the next word based only on past context)</p></li>
+<li><p>Autoregressive text generation continues by feeding the output of one step as the input for the next, which is essential for creating coherent sentences.</p></li>
+</ul>
+</section>
+</section>
+<section id="masking-during-the-attention-mechanism">
+<h2>Masking during the attention mechanism<a class="headerlink" href="#masking-during-the-attention-mechanism" title="Link to this heading"></a></h2>
+<section id="when-is-the-mask-applied">
+<h3>When is the mask applied?<a class="headerlink" href="#when-is-the-mask-applied" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Mask is applied to scaled attention scores</p></li>
+<li><p>Masked attention scores are used in the Softmax function</p></li>
+<li><p>Ensure that the scaled attention scores sums to 1 over a restricted set of tokens</p></li>
+</ul>
+<p><img alt="alt text" src="../_images/masked_attention.png" /></p>
+</section>
+<section id="how-to-apply-attention-mask">
+<h3>How to apply attention mask?<a class="headerlink" href="#how-to-apply-attention-mask" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Mask: Set upper triangle values of the attention matrix to negative infinity</p></li>
+<li><p><span class="math notranslate nohighlight">\(softmax(\frac{QK^T}{\sqrt{d_k}} + M)*V\)</span></p></li>
+</ul>
+<p><img alt="alt text" src="../_images/masking.png" /></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p class="rubric" id="causal-attention-causal-masking">Causal Attention (Causal Masking)</p>
+<p><strong>In decoder transformer models like GPT:</strong></p>
+<ul class="simple">
+<li><p>Setting upper triangle values of the attention matrix to negative infinity is referred as <strong>Causal Attention (Causal Masking)</strong></p></li>
+<li><p>Causal Attention describes the behavioral constraint</p>
+<ul>
+<li><p>Model must be causal, i.e., respect the sequence of tokens as they appear in time</p></li>
+</ul>
+</li>
+<li><p>Masked Attention describes the technical implementation</p>
+<ul>
+<li><p>Model uses a mathematical mask (upper triangle of matrix with negative infinity)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p class="rubric" id="masking-is-a-broader-term">Masking is a broader term</p>
+<ul class="simple">
+<li><p>“Mask” can be applied to tokens for reasons unrelated to causality</p></li>
+</ul>
+<p><strong>Padding Masks:</strong></p>
+<ul class="simple">
+<li><p>Ignoring filler words (Used to ignore ‘[PAD]’ tokens)</p></li>
+<li><p>Used in both encoder and decoder transformers</p></li>
+</ul>
+<p><strong>Masked Language Modeling:</strong></p>
+<ul class="simple">
+<li><p>Models like BERT use “Masked Language Modeling” to hide random words in the middle of a sentence to force the model to guess them</p>
+<ul>
+<li><p>Masking process: Replace a small percentage (e.g., 15%) of input tokens with a special [MASK] token</p></li>
+<li><p>Objective: To teach the model to understand the relationship between words by “filling in the blanks”</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../06.Attention_mechanism/" class="btn btn-neutral float-left" title="Self-attention mechanism" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../08.Multihead-attention/" class="btn btn-neutral float-right" title="Multi-head self-attention" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

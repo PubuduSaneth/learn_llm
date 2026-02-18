@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Modeling Head (LM Head) &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Pre-trained GPT-2 model end to end" href="../10_1.LLM-end-to-end/" />
+    <link rel="prev" title="Feedforward neural network (FNN)" href="../09.FNN/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Language Modeling Head (LM Head)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-lm-head">What is LM head?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-lm-head-is-important">Why LM head is important?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-is-the-lm-head-help-predict-next-token">How is the LM head help predict next token</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11.LLM_dataflow/">Dataflow across LLM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Language Modeling Head (LM Head)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/10.LM_head.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="language-modeling-head-lm-head">
+<h1>Language Modeling Head (LM Head)<a class="headerlink" href="#language-modeling-head-lm-head" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand what a LM head is</p></li>
+<li><p>Explore how LM head help predict the next token</p></li>
+</ul>
+</div>
+<section id="what-is-lm-head">
+<h2>What is LM head?<a class="headerlink" href="#what-is-lm-head" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>LM head projects the Context vector of the last token from the final block into the size of the model’s vocabulary and calculates a <strong>probability score</strong> for every possible next token</p></li>
+<li><p>Enable next token prediction</p></li>
+</ul>
+</section>
+<section id="why-lm-head-is-important">
+<h2>Why LM head is important?<a class="headerlink" href="#why-lm-head-is-important" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>LM head is final component of a Transformer model, specifically in a LLM like GPT</p></li>
+<li><p>Connects the output of the final Transformer block to the model’s vocabulary &amp; help predict the next token</p></li>
+</ul>
+</section>
+<section id="how-is-the-lm-head-help-predict-next-token">
+<h2>How is the LM head help predict next token<a class="headerlink" href="#how-is-the-lm-head-help-predict-next-token" title="Link to this heading"></a></h2>
+<p><img alt="alt text" src="../_images/LM_head.png" /></p>
+<ul class="simple">
+<li><p>Input: Receives the “output vector” from the last Transformer block</p>
+<ul>
+<li><p>E.g., if the model uses an embedding size of 3,072, the LM head takes in a vector of size 3,072 for each token.</p></li>
+</ul>
+</li>
+<li><p>Maps this input vector to a much larger vector equal to the size of the model’s vocabulary (e.g., 50,257 for GPT-2)</p>
+<ul>
+<li><p>These outputs are raw, unnormalized scores called <code class="docutils literal notranslate"><span class="pre">logits</span></code></p></li>
+</ul>
+</li>
+<li><p>Convert <code class="docutils literal notranslate"><span class="pre">logits</span></code> to probability scores via softmax function</p></li>
+<li><p>Employ a sampling strategy to select the next token prediction</p></li>
+</ul>
+<div class="admonition-coding instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Coding</p>
+<p class="rubric" id="custom-lm-head">Custom LM-head</p>
+<p><strong>Steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Get Logits from the Language Modeling Head</p></li>
+<li><p>Implement Temperature Scaling</p></li>
+<li><p>Implement Top-K Sampling</p></li>
+<li><p>Extract probabilities for Top-K</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lm_head</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">last_token_context_vector</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+
+
+    <span class="c1"># Get Logits from the Language Modeling Head</span>
+    <span class="c1">## Project matrix for d_model (model dimension) to d_vocabulary (vocabulary dimensions)</span>
+    <span class="n">lm_head</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_output_embeddings</span><span class="p">()</span>
+    <span class="c1">## Project last_token_context_vector and extract logits </span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">lm_head</span><span class="p">(</span><span class="n">last_token_context_vector</span><span class="p">)</span>
+
+    <span class="c1"># Implement Temperature Scaling</span>
+    <span class="c1"># Lower temp -&gt; more confident, less random. Higher temp -&gt; more random, creative.</span>
+    <span class="n">scaled_logits</span> <span class="o">=</span> <span class="n">logits</span> <span class="o">/</span> <span class="n">temperature</span>
+
+    <span class="c1"># Implement Top-K Sampling</span>
+    <span class="c1"># We limit the sampling pool to the top &#39;k&#39; most likely tokens</span>
+    <span class="n">top_k_logits</span><span class="p">,</span> <span class="n">top_k_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">scaled_logits</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="c1"># Create a new tensor filled with a very low value (-inf)</span>
+    <span class="n">filtered_logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">))</span>
+    <span class="c1"># Scatter the top-k logits back into the new tensor at their original positions (Scatter the values along dimension 1)</span>
+    <span class="n">filtered_logits</span><span class="o">.</span><span class="n">scatter_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">top_k_indices</span><span class="p">,</span> <span class="n">top_k_logits</span><span class="p">)</span>
+
+    <span class="c1"># Convert the filtered logits into a probability distribution</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">filtered_logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">probabilities</span>
+
+</pre></div>
+</div>
+<p><strong>Steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Decoding via multinomial sampling method to get the next token prediction</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Select top-n tokens from the probabilities calculated in the LM-head</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_top_token</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="c1"># Sample one token from the final probability distribution</span>
+    <span class="c1"># torch.multinomial is used for sampling from a discrete probability distribution.</span>
+    <span class="n">final_token_id</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">top_n</span><span class="p">)</span>
+
+    <span class="c1"># Decode the selected token ID(s) to get the final word</span>
+    <span class="n">final_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">final_token_id</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Final Selected </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s2"> Tokens: &#39;</span><span class="si">{</span><span class="n">final_token</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">final_token</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Functions <code class="docutils literal notranslate"><span class="pre">lm_head</span></code> and <code class="docutils literal notranslate"><span class="pre">get_top_token</span></code> used in <a class="reference internal" href="../10_1.LLM-end-to-end/"><span class="std std-doc">GPT-2 pre-trained end to end exercise</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="docutils">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../09.FNN/" class="btn btn-neutral float-left" title="Feedforward neural network (FNN)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../10_1.LLM-end-to-end/" class="btn btn-neutral float-right" title="Pre-trained GPT-2 model end to end" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

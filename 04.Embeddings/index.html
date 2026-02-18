@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to embedding &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Transformer blocks" href="../05.Transformer_block/" />
+    <link rel="prev" title="Introduction to tokenization" href="../03.tokenizer/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to embedding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#token-embedding">Token embedding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#token-embeddings-in-llms">Token embeddings in LLMs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpt-2-token-embeddings-step-by-step-breakdown">GPT-2 Token embeddings: Step-by-Step Breakdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#explore-llm-token-embeddings">Explore LLM token embeddings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#position-embeddings">Position embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-layer-of-llms">Embedding layer of LLMs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11.LLM_dataflow/">Dataflow across LLM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction to embedding</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/04.Embeddings.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-embedding">
+<h1>Introduction to embedding<a class="headerlink" href="#introduction-to-embedding" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand what embedding is and why it is important</p></li>
+<li><p>Explore how embedding layers in LLMs process tokens</p></li>
+</ul>
+</div>
+<section id="token-embedding">
+<h2>Token embedding<a class="headerlink" href="#token-embedding" title="Link to this heading"></a></h2>
+<p><strong>What is token embedding?</strong></p>
+<ul class="simple">
+<li><p>Token embedding is the process of converting discrete tokens (specifically token-IDs) into vectors</p></li>
+<li><p>These vectors can be represented in a high-dimensional space</p>
+<ul>
+<li><p>Token ID -&gt; vector with length <code class="docutils literal notranslate"><span class="pre">N</span></code> (points in N-dimensional space)</p></li>
+</ul>
+</li>
+<li><p>Representing tokens in a high-dimensional space enables to effectively capture complex patterns and relationships</p></li>
+</ul>
+<p><strong>What token embedding is important?</strong></p>
+<ul class="simple">
+<li><p>Token-IDs are just arbitrary integers assigned during tokenization that do not have mathematical relationship between these integers</p>
+<ul>
+<li><p>Tokens are discrete numerical labels with no geometric or relational structure</p></li>
+</ul>
+</li>
+<li><p>Token embedding convert these numerical labels to structured representations - vectors (points in a high-dimensional space) in a way that captures the relationships between tokens</p></li>
+<li><p>In this high-dimensional space, semantically related tokens like “dog”, “cat”, “animal” cluster together</p></li>
+<li><p>This structure is learned during model training process so that words with similar contextual roles have similar vector representations (similarity between vectors represent relationships between tokens)</p></li>
+</ul>
+<div class="admonition-demo demo admonition" id="demo-0">
+<p class="admonition-title">Demo</p>
+<p><strong>Explore token embeddings (Word2Vec embeddings):</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jalammar.github.io/illustrated-word2vec/">Word2Vec</a> embedding was widely used before the introduction of LLM technology</p></li>
+</ul>
+<p><img alt="Word2Vec" src="../_images/word2vec.png" />
+<em>Figure shows that the words with similar roles in natural language cluster together when represented in high-dimensional space</em></p>
+<details>
+<summary>Python implementation</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gensim.downloader</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">api</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c1"># Download and load the pre-trained Google News model</span>
+<span class="n">wv</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;word2vec-google-news-300&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensions of &#39;king&#39; embeddings: </span><span class="si">{</span><span class="n">wv</span><span class="p">[</span><span class="s1">&#39;king&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 elements of &#39;king&#39; embeddings: </span><span class="si">{</span><span class="n">wv</span><span class="p">[</span><span class="s1">&#39;king&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">similar_words</span> <span class="o">=</span> <span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s1">&#39;king&#39;</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">similarity</span> <span class="ow">in</span> <span class="n">similar_words</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">similar_words</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_3d_projections</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">wv</span><span class="p">):</span>
+    <span class="c1"># Extract embeddings for the given words</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Word List:&quot;</span><span class="p">,</span> <span class="n">word_list</span><span class="p">)</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">[</span><span class="n">wv</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">]</span>
+
+    <span class="c1"># Apply PCA to reduce dimensions to 3D</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">projections</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">projections</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_3d_projections</span><span class="p">(</span><span class="n">projections</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">projections</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;3D PCA Projection of Word2Vec Embeddings&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;PC1&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;PC2&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;PC3&quot;</span><span class="p">)</span>
+    <span class="c1">#plt.legend(loc=&#39;upper left&#39;)</span>
+    <span class="c1">#plt.tight_layout()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">similar_words</span><span class="p">]</span>
+<span class="n">words</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;software&quot;</span><span class="p">,</span> <span class="s2">&quot;internet&quot;</span><span class="p">,</span> <span class="s2">&quot;web&quot;</span> <span class="p">])</span>
+<span class="n">reduced_embeddings</span> <span class="o">=</span> <span class="n">get_3d_projections</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">wv</span><span class="p">)</span>
+<span class="n">plot_3d_projections</span><span class="p">(</span><span class="n">reduced_embeddings</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</details>
+</div>
+<section id="token-embeddings-in-llms">
+<h3>Token embeddings in LLMs<a class="headerlink" href="#token-embeddings-in-llms" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tokenizer in GPT-2 smallest model has a vocabulary of 50257 tokens</p></li>
+<li><p>This GPT-2 tokenizer maps tokens to integers 0-50256 with no mathematical relationship in those assignments</p></li>
+<li><p>For example, tokenizer maps input - <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">sat</span> <span class="pre">on</span> <span class="pre">the</span></code> to tokens <code class="docutils literal notranslate"><span class="pre">[9246,</span> <span class="pre">3332,</span> <span class="pre">319,</span> <span class="pre">262]</span></code> that do not have inherent relationship between these numbers themselves</p></li>
+<li><p>Token embeddings convert these arbitrary Token-IDs into dense vectors in a continuous space of 768 dimensions</p></li>
+<li><p>Now <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">sat</span> <span class="pre">on</span> <span class="pre">the</span></code> aren’t just different numbers—they’re points in a high-dimensional space where the similarity between vectors has meaning</p></li>
+<li><p>Capturing semantic meaning through token embeddings is learned during LLM pre-training process (detailed later)</p></li>
+</ul>
+</section>
+<section id="gpt-2-token-embeddings-step-by-step-breakdown">
+<h3>GPT-2 Token embeddings: Step-by-Step Breakdown<a class="headerlink" href="#gpt-2-token-embeddings-step-by-step-breakdown" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Initiate a learnable matrix (dimensions <code class="docutils literal notranslate"><span class="pre">[vocab_size</span> <span class="pre">×</span> <span class="pre">embedding_dim]</span></code>)</p>
+<ul class="simple">
+<li><p>Each row represents one token’s embedding vector</p></li>
+</ul>
+</li>
+<li><p>Initiate the matrix with small random values (e.g., -2.84 to 1.58) to break symmetry</p>
+<ul class="simple">
+<li><p>if all embeddings were identical, tokens couldn’t differentiate during training</p></li>
+</ul>
+</li>
+<li><p>As the model processes training examples, it makes predictions using these random embeddings</p></li>
+<li><p>Prediction errors generate gradients that flow back through the network to the embedding layer</p></li>
+<li><p>Token embeddings are optimize through backpropagation (Tokens appearing in similar contexts receive similar updates)</p></li>
+<li><p>Through thousands of iterations in the pre-training process, random vectors evolve into meaningful representations where “cat” and “dog” cluster together</p></li>
+<li><p>The final optimized embeddings encode semantic relationships learned entirely from the training data patterns</p></li>
+</ol>
+</section>
+<section id="explore-llm-token-embeddings">
+<h3>Explore LLM token embeddings<a class="headerlink" href="#explore-llm-token-embeddings" title="Link to this heading"></a></h3>
+<p><strong>Embedding Dimensions:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2&quot;</span><span class="p">,)</span>
+
+<span class="c1"># Access the word token embedding layer</span>
+<span class="n">wte</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">wte</span>
+
+<span class="c1"># Get vocabulary size and embedding dimension</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vocabulary Size: </span><span class="si">{</span><span class="n">wte</span><span class="o">.</span><span class="n">num_embeddings</span><span class="si">}</span><span class="s2">; Embedding Dimension: </span><span class="si">{</span><span class="n">wte</span><span class="o">.</span><span class="n">embedding_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># The embedding matrix is stored in the &#39;weight&#39; attribute</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of the embedding matrix: </span><span class="si">{</span><span class="n">wte</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>LLM Embedding of made-up words:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text_rand</span> <span class="o">=</span> <span class="s2">&quot;rand_xyz&quot;</span>
+<span class="n">rand_token_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text_rand</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token IDs for text &#39;</span><span class="si">{</span><span class="n">text_rand</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">rand_token_ids</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decoded text: </span><span class="si">{</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">rand_token_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Use evaluation mode and not gradient calculation (training)</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">rand_token_embeddings</span> <span class="o">=</span> <span class="n">wte</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">rand_token_ids</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of the random token embeddings: </span><span class="si">{</span><span class="n">rand_token_embeddings</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rand_token_ids</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">rand_token_ids</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">rand_token_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">;</span><span class="se">\n\t</span><span class="s2">Embeddings (first 5): </span><span class="si">{</span><span class="n">rand_token_embeddings</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition-output instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Output</p>
+<details>
+<summary>Embedding Dimensions</summary>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Vocabulary Size: 50257; Embedding Dimension: 768
+Shape of the embedding matrix: torch.Size([50257, 768])
+</pre></div>
+</div>
+</details>
+<details>
+<summary>LLM Embedding of made-up words</summary>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Token IDs for text &#39;rand_xyz&#39;: [25192, 62, 5431, 89]
+Decoded text: rand_xyz
+
+Shape of the random token embeddings: torch.Size([4, 768])
+
+Token 0: rand -&gt; 25192;
+	Embeddings (first 5D): tensor([-0.0456, -0.1112,  0.2527,  0.0098, -0.0464])
+Token 1: _ -&gt; 62;
+	Embeddings (first 5D): tensor([-0.0073, -0.0894,  0.0005,  0.0701, -0.0090])
+Token 2: xy -&gt; 5431;
+	Embeddings (first 5): tensor([-0.1123, -0.0957,  0.1115, -0.0743,  0.0958])
+Token 3: z -&gt; 89;
+	Embeddings (first 5D): tensor([-0.0141, -0.0427,  0.0941, -0.1052,  0.0594])
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="position-embeddings">
+<h2>Position embeddings<a class="headerlink" href="#position-embeddings" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Token embeddings process (converting unstructured token-ids to dense vectors) help capture relationships between tokens</p></li>
+<li><p>Token embeddings process treats all positions equally</p></li>
+<li><p>Token embedding alone makes models unable to distinguish token order without position information</p>
+<ul>
+<li><p>Unable to distinguish between “dog bites man” and “man bites dog”</p></li>
+</ul>
+</li>
+<li><p>Position embeddings injects position information to embedding vectors</p></li>
+</ul>
+</section>
+<section id="embedding-layer-of-llms">
+<h2>Embedding layer of LLMs<a class="headerlink" href="#embedding-layer-of-llms" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Token embeddings convert discrete token IDs into vector representations through a learnable matrix</p></li>
+<li><p>Positional embeddings added to inject sequence order information to LLM embeddings</p></li>
+<li><p>Embedding vectors (combined token and position embeddings) are parses to the next layer of the LLM - transformer layer/block</p></li>
+</ul>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/LLM-embeddings.png"><img alt="LLM embeddings" src="../_images/LLM-embeddings.png" style="width: 531.5px; height: 224.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Source: <a class="reference external" href="https://poloclub.github.io/transformer-explainer/">transformer-explainer</a></em></span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition-demo demo admonition" id="demo-1">
+<p class="admonition-title">Demo</p>
+<p><strong>Token and position embeddings:</strong></p>
+<p><strong>Steps in the following script:</strong></p>
+<ul class="simple">
+<li><p>Tokenize input text <code class="docutils literal notranslate"><span class="pre">bank</span> <span class="pre">is</span> <span class="pre">near</span> <span class="pre">the</span> <span class="pre">river</span> <span class="pre">bank</span></code></p></li>
+<li><p>Pass input to token and position embeddings</p></li>
+<li><p>Calculate the similarity between 1st and last token</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="n">text_1</span> <span class="o">=</span> <span class="s2">&quot;bank is near the river bank&quot;</span>
+<span class="n">token_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text_1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">token_ids</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token_ids</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">token_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">wte</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">wte</span> <span class="c1"># Token embedding</span>
+<span class="n">wpe</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">wpe</span> <span class="c1"># Position embedding</span>
+
+<span class="n">bank_1_id</span> <span class="o">=</span> <span class="n">token_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">wte_bank_1</span> <span class="o">=</span> <span class="n">wte</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">bank_1_id</span><span class="p">))</span>
+<span class="n">wpe_bank_1</span> <span class="o">=</span> <span class="n">wpe</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">bank_2_id</span> <span class="o">=</span> <span class="n">token_ids</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">wte_bank_2</span> <span class="o">=</span> <span class="n">wte</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">bank_2_id</span><span class="p">))</span>
+<span class="n">wpe_bank_2</span> <span class="o">=</span> <span class="n">wpe</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">cosine_similarity</span><span class="p">(</span>
+    <span class="n">wte_bank_1</span> <span class="o">+</span> <span class="n">wpe_bank_1</span><span class="p">,</span>
+    <span class="n">wte_bank_2</span> <span class="o">+</span> <span class="n">wpe_bank_2</span><span class="p">,</span>
+    <span class="n">dim</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Similarity: </span><span class="si">{</span><span class="n">cosine_sim</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Less than 1.0 - they&#39;re different!</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The contextualization happens through the Transformer layers of the LLM by updating vector embeddings</p></li>
+<li><p>Transformer update vectors from embedding layer to reflect the attention patterns that capture semantic relationships like “river” → “bank” (as in riverbank)</p></li>
+</ul>
+<div class="admonition-output instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Output</p>
+<details>
+<summary>LLM Embedding</summary>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## Notice the token 0 - &quot;bank&quot; and &quot; bank&quot; (with leading space)
+
+Token 0: bank -&gt; 17796
+Token 1:  is -&gt; 318
+Token 2:  near -&gt; 1474
+Token 3:  the -&gt; 262
+Token 4:  river -&gt; 7850
+Token 5:  bank -&gt; 3331
+
+Similarity: 0.5472
+</pre></div>
+</div>
+</details>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../03.tokenizer/" class="btn btn-neutral float-left" title="Introduction to tokenization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../05.Transformer_block/" class="btn btn-neutral float-right" title="Transformer blocks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

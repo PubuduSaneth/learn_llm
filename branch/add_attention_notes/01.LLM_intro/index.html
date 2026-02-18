@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to Large Language Models (LLMs) &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="GPT - Generative Pretrained Transformer model" href="../02.GPT_intro/" />
+    <link rel="prev" title="Building Blocks of GPT-2 LLM" href="../" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Large Language Models (LLMs)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#language-modeling-lm">Language modeling (LM)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-does-the-lm-field-needs-llms">Why does the LM field needs LLMs?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#llms">LLMs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#llms-vs-other-ml-approaches">LLMs vs other ML approaches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.Attention_mechanism/">Self-attention mechanism</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction to Large Language Models (LLMs)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/content/blob/main/content/01.LLM_intro.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-large-language-models-llms">
+<h1>Introduction to Large Language Models (LLMs)<a class="headerlink" href="#introduction-to-large-language-models-llms" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<p><strong>Understand:</strong></p>
+<ul class="simple">
+<li><p>Why the filed of language modeling needed LLMs?</p></li>
+<li><p>What are LLMs?</p></li>
+<li><p>How do LLMs differ from other machine learning approaches?</p></li>
+</ul>
+</div>
+<section id="language-modeling-lm">
+<h2>Language modeling (LM)<a class="headerlink" href="#language-modeling-lm" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>LM was introduced in early 1980s with the introduction of Recurrent Neural Networks (RNNs)</p></li>
+<li><p>With the advances in the field of LM, more advance techniques to RNNs were introduced to</p>
+<ul>
+<li><p>preserve gradients and maintain information (1997-2014; Gating mechanisms)</p></li>
+<li><p>handle long-term memory (2015; Attention for RNNs)</p></li>
+<li><p>manage variable-length input output sequences (2014; Encoder-decoder for RNNs)</p></li>
+</ul>
+</li>
+</ul>
+<section id="why-does-the-lm-field-needs-llms">
+<h3>Why does the LM field needs LLMs?<a class="headerlink" href="#why-does-the-lm-field-needs-llms" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>RNNs process inputs sequentially and the attention mechanism was not build into the core architecture</p></li>
+<li><p>RNNs are slow and lead to scalability challenges</p></li>
+<li><p>Transformer technology introduced in the paper <a class="reference external" href="https://arxiv.org/abs/1706.03762">“Attention Is All You Need”</a> addressed this limitations in Modern RNNs</p></li>
+<li><p>Transformer technology (therefore LLMs) eliminate sequential dependency:</p>
+<ul>
+<li><p>all positions can be computed in parallel</p></li>
+<li><p>Scalable model training and inference</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="llms">
+<h2>LLMs<a class="headerlink" href="#llms" title="Link to this heading"></a></h2>
+<p>Transformer-based neural networks with large number of parameters (billions to trillions) that employ self-attention mechanisms and trained on vast amounts data (billions to trillions of tokens)</p>
+<section id="llms-vs-other-ml-approaches">
+<h3>LLMs vs other ML approaches<a class="headerlink" href="#llms-vs-other-ml-approaches" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Behavior of traditional ML approaches are specifically tied to the training objectives</p></li>
+<li><p>LLMs exhibits capabilities that were not explicitly trained</p>
+<ul>
+<li><p>i.e., Simple training objectives lead to complex capabilities</p></li>
+<li><p>e.g., LLM’s ability to translate despite never being specifically trained for translation</p></li>
+</ul>
+</li>
+<li><p>These capabilities are referred “Emergent Behavior” of LLMs</p></li>
+<li><p>This complexity emerges from:</p>
+<ul>
+<li><p>Large scale + rich data + powerful architecture</p></li>
+<li><p>Emergent mechanism is still not fully understood</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../" class="btn btn-neutral float-left" title="Building Blocks of GPT-2 LLM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../02.GPT_intro/" class="btn btn-neutral float-right" title="GPT - Generative Pretrained Transformer model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
