@@ -20,8 +20,8 @@
 project = "Learn LLMs"
 copyright = "Pubudu Samarakoon, 2026"
 author = "Pubudu Samarakoon"
-github_user = "coderefinery"
-github_repo_name = ""  # auto-detected from dirname if blank
+github_user = "pubudusaneth"
+github_repo_name = "learn_llm"  # auto-detected from dirname if blank
 github_version = "main"
 conf_py_path = "/content/"  # with leading and trailing slash
 
