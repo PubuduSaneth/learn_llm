@@ -41,7 +41,7 @@ Prerequisites
 08.Multihead-attention.md
 09.FNN.md
 10.LM_head.md
-10_1.LLM-end-t0-end.ipynb
+10_1.LLM-end-to-end.ipynb
 11.LLM_dataflow.md
 ```
 
