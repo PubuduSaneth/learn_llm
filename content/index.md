@@ -7,5 +7,5 @@ Lessons covering a broad range of concepts on Large Language Model (LLM) related
 :maxdepth: 1
 
 GPT-2_LLM/index.md
-
+Agentic_Architectures/index.md
 ```
