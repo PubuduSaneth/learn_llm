@@ -20,13 +20,13 @@ GPT-2_LLM/09.FNN.md
 GPT-2_LLM/10.LM_head.md
 GPT-2_LLM/10_1.LLM-end-to-end.ipynb
 GPT-2_LLM/11.LLM_dataflow.md
-
+GPT-2_LLM/quick-reference.md
 ```
 
 
 ```{toctree}
-:caption: Lesson: Architecting Autonomous Systems
+:caption: Architecting Autonomous Systems
 :maxdepth: 1
 
-Agentic_Architectures/index.md
+Agentic_Architectures/0.Introduction.md
 ```
