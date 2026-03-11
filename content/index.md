@@ -29,4 +29,5 @@ GPT-2_LLM/quick-reference.md
 :maxdepth: 1
 
 Agentic_Architectures/0.Introduction.md
+Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
 ```
