@@ -30,4 +30,5 @@ GPT-2_LLM/quick-reference.md
 
 Agentic_Architectures/0.Introduction.md
 Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
+Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md
 ```
