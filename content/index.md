@@ -2,7 +2,6 @@
 
 Lessons covering a broad range of concepts on Large Language Model (LLM) related technology
 
-
 ```{toctree}
 :caption: Building Blocks of GPT-2 LLM
 :maxdepth: 1
@@ -23,7 +22,6 @@ GPT-2_LLM/11.LLM_dataflow.md
 GPT-2_LLM/quick-reference.md
 ```
 
-
 ```{toctree}
 :caption: Architecting Autonomous Systems
 :maxdepth: 1
@@ -31,4 +29,5 @@ GPT-2_LLM/quick-reference.md
 Agentic_Architectures/0.Introduction.md
 Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
 Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md
+Agentic_Architectures/03.Context_Engineering.md
 ```
