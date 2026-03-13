@@ -1,61 +1,36 @@
-# Building Blocks of GPT-2 LLM
+# Learn LLMs
 
-## Introduction
+The space where I organize my notes as I cover a broad range of concepts on Large Language Model (LLM) related technologies
 
-This lesson is designed to
+```{toctree}
+:caption: Building Blocks of GPT-2 LLM
+:maxdepth: 1
 
-- Explore the architecture of LLMs with a special focus on GPT-2 model
-- Introduce fundamental components of LLM (i.e., building blocks of LLM architecture)
-- Provide understanding of basic LLM architecture
+GPT-2_LLM/0.Introduction.md
+GPT-2_LLM/01.LLM_intro.md
+GPT-2_LLM/02.GPT_intro.md
+GPT-2_LLM/03.tokenizer.md
+GPT-2_LLM/04.Embeddings.md
+GPT-2_LLM/05.Transformer_block.md
+GPT-2_LLM/06.Attention_mechanism.md
+GPT-2_LLM/07.masked_attention.md
+GPT-2_LLM/08.Multihead-attention.md
+GPT-2_LLM/09.FNN.md
+GPT-2_LLM/10.LM_head.md
+GPT-2_LLM/10_1.LLM-end-to-end.ipynb
+GPT-2_LLM/11.LLM_dataflow.md
+GPT-2_LLM/quick-reference.md
+```
 
-## Objective
+:::{exercise} Under active development (preview stage)
 
-- Identify key components (building blocks) of LLM (Decoder-only LLMs)
-- Understand
-  - why each building block of a LLM important ?
-  - how these building blocks work ?
-- Understand the dataflow and data parallelization of LLMs
+```{toctree}
+:caption: Architecting Autonomous Systems
+:maxdepth: 1
 
-At the end of the lesson, learners will gain knowledge to interpret the processes that enable LLMs to predict the next word from a sequence of input words
-
-:::{prereq}
-Prerequisites
-
-- Basic understanding of Deep learning concepts and methods
-- Python programming
-- Basic understanding of PyTorch implementation
+Agentic_Architectures/0.Introduction.md
+Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
+Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md
+Agentic_Architectures/03.Context_Engineering.md
+```
 :::
-
-
-```{toctree}
-:caption: The lesson
-:maxdepth: 1
-
-01.LLM_intro.md
-02.GPT_intro.md
-03.tokenizer.md
-04.Embeddings.md
-05.Transformer_block.md
-06.Attention_mechanism.md
-07.masked_attention.md
-08.Multihead-attention.md
-09.FNN.md
-10.LM_head.md
-10_1.LLM-end-to-end.ipynb
-11.LLM_dataflow.md
-```
-
-```{toctree}
-:caption: Reference
-:maxdepth: 1
-
-quick-reference
-```
-
-(learner-personas)=
-
-## Who is the tutorial for?
-
-This lesson is for individuals with deep learning knowledge and want to have a basic overview of the architecture of LLMs. The lesson is designed not to dive deep into each component but to interpret the underline processes of LLM's key components.
-
-## Credits
