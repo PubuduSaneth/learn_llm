@@ -1,6 +1,6 @@
-# Into to LLMs
+# Learn LLMs
 
-Lessons covering a broad range of concepts on Large Language Model (LLM) related technology
+The space where I organize my notes as I cover a broad range of concepts on Large Language Model (LLM) related technologies
 
 ```{toctree}
 :caption: Building Blocks of GPT-2 LLM
@@ -22,6 +22,8 @@ GPT-2_LLM/11.LLM_dataflow.md
 GPT-2_LLM/quick-reference.md
 ```
 
+:::{exercise} Under active development (preview stage)
+
 ```{toctree}
 :caption: Architecting Autonomous Systems
 :maxdepth: 1
@@ -31,3 +33,4 @@ Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
 Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md
 Agentic_Architectures/03.Context_Engineering.md
 ```
+:::
