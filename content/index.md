@@ -1,6 +1,8 @@
 # Learn LLMs
 
-The space where I organize my notes as I cover a broad range of concepts on Large Language Model (LLM) related technologies
+I’ve spent the last 15+ years working in genomics, and I see myself as infinite learner. Recently, I began studying the technology behind Large Language Models (LLMs) —not to ride the latest AI-HASS (“hype as a service”) wave, but to understand the core technology that make these systems work.
+
+These notes are my learning journal: a place where I collect, organize, and clarify what I’m discovering about LLMs and the broader ecosystem around them.
 
 ```{toctree}
 :caption: Building Blocks of GPT-2 LLM
