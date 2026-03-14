@@ -1,0 +1,886 @@
+# Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study
+
+## Overview
+
+This guide explains core concepts in agent development using a real-world implementation: a Norwegian language learning agent built with the Google Agent Development Kit (ADK). The agent orchestrates interactive language practice scenarios, manages user state across sessions, and integrates external tools through the Model Context Protocol.
+
+
+## Part 1: Core Anatomy and Taxonomy of Agents
+
+### What Is an Agent?
+
+An agent is a software system that autonomously perceives its environment, reasons about goals, and takes actions to achieve those goals. Agents operate in a loop: **perceive → reason → act → perceive again**.
+
+### The Agent's Operational Loop
+
+The agent's operational loop consists of four phases:
+
+#### Phase 1: Context Preparation (Before Agent)
+Before the agent processes any input, it prepares its context:
+
+```python
+# From agent.py: on_before_agent callback
+async def on_before_agent(callback_context: CallbackContext):
+    state = callback_context.state
+    scenario_id = state.get("active_scenario_id")
+
+    memory_info = ""
+    # Search memory for personalization
+    if not scenario_id:
+        try:
+            memories = await callback_context.search_memory("scenario fullført")
+            if memories and memories.memories:
+                memory_info = "\n\nKontekst fra tidligere samtaler:\n"
+                for mem in memories.memories[-3:]:
+                    memory_info += f"- {mem.content...}\n"
+        except Exception:
+            pass
+
+    # Dynamically build instruction based on state
+    if scenario_id and scenario_id in SCENARIOS:
+        scenario = SCENARIOS[scenario_id]
+        new_instruction = build_instruction(scenario, state)
+        root_agent.instruction = new_instruction
+    else:
+        root_agent.instruction = SYSTEM_INSTRUCTION + memory_info
+```
+
+**What happens here:**
+1. **State Retrieval**: The agent accesses persisted session state (current scenario, words practiced, exchange count)
+2. **Memory Search**: It queries the memory service for past interactions to provide context-aware personalization
+3. **Dynamic Instruction Building**: The system instruction is reconstructed based on current state, not static
+
+**Why this matters:**
+- The agent's behavior is context-aware, not one-size-fits-all
+- Session continuity is maintained across conversations
+- The agent's instruction set evolves based on user progress
+
+#### Phase 2: Agent Reasoning (Core Loop)
+The agent receives user input, applies tools to gather information, and generates a response:
+
+```python
+root_agent = LlmAgent(
+    name="norsk_agent",
+    model=MODEL_ID,
+    instruction=SYSTEM_INSTRUCTION,
+    tools=[list_scenarios, select_scenario, get_vocabulary,
+           mark_word_practiced, get_progress, end_scenario,
+           get_user_profile, mcp_toolset],
+)
+```
+
+**The internal loop:**
+1. **Observe**: Receive user utterance ("Jeg vil velge kafé-scenarioet")
+2. **Plan**: Reason about which tools to use (e.g., `select_scenario`)
+3. **Act**: Call the tool with appropriate arguments
+4. **Observe**: Receive tool output with scenario details
+5. **Generate**: Compose response based on tool results
+
+#### Phase 3: Tool Execution (Tool Integration)
+The agent invokes tools to affect state or retrieve information:
+
+```python
+# Example tool call sequence:
+# User: "Jeg vil velge kafé-scenarioet"
+# Agent reasoning: "User wants cafe scenario → call select_scenario('cafe')"
+# Tool execution (tools.py):
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    if scenario_id not in SCENARIOS:
+        return {"error": f"Beklager, jeg kjenner ikke til scenarioet '{scenario_id}'."}
+
+    # Modify state
+    tool_context.state["active_scenario_id"] = scenario_id
+    tool_context.state["words_practiced"] = []
+    tool_context.state["exchange_count"] = 0
+
+    # Return result
+    scenario = SCENARIOS[scenario_id]
+    return {
+        "id": scenario["id"],
+        "title_no": scenario["title_no"],
+        "persona": scenario["persona"],
+        "opening_line": scenario["opening_line"]
+    }
+```
+
+**State mutation happens here**: The agent's tools modify session state directly.
+
+#### Phase 4: State Persistence (After Agent)
+After generating a response, the agent persists relevant information:
+
+```python
+# From agent.py: on_after_agent callback
+async def on_after_agent(callback_context: CallbackContext):
+    count = callback_context.state.get("exchange_count", 0)
+    callback_context.state["exchange_count"] = count + 1
+
+    # Add current session to long-term memory
+    try:
+        await callback_context.add_session_to_memory()
+    except Exception:
+        pass
+```
+
+**What happens:**
+1. Exchange counter is incremented (used to track conversation depth)
+2. The entire session is serialized to long-term memory
+3. Future conversations can query this memory for context
+
+### Complete Loop Diagram
+
+```
+User Input
+    ↓
+[1] on_before_agent()
+    ├─ Retrieve session state
+    ├─ Query memory for personalization
+    └─ Rebuild dynamic instruction
+    ↓
+[2] Agent Reasoning
+    ├─ Observe: Parse user intent
+    ├─ Plan: Decide which tools to call
+    ├─ Act: Execute tools
+    └─ Generate: Create response
+    ↓
+[3] Tool Execution
+    ├─ Modify state (active_scenario_id, words_practiced, etc.)
+    └─ Return results to agent
+    ↓
+[4] on_after_agent()
+    ├─ Increment exchange counter
+    └─ Persist session to memory
+    ↓
+Response to User
+```
+
+
+
+### Taxonomy of Capabilities
+
+Agent capabilities fall into distinct categories:
+
+#### 1. Observation (Perception)
+**How the agent perceives its environment:**
+
+```python
+# Capability 1: Access to session state
+state = callback_context.state
+active_scenario_id = state.get("active_scenario_id")
+words_practiced = state.get("words_practiced", [])
+exchange_count = state.get("exchange_count", 0)
+```
+
+The agent observes:
+- Current scenario ID
+- Words practiced in this session
+- Number of exchanges (conversation depth)
+- User's cross-session profile (completed scenarios, weak words)
+
+#### 2. Action (Effecting State)
+**How the agent affects its environment:**
+
+```python
+# Capability 2: Direct state mutation through tools
+def mark_word_practiced(tool_context: Context, word: str, correct: bool) -> str:
+    practiced = tool_context.state.get("words_practiced", [])
+    if correct and word not in practiced:
+        practiced.append(word)
+        tool_context.state["words_practiced"] = practiced  # ← State mutation
+        return f"Flott! '{word}' er markert som lært."
+```
+
+The agent can:
+- Change the active scenario
+- Mark words as learned
+- Update user profiles
+- Track progress
+
+#### 3. Communication (Expression)
+**How the agent expresses itself:**
+
+```python
+# Capability 3: Natural language generation constrained by instruction
+SYSTEM_INSTRUCTION = """
+Du er en vennlig og tålmodig norsk språkpartner.
+Bruk alltid norsk.
+Hold svarene dine svært korte (1-2 små setninger).
+Dersom brukeren gjør grammatikkfeil, gi en rask og vennlig korreksjon.
+"""
+```
+
+The agent is instructed to:
+- Speak only Norwegian
+- Keep responses short (1-2 sentences)
+- Provide gentle corrections
+- Adapt persona based on scenario
+
+#### 4. Memory (Persistent Knowledge)
+**How the agent remembers:**
+
+```python
+# Capability 4: Long-term memory retrieval and storage
+memories = await callback_context.search_memory("scenario fullført")
+# Can query for:
+# - Completed scenarios
+# - Weak words (weak_words list)
+# - Past interactions
+```
+
+The agent remembers:
+- Which scenarios have been completed
+- Words the user struggles with
+- The trajectory of learning progress
+
+#### 5. Tool Integration (External Capabilities)
+**How the agent extends itself:**
+
+```python
+# Capability 5: Call external tools
+tools=[list_scenarios, select_scenario, get_vocabulary,
+       mark_word_practiced, get_progress, end_scenario,
+       get_user_profile, mcp_toolset]
+
+# Including MCP-integrated tools:
+mcp_toolset = McpToolset(
+    connection_params=StdioServerParameters(
+        command="uv",
+        args=["run", "mcp_vocab_server.py"],
+    ),
+    use_mcp_resources=True
+)
+```
+
+The agent integrates:
+- Local tools (scenario management, progress tracking)
+- External MCP services (vocabulary lookup from external registry)
+
+## Part 2: Tools, Interoperability, and the Model Context Protocol (MCP)
+
+### What Are Tools?
+
+Tools are functions that agents can invoke to interact with their environment. They are the agent's "hands" for affecting the world.
+
+#### Tool Categories in Our Implementation
+
+**Category 1: State Management Tools**
+```python
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    """Changes the active scenario and resets scenario-specific state."""
+    tool_context.state["active_scenario_id"] = scenario_id
+    tool_context.state["words_practiced"] = []
+    tool_context.state["exchange_count"] = 0
+```
+
+**Category 2: Observation Tools**
+```python
+def get_progress(tool_context: Context) -> dict:
+    """Queries current progress without modifying state."""
+    active_scenario_id = tool_context.state.get("active_scenario_id")
+    practiced = tool_context.state.get("words_practiced", [])
+    total_words = len(SCENARIOS[active_scenario_id].get("vocabulary", []))
+    return {
+        "practiced_count": len(practiced),
+        "total_words": total_words,
+        "completion_percentage": (len(practiced) / total_words) * 100
+    }
+```
+
+**Category 3: Complex Multi-Step Tools**
+```python
+def end_scenario(tool_context: Context) -> str:
+    """Orchestrates scenario completion, including state analysis and memory updates."""
+    scenario = SCENARIOS[active_scenario_id]
+    vocab = scenario.get("vocabulary", [])
+    words_practiced = tool_context.state.get("words_practiced", [])
+
+    # Calculate weak words
+    target_words = {item["norwegian"] for item in vocab}
+    practiced_set = set(words_practiced)
+    weak_words = target_words - practiced_set
+
+    # Update cross-session profile
+    all_weak_words = set(tool_context.state.get("user:weak_words", []))
+    all_weak_words.update(weak_words)
+    tool_context.state["user:weak_words"] = list(all_weak_words)
+```
+
+### Tool Design Best Practices
+
+#### 1. **Single Responsibility Principle**
+Each tool does one thing well:
+
+```python
+# ✓ GOOD: Focused tool
+def get_vocabulary(scenario_id: str) -> dict:
+    """Returns vocabulary for a scenario. No side effects."""
+    if scenario_id not in SCENARIOS:
+        return {"error": f"Cannot find vocabulary for '{scenario_id}'."}
+    return {"vocabulary": SCENARIOS[scenario_id]["vocabulary"]}
+
+# ✗ BAD: Mixing concerns
+# def get_vocabulary_and_mark_practiced(scenario_id, word, correct):
+#     "Violates single responsibility - does two things"
+```
+
+#### 2. **Clear Input Contracts**
+Define exactly what parameters are needed:
+
+```python
+def mark_word_practiced(
+    tool_context: Context,      # Always include context for state access
+    word: str,                  # The vocabulary word
+    correct: bool               # Whether user used it correctly
+) -> str:
+    """Clear inputs, clear purpose."""
+```
+
+#### 3. **Predictable Output Contracts**
+Tools always return a consistent structure:
+
+```python
+# ✓ GOOD: Consistent return types
+def select_scenario(...) -> dict:
+    return {
+        "id": scenario["id"],
+        "title_no": scenario["title_no"],
+        "persona": scenario["persona"],
+        "opening_line": scenario["opening_line"]
+    }
+    # or error:
+    return {"error": "..."}
+
+# ✗ BAD: Unpredictable returns
+# def select_scenario(...):
+#     if ok: return scenario
+#     else: return None  # Inconsistent!
+```
+
+#### 4. **Explicit Error Handling**
+Tools should not crash; they return error information:
+
+```python
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    if scenario_id not in SCENARIOS:
+        return {"error": f"Beklager, jeg kjenner ikke til scenarioet '{scenario_id}'."}
+    # Happy path follows
+```
+
+#### 5. **State Locality**
+Tools access and modify state through the provided context, not global variables:
+
+```python
+# ✓ GOOD: State through context
+def mark_word_practiced(tool_context: Context, word: str, correct: bool) -> str:
+    practiced = tool_context.state.get("words_practiced", [])
+    tool_context.state["words_practiced"] = practiced + [word]
+
+# ✗ BAD: Global state
+# GLOBAL_STATE = {}
+# def mark_word_practiced(word, correct):
+#     GLOBAL_STATE["words_practiced"] = ...  # Hard to trace!
+```
+
+
+
+### The Model Context Protocol (MCP) Architecture
+
+MCP is a standardized protocol for agents to discover and invoke tools provided by external services.
+
+#### Why MCP?
+
+In our language learning agent, we need to:
+1. Look up word definitions in an external vocabulary registry
+2. Integrate without hardcoding dependencies
+3. Allow the vocabulary service to be replaced or updated independently
+
+**Solution: MCP**
+
+#### How MCP Works in Our Agent
+
+```python
+# From agent.py
+from mcp import StdioServerParameters
+
+mcp_toolset = McpToolset(
+    connection_params=StdioServerParameters(
+        command="uv",  # Package manager (Python environment)
+        args=["run", os.path.join(..., "mcp_vocab_server.py")],
+    ),
+    use_mcp_resources=True  # Enable resource discovery
+)
+
+root_agent = LlmAgent(
+    tools=[..., mcp_toolset]  # MCP tools mixed with local tools
+)
+```
+
+**What's happening:**
+1. The agent declares an MCP connection to a vocabulary service
+2. The service runs as a separate process (stdio-based communication)
+3. At runtime, the agent discovers what tools the service provides
+4. The agent can call those tools as if they were local
+
+#### MCP Component Architecture
+
+```
+Agent Process
+    │
+    ├─ Local Tools (list_scenarios, select_scenario, etc.)
+    │
+    └─ MCP Toolset
+        │
+        └─ Stdio Connection
+            │
+            ↕ JSON-RPC Protocol
+            │
+        External MCP Server (mcp_vocab_server.py)
+            │
+            ├─ lookup_word tool
+            ├─ search_dictionary tool
+            └─ get_examples tool
+```
+
+#### MCP Benefits
+
+**Decoupling**: The agent doesn't depend on vocabulary service internals
+```python
+# Agent just calls it
+result = await agent.call_tool("lookup_word", {"word": "kaffee"})
+# Service can change implementation without agent knowing
+```
+
+**Composability**: Multiple MCP servers can be chained
+```python
+mcp_toolset1 = McpToolset(connection_params=vocab_server)
+mcp_toolset2 = McpToolset(connection_params=pronunciation_server)
+root_agent = LlmAgent(tools=[..., mcp_toolset1, mcp_toolset2])
+```
+
+**Isolation**: Service failures don't crash the agent
+```python
+try:
+    memories = await callback_context.search_memory("...")
+except Exception:
+    pass  # Graceful degradation
+```
+
+### Technical Primitives and Transport
+
+#### Transport: Stdio-Based JSON-RPC
+
+Our MCP uses stdio for communication:
+
+```python
+StdioServerParameters(
+    command="uv",
+    args=["run", "mcp_vocab_server.py"]
+)
+```
+
+**Message flow:**
+```
+Agent writes JSON to server's stdin:
+{"jsonrpc": "2.0", "id": 1, "method": "lookup_word", "params": {"word": "kaffe"}}
+    ↓
+Server processes, writes JSON to stdout:
+{"jsonrpc": "2.0", "id": 1, "result": {"definition": "a beverage..."}}
+    ↓
+Agent parses response and continues
+```
+
+#### Tool Definition Format
+
+Tools are discovered via the MCP protocol. Each tool has:
+
+```javascript
+{
+  "name": "lookup_word",
+  "description": "Look up a word in the external vocabulary registry",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "word": {
+        "type": "string",
+        "description": "The word to look up"
+      }
+    },
+    "required": ["word"]
+  }
+}
+```
+
+The agent uses this schema to:
+1. Know what tools are available
+2. Understand parameter requirements
+3. Generate appropriate tool calls
+
+
+## Part 3: Context Engineering – Sessions and Persistent Memory
+
+### What Is Context?
+
+Context is the complete information the agent needs to make decisions. It includes:
+- **Immediate context**: Current conversation, active scenario
+- **Session context**: User's state within one session
+- **Long-term context**: User's profile across sessions
+
+### Session Management
+
+#### What Is a Session?
+
+A session represents one continuous interaction between user and agent:
+
+```python
+session_service = SqliteSessionService("sessions.db")
+```
+
+Sessions are:
+- **Persistent**: Stored in a database
+- **Isolated**: One user, one conversation thread
+- **Stateful**: Maintain variables that evolve during the conversation
+
+#### How Sessions Store State
+
+```python
+# In tools.py
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    # These go into session state
+    tool_context.state["active_scenario_id"] = scenario_id
+    tool_context.state["words_practiced"] = []
+    tool_context.state["exchange_count"] = 0
+
+# In agent.py - on_after_agent callback
+async def on_after_agent(callback_context: CallbackContext):
+    count = callback_context.state.get("exchange_count", 0)
+    callback_context.state["exchange_count"] = count + 1  # Persisted
+```
+
+#### Session State Schema
+
+```
+Session State = {
+  "active_scenario_id": "cafe",           # Current practice scenario
+  "words_practiced": ["en kaffe", "å betale"],  # Words learned this session
+  "exchange_count": 5,                    # Number of turns in conversation
+
+  # Cross-session profile
+  "user:completed_scenarios": 3,
+  "user:weak_words": ["kort eller kontant?", "heisen"],
+
+  # Additional context
+  "user:preferred_difficulty": "intermediate"
+}
+```
+
+#### Retrieving Session State
+
+```python
+# In on_before_agent
+state = callback_context.state
+scenario_id = state.get("active_scenario_id")
+words_practiced = state.get("words_practiced", [])
+
+# Used to build dynamic instruction
+if scenario_id and scenario_id in SCENARIOS:
+    scenario = SCENARIOS[scenario_id]
+    new_instruction = build_instruction(scenario, state)
+```
+
+
+
+### Memory Architectures
+
+Our agent uses **two-tier memory**:
+
+#### Tier 1: Short-Term Memory (Session State)
+**Scope**: Current conversation only
+**Capacity**: Small (dictionary)
+**Retrieval**: Instant (in-memory access)
+**Content**: Active scenario, current words practiced, exchange count
+
+```python
+# Accessed every turn
+state.get("active_scenario_id")
+state.get("words_practiced")
+```
+
+#### Tier 2: Long-Term Memory (Persistent Storage)
+**Scope**: Across all sessions
+**Capacity**: Large (database)
+**Retrieval**: On-demand (memory search)
+**Content**: Completed scenarios, weak words, interaction history
+
+```python
+# From on_before_agent
+memories = await callback_context.search_memory("scenario fullført")
+if memories and memories.memories:
+    memory_info = "\n\nKontekst fra tidligere samtaler:\n"
+    for mem in memories.memories[-3:]:  # Last 3 memories
+        memory_info += f"- {mem.content...}\n"
+```
+
+#### Memory Lifecycle
+
+```
+Turn 1 of Session A:
+    ├─ Short-term: empty
+    ├─ Long-term: search for past completions
+    └─ Add personalization to instruction
+
+Turn 2 of Session A:
+    ├─ Short-term: words_practiced = ["en kaffe"]
+    └─ Update persists in session
+
+Turn 3 of Session A:
+    ├─ on_after_agent: serialize session to memory
+    ├─ Long-term: "User practiced scenario:cafe, learned 1 words"
+    └─ Memory serves future sessions
+
+Session B (next day):
+    ├─ Short-term: reset (new session)
+    ├─ Long-term: "User completed cafe scenario before"
+    └─ Memory retrieval enables personalization ("Glad to see you back!")
+```
+
+#### How Memory Informs Behavior
+
+**Dynamic Instruction Building Using Memory**
+
+```python
+# From prompts.py
+def build_instruction(scenario: dict, state: dict) -> str:
+    weak_words = state.get("user:weak_words", [])
+
+    # Memory informs instruction
+    if weak_words:
+        instruction += f"VIKTIG: In previous conversations, the user struggled with: {weak_words}.\n"
+        instruction += "Try to incorporate them into the conversation.\n"
+```
+
+The instruction evolves based on:
+1. **Immediate session state** (active scenario)
+2. **Long-term memory** (weak words from past attempts)
+
+**Example:**
+```
+Session 1:
+  User struggles with: "kort eller kontant?" (card or cash?)
+  → Stored in memory as weak_word
+
+Session 2 (next day):
+  on_before_agent loads memory
+  build_instruction includes: "Try to use 'kort eller kontant?' in conversation"
+  → Agent naturally steers conversation to practice this phrase
+```
+
+#### Memory Search vs. Full Retrieval
+
+```python
+# Selective retrieval - only get relevant memories
+memories = await callback_context.search_memory("scenario fullført")
+# Instead of: all_memories = memory_service.get_all()
+
+# Filter by recency
+for mem in memories.memories[-3:]:  # Last 3 only
+    memory_info += f"- {mem.content...}\n"
+```
+
+**Benefits:**
+- **Efficiency**: Only relevant memories retrieved
+- **Relevance**: Recent memories prioritized
+- **Scalability**: System works with large memory stores
+
+
+
+### Practical Memory Example: The Learning Journey
+
+Let's trace how memory enables adaptive learning across sessions:
+
+```
+DAY 1 - Session 1:
+┌─ User selects "café" scenario
+├─ on_before_agent: no memory (first time)
+│  └─ Instruction: basic introduction
+├─ Conversation: user practices 8/12 words
+│  └─ Weak: "kort eller kontant?", "kvittering"
+├─ on_after_agent: session → memory
+│  └─ Memory: "completed scenario:cafe, weak_words: [...]"
+└─ Session ends
+
+DAY 2 - Session 2:
+┌─ User starts fresh (new session)
+├─ on_before_agent: search memory "scenario fullført"
+│  ├─ Found: "User completed café scenario"
+│  └─ Instruction += "Context: User has practiced café before.\n"
+│  └─ Instruction += "Try to use: 'kort eller kontant?', 'kvittering'\n"
+├─ Conversation: agent naturally steers toward weak words
+│  └─ Agent: "Hvordan vil du betale – kort eller kontant?"
+│  └─ User: "Kort, takk!"
+│  └─ weak_words now practiced!
+├─ on_after_agent: updated memory
+│  └─ Memory: weak_words reduced, user profile updated
+└─ Session ends
+
+DAY 7 - Session 3:
+┌─ User tries "hotel" scenario
+├─ on_before_agent: search memory for context
+│  ├─ Found: "User completed café, weak words practiced"
+│  └─ Instruction += "User is advancing to new scenario\n"
+│  └─ Instruction += "Build on café vocabulary where it applies\n"
+├─ Conversation: new scenario with continuity
+└─ Session ends
+```
+
+
+
+## Part 4: Integration Patterns
+
+### Pattern 1: Dynamic Instruction Generation
+
+The agent doesn't have a static system prompt. Instead, it's constructed based on state:
+
+```python
+# on_before_agent
+if scenario_id and scenario_id in SCENARIOS:
+    scenario = SCENARIOS[scenario_id]
+    new_instruction = build_instruction(scenario, state)
+    root_agent.instruction = new_instruction  # ← Dynamic assignment
+else:
+    root_agent.instruction = SYSTEM_INSTRUCTION + memory_info
+```
+
+**Why dynamic?**
+- Reduces context window usage (only relevant info included)
+- Enables precision (instruction tailored to current scenario)
+- Supports learning (instruction references weak words, completed scenarios)
+
+### Pattern 2: Callback-Driven State Management
+
+The agent doesn't directly manage state. Instead, callbacks hook into the agent's lifecycle:
+
+```
+User Input
+    ↓
+on_before_agent() ← Prepare context
+    ↓
+Agent Reasoning Loop
+    ↓
+on_after_agent() ← Persist state
+    ↓
+Response
+```
+
+**Why callbacks?**
+- **Separation of concerns**: Agent reasoning separate from state management
+- **Testability**: Callbacks can be mocked
+- **Extensibility**: New concerns added without modifying agent core
+
+### Pattern 3: Tool-Based State Mutation
+
+State changes only happen through tools, never directly in callbacks:
+
+```python
+# ✓ GOOD: Tool modifies state
+def mark_word_practiced(tool_context: Context, word: str, correct: bool) -> str:
+    practiced = tool_context.state.get("words_practiced", [])
+    tool_context.state["words_practiced"] = practiced + [word]
+
+# ✗ BAD: Callback modifies state
+# async def on_after_agent(callback_context):
+#     callback_context.state["words_practiced"].append(word)  # Side effect!
+```
+
+**Why?**
+- **Auditability**: All state changes are tool calls (logged)
+- **Consistency**: State mutations always go through validation (error checking in tool)
+- **Understandability**: Reading tools shows what state changes are possible
+
+### Pattern 4: Memory-Informed Adaptation
+
+Memory is consulted during context preparation, not during reasoning:
+
+```python
+# on_before_agent (called BEFORE reasoning)
+memories = await callback_context.search_memory("scenario fullført")
+# Memory informs instruction...
+root_agent.instruction = SYSTEM_INSTRUCTION + memory_info
+
+# Agent reasoning (happens AFTER memory consultation)
+# Agent has memory-informed instruction in context window
+```
+
+**Why separate?**
+- **Efficiency**: No need to query memory multiple times per turn
+- **Clarity**: Memory influence is transparent (in the instruction)
+- **Control**: Agent doesn't autonomously decide what memories to use
+
+
+
+## Summary: The Complete Picture
+
+### The Agent Stack
+
+```
+┌─────────────────────────────────────────────────┐
+│         User (Natural Language)                 │
+└──────────────────────┬──────────────────────────┘
+                       ↓
+        ┌──────────────────────────────┐
+        │   on_before_agent Callback   │
+        │  - Retrieve session state    │
+        │  - Search memory for context │
+        │  - Build dynamic instruction │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  Agent Reasoning Loop        │
+        │  (Gemini 2.5 Flash)          │
+        │  - Perceive user intent      │
+        │  - Select tools to invoke    │
+        │  - Generate response         │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │       Tool Invocation        │
+        ├──────────────────────────────┤
+        │  Local Tools:                │
+        │  - select_scenario           │
+        │  - mark_word_practiced       │
+        │  - get_progress              │
+        │  - end_scenario              │
+        │  - get_user_profile          │
+        │                              │
+        │  MCP Tools:                  │
+        │  - lookup_word (external)    │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  on_after_agent Callback     │
+        │  - Increment exchange count  │
+        │  - Persist session to memory │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │   State Persistence Layer    │
+        ├──────────────────────────────┤
+        │  Session Store:              │
+        │  - SqliteSessionService      │
+        │  - Current: state dict       │
+        │                              │
+        │  Long-Term Memory:           │
+        │  - InMemoryMemoryService     │
+        │  - Historical: completed     │
+        │    scenarios, weak words     │
+        └──────────────────────────────┘
+```
+
+### Key Takeaways
+
+1. **Agents are autonomous reasoners** operating in a perceive-reason-act loop
+2. **Tools are the agent's interface** to affect state and gather information
+3. **MCP enables decoupled tool integration** through a standard protocol
+4. **Sessions provide short-term context** that evolves during a conversation
+5. **Memory provides long-term context** that enables continuity across sessions
+6. **Dynamic instructions** adapt agent behavior based on current state and historical context
+
+This Norwegian language learning agent demonstrates how these concepts combine to create an agent that's both powerful and maintainable.
