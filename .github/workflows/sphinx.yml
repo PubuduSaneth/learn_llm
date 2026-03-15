@@ -8,7 +8,10 @@
 
 
 name: sphinx
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches:
+      - main        # only runs when commits are pushed to main (including PR merges)
 
 env:
   DEFAULT_BRANCH: "main"
