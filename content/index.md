@@ -37,6 +37,7 @@ Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md
 Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md
 Agentic_Architectures/03.Context_Engineering.md
 Agentic_Architectures/04.Agent_Development_Guide.md
+Agentic_Architectures/04.1.Agent_Development_Guide_P1.md
 Agentic_Architectures/05.Engineering_trust.md
 Agentic_Architectures/Reference.md
 ```
