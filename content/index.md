@@ -39,7 +39,6 @@ Agentic_Architectures/03.Context_Engineering.md
 Agentic_Architectures/04.1.Agent_Development_Guide_P1.md
 Agentic_Architectures/04.2.Agent_Development_Guide_P2.md
 Agentic_Architectures/04.3.Agent_Development_Guide_P3.md
-Agentic_Architectures/04.4.Agent_Development_Guide_P4.md
 Agentic_Architectures/05.Engineering_trust.md
 Agentic_Architectures/Reference.md
 ```
