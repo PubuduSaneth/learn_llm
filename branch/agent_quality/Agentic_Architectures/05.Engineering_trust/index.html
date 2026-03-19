@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Trust &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Reference" href="../Reference/" />
+    <link rel="prev" title="Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study" href="../04.Agent_Development_Guide/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Agent_Development_Guide/">Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Engineering Trust</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecting-quality-and-observability-for-ai-agents">Architecting Quality and Observability for AI Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-quality">Agent Quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#outside-in-evaluation-strategy">“Outside-In” evaluation strategy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluator-spectrum">Evaluator Spectrum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-observability">Agent Observability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#agent-observability-quality">Agent Observability &amp; quality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mapping-observability-to-quality">Mapping observability to quality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#operationalizing-data">Operationalizing data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linking-data-to-agent-quality">Linking data to agent quality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-agent-quality-flywheel">The Agent Quality Flywheel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-trust">Building Trust</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Engineering Trust</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/05.Engineering_trust.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="engineering-trust">
+<h1>Engineering Trust<a class="headerlink" href="#engineering-trust" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Distinguish between verification and validation in AI systems</p></li>
+<li><p>Understand three pillars of observability</p>
+<ul>
+<li><p>Logging, Tracing, and Metrics—to reconstruct an agent’s internal “thought process.”</p></li>
+</ul>
+</li>
+<li><p>Explore complex failure modes in Multi-Agent Systems</p></li>
+</ul>
+</div>
+<div class="admonition-references instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/whitepaper-agent-quality">Agent Quality</a></p></li>
+</ul>
+</div>
+<section id="architecting-quality-and-observability-for-ai-agents">
+<h2>Architecting Quality and Observability for AI Agents<a class="headerlink" href="#architecting-quality-and-observability-for-ai-agents" title="Link to this heading"></a></h2>
+<p>AI agents are non-deterministic and dynamic. Therefore, traditional unit testing—which asks “Did we build the product right?”—is insufficient. Instead, evaluating an agent requires asking “Did we build the right product?” through continuous validation of the agent’s entire decision-making trajectory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>The Paradigm Shift: From Code to Agents:</strong></p>
+<p>Traditional software is like a Delivery Truck: it follows a fixed route and requires basic checks (Did it start? Did it arrive?). AI agents are like Formula 1 Race Cars: autonomous systems where success depends on dynamic judgment in high-stakes environments. Success requires continuous telemetry to judge every decision—from braking strategy to fuel consumption</p>
+<p><img alt="alt text" src="../../_images/Code_to_Agents.png" /></p>
+<ul>
+<li><p>Non-determinism → Identical inputs can produce varying outputs, making traditional breakpoints ineffective for catching “flaws in judgment.”</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>⚠️ Pitfall: Treating an agent like a passive model. An agent is a system, not just an algorithm.</p></li>
+<li><p>💡 Insight: The move from text-out (LLMs) to action-out (Agents) means the primary unit of evaluation is no longer the model, but the entire system trajectory.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+<p><strong>Evolution of Complexity:</strong></p>
+<ul class="simple">
+<li><p>Traditional ML: Clear metrics like F1-score or RMSE.</p></li>
+<li><p>Passive LLM: Generative, probabilistic text-in/text-out.</p></li>
+<li><p>RAG (Retrieval-Augmented Generation): Success depends on retrieval accuracy vs. generation quality.</p></li>
+<li><p>Active AI Agent: Introduces planning, tool usage, and stateful memory.</p></li>
+<li><p>Multi-Agent Systems (MAS):</p>
+<ul>
+<li><p>Success depends on unscripted interactions.</p></li>
+<li><p>⚠️ Pitfall: Systemic Deadlocks or Resource Contention can cause failures that aren’t attributable to any single agent.</p></li>
+<li><p>you must track both individual agent performance and the stability of the global environment.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/Evolution_of_Complexity.png" /></p>
+</div>
+<section id="agent-quality">
+<h3>Agent Quality<a class="headerlink" href="#agent-quality" title="Link to this heading"></a></h3>
+<p>Agent quality must be treated as an architectural pillar rather than a final testing phase. It is measured across a framework of four interconnected pillars:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pillar</p></th>
+<th class="head"><p>Metric Type</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Business Impact</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Effectiveness</p></td>
+<td><p>Goal Achievement</p></td>
+<td><p>Did the agent achieve the user’s actual intent?</p></td>
+<td><p>Direct impact on KPIs (e.g., conversion rates).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Efficiency</p></td>
+<td><p>Operational Cost</p></td>
+<td><p>The resource cost (tokens, time, steps) of the solution.</p></td>
+<td><p>Operational margins and user latency.</p></td>
+</tr>
+<tr class="row-even"><td><p>Robustness</p></td>
+<td><p>Reliability</p></td>
+<td><p>Ability to handle API timeouts, missing data, or ambiguity.</p></td>
+<td><p>Graceful degradation and system uptime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Safety &amp; Alignment</p></td>
+<td><p>Trustworthiness</p></td>
+<td><p>Operation within ethical boundaries and security rules.</p></td>
+<td><p>Risk mitigation and enterprise trust.</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>You cannot measure Efficiency if you don’t count the steps, and you cannot verify Safety if you cannot inspect the reasoning.</p></li>
+</ul>
+<div class="admonition-visual-explanation instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Visual explanation</p>
+<p><strong>Effectiveness:</strong>
+<img alt="alt text" src="../../_images/Agent_Q_Effectiveness.png" /></p>
+<p><strong>Efficiency:</strong>
+<img alt="alt text" src="../../_images/Agent_Q_Efficiency.png" /></p>
+<p><strong>Robustness:</strong>
+<img alt="alt text" src="../../_images/Agent_Q_Robustness.png" /></p>
+<p><strong>Safety &amp; Alignment:</strong>
+<img alt="alt text" src="../../_images/Agent_Q_Safety_Alignment.png" /></p>
+</div>
+</section>
+<section id="outside-in-evaluation-strategy">
+<h3>“Outside-In” evaluation strategy<a class="headerlink" href="#outside-in-evaluation-strategy" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/Outside-In.png" /></p>
+<p>To assess these pillars, the framework uses an <strong>“Outside-In” evaluation strategy</strong>. It starts with the <strong>“Black Box”</strong> view (evaluating the final end-to-end output and user satisfaction). If there is a failure, it moves to the <strong>“Glass Box”</strong> view (“Inside-Out” View - evaluating the agent’s internal trajectory, including its LLM planning, tool selection, and context handling) to diagnose exactly <em>why</em> it failed.</p>
+<ul>
+<li><p>This judgment process relies on a mix of automated metrics, scalable models evaluating other models (LLM-as-a-Judge and Agent-as-a-Judge), and indispensable Human-in-the-Loop (HITL) evaluators.</p></li>
+<li><p>The Black Box (End-to-End):</p>
+<ul class="simple">
+<li><p>Measures Task Success Rate and User Satisfaction.</p></li>
+<li><p>If the goal is met, the system is effective.</p></li>
+</ul>
+</li>
+<li><p>The Glass Box (Trajectory Evaluation):</p>
+<ul>
+<li><p>If the black box fails, we open the “Glass Box” to inspect the Trajectory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>💡 Insight: The Trajectory is the Truth. Measuring only the final answer hides fatal flaws in reasoning or tool usage.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Glass Box Inspection Points:</p>
+<ul class="simple">
+<li><p>Thought: Is the plan logical, or did Context Pollution cause a reasoning loop?</p></li>
+<li><p>Tool Usage: Did the agent hallucinate tool parameters or call tools unnecessarily?</p>
+<ul>
+<li><p>RAG Performance: ⚠️ Pitfall: The LLM may ignore retrieved context entirely to hallucinate a “plausible” answer.</p></li>
+</ul>
+</li>
+<li><p>Observation: Did the agent misinterpret the tool’s output (e.g., ignoring a 404 error)?</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/blackbox-glassbox.png" /></p>
+<ul class="simple">
+<li><p>Diagnostic Power:</p>
+<ul>
+<li><p>You can’t diagnose a process you can’t see</p></li>
+<li><p>Trace provide the visibility of the underlying process/processes</p></li>
+<li><p>By analyzing the trace, we move from “the final answer is wrong” to “the answer is wrong because the agent misinterpreted the API’s error response.”</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="evaluator-spectrum">
+<h2>Evaluator Spectrum<a class="headerlink" href="#evaluator-spectrum" title="Link to this heading"></a></h2>
+<p>The “Outside-In” Evaluation Hierarchy is a top-down strategic framework that prioritizes evaluating an agent’s real-world success before diving into the technical details of its execution.</p>
+<p>The <strong>Evaluator Spectrum</strong> (“The Evaluators”) defines the diverse set of judges required to execute this evaluation, balancing scalable automation with necessary human oversight. This spectrum includes:</p>
+<ul class="simple">
+<li><p>Automated Metrics:</p>
+<ul>
+<li><p>Fast, reproducible metrics (like string or embedding similarity) used as a first-pass filter to catch obvious output regressions at scale.</p></li>
+</ul>
+</li>
+<li><p>LLM-as-a-Judge:</p>
+<ul>
+<li><p>Using a powerful language model to scalably score qualitative outputs (like helpfulness or correctness) against a defined rubric, often through pairwise comparisons.</p></li>
+</ul>
+</li>
+<li><p>Agent-as-a-Judge:</p>
+<ul>
+<li><p>Using a specialized agent to evaluate the <em>process</em> and full execution trace of another agent, assessing intermediate steps like plan logic and tool selection.</p></li>
+</ul>
+</li>
+<li><p>Human-in-the-Loop (HITL) and User Feedback:</p>
+<ul>
+<li><p>The indispensable human element needed to interpret complex nuance, apply deep domain expertise, define the “gold standard” benchmarks, and provide real-world satisfaction signals.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/Evaluators.png" /></p>
+<p><strong>How Evaluators Relate to “Outside-In” evaluation:</strong></p>
+<p>The “Outside-In” Hierarchy dictates <em>what to evaluate</em> (final output versus internal trajectory), while the Evaluator Spectrum dictates <em>how</em> to judge it*</p>
+<p>For example, the “Black Box” (end-to-end success) is often efficiently measured using basic <strong>Automated Metrics</strong> and real-world <strong>User Feedback</strong>. However, when a failure triggers a deeper “Glass Box” (trajectory) analysis, simple metrics fail. Evaluators must then deploy <strong>LLM-as-a-Judge</strong>, <strong>Agent-as-a-Judge</strong>, and <strong>HITL</strong> to accurately critique the nuanced, subjective quality of the agent’s internal reasoning and intermediate steps,,.</p>
+<section id="agent-observability">
+<h3>Agent Observability<a class="headerlink" href="#agent-observability" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>To evaluate a process, you must be able to see it</p></li>
+<li><p>Traditional software uses monitoring; agents require Observability.</p></li>
+<li><p>The kitchen analogy:</p>
+<ul>
+<li><p>traditional software monitoring is like checking if a fast-food line cook followed a rigid, step-by-step recipe</p></li>
+<li><p>Agent observability is like a food critic evaluating a gourmet chef’s dynamic decisions, adaptations, and creative process</p></li>
+</ul>
+</li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Traditional Software</p></th>
+<th class="head"><p>Agentic Al</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Metaphor</p></td>
+<td><p>The Line Cook: Follows a rigid, laminated recipe perfectly.</p></td>
+<td><p>The Gourmet Chef: Dynamically decides le recipe based on ingredients and goals.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Workflow</p></td>
+<td><p>Deterministic: Fixed logic and predictable paths.</p></td>
+<td><p>Probabilistic: Emergent behavior via Tool Use and Memory.</p></td>
+</tr>
+<tr class="row-even"><td><p>Failure Mode</p></td>
+<td><p>System Crash: Explicit errors like NullPointerException.</p></td>
+<td><p>Quality Degradation: Silent failures like factual hallucinations or emergent bias.</p></td>
+</tr>
+<tr class="row-odd"><td><p>QA Method</p></td>
+<td><p>Verification: Did we build the product right?</p></td>
+<td><p>Validation: Did we build the right product?</p></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="alt text" src="../../_images/glassbox_evaluation.png" /></p>
+<p><strong>Pillars of Observability:</strong></p>
+<p><img alt="alt text" src="../../_images/Pillars_of_Observability.png" /></p>
+<p>Observability provides the telemetry needed to capture an agent’s “thought process” and is built on three foundational pillars:</p>
+<ul class="simple">
+<li><p>Logging (The Agent’s Diary)</p>
+<ul>
+<li><p>Structured, timestamped entries that capture raw facts about discrete events, such as the exact prompt sent to the model, the tools invoked, and the raw data received</p></li>
+<li><p>Effective logging records the agent’s intent before an action, and the outcome after. This separates a failed API attempt from a hallucinated decision not to act</p></li>
+<li><p><img alt="alt text" src="../../_images/logging.png" /></p></li>
+</ul>
+</li>
+<li><p>Tracing (Following the Footsteps)</p>
+<ul>
+<li><p>The narrative thread that stitches individual logs together across a single task. Traces reveal the causal relationship between events (e.g., showing that a faulty tool call caused an LLM hallucination, which led to a bad final answer).</p></li>
+<li><p><img alt="alt text" src="../../_images/Tracing.png" /></p></li>
+</ul>
+</li>
+<li><p>Metrics (The Health Report):</p>
+<ul>
+<li><p>The aggregated scorecard of the agent’s performance over time.</p></li>
+<li><p>This is divided into <em>System Metrics</em> (direct measurements like latency, error rates, and token costs) and <em>Quality Metrics</em> (evaluative scores like factual correctness, trajectory adherence, and helpfulness)</p></li>
+<li><p><img alt="alt text" src="../../_images/Metrics.png" /></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="agent-observability-quality">
+<h2>Agent Observability &amp; quality<a class="headerlink" href="#agent-observability-quality" title="Link to this heading"></a></h2>
+<p>Agent observability and agent quality are fundamentally interdependent, operating as a continuous loop where visibility enables judgment, and judgment drives improvement</p>
+<p><strong>Observability - Prerequisite for Quality Evaluation:</strong></p>
+<ul class="simple">
+<li><p>A core principle of AI agents is that “you cannot judge a process you cannot see”</p></li>
+<li><p>Measuring the four pillars of agent quality (Effectiveness, Efficiency, Robustness, and Safety) is impossible if you only examine the agent’s final output.</p></li>
+<li><p>For example,</p>
+<ul>
+<li><p>you cannot measure operational efficiency without counting the number of steps an agent took,</p></li>
+<li><p>you can’t diagnose a robustness failure without knowing exactly which API call timed out</p></li>
+</ul>
+</li>
+<li><p>A holistic framework for agent quality demands a holistic architecture for agent visibility</p></li>
+</ul>
+<p><strong>The Trajectory is the Truth:</strong></p>
+<ul class="simple">
+<li><p>Execution trajectory is agent’s its end-to-end “thought process”.</p></li>
+<li><p>The true measure of an agent’s logic, safety, and efficiency lies in its execution trajectory</p></li>
+<li><p>Observability—specifically through structured logs (the agent’s diary) and end-to-end traces (the narrative thread)—provides the indispensable evidence needed to reconstruct and analyze this trajectory to understand why an agent succeeded or failed.</p></li>
+</ul>
+<p><strong>Transforming Telemetry into Quality Metrics:</strong></p>
+<ul class="simple">
+<li><p>Observability supplies the raw data, while the quality evaluation framework provides the judgment</p></li>
+<li><p>Quality Metrics (such as factual correctness, trajectory adherence, and safety scores) are not simply raw system data; they are “second-order metrics” derived by applying a judgment layer (like an LLM-as-a-Judge or Human-in-the-Loop evaluator) directly on top of the raw logs and traces captured by observability</p></li>
+</ul>
+<p><strong>Evaluatable-by-Design:</strong></p>
+<ul class="simple">
+<li><p>Architecture Because quality depends so heavily on visibility, reliable agents must be built to be “evaluatable-by-design”</p></li>
+<li><p>This means quality cannot be a final testing phase; instead, agents must be architected from the first line of code with the necessary “telemetry ports” to emit the observability data required for judgment</p></li>
+</ul>
+<section id="mapping-observability-to-quality">
+<h3>Mapping observability to quality<a class="headerlink" href="#mapping-observability-to-quality" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/observability_to_quality.png" /></p>
+<p><img alt="alt text" src="../../_images/observability_to_quality2.png" /></p>
+</section>
+</section>
+<section id="operationalizing-data">
+<h2>Operationalizing data<a class="headerlink" href="#operationalizing-data" title="Link to this heading"></a></h2>
+<p>Operationalizing data is the critical step that bridges the gap between simply collecting observability data (logs, traces, and metrics) and actually improving an AI agent’s quality. While having this raw data provides the necessary components, operationalizing it means assembling these pieces into a working system that generates real-time actions and insights during live operations.</p>
+<section id="linking-data-to-agent-quality">
+<h3>Linking data to agent quality<a class="headerlink" href="#linking-data-to-agent-quality" title="Link to this heading"></a></h3>
+<p><strong>Dashboards &amp; Alerting:</strong></p>
+<ul class="simple">
+<li><p>Separating System Health from Model Quality</p></li>
+<li><p>A single dashboard is insufficient for managing an AI agent.</p></li>
+<li><p>To effectively operationalize data, teams must separate it into two distinct views:</p>
+<ul>
+<li><p>Operational Dashboards:</p>
+<ul>
+<li><p>Used primarily by SREs and DevOps teams, these dashboards track real-time system metrics like P99 latency, error rates, and token consumption. They are used to trigger immediate alerts for system bottlenecks or budget overruns.</p></li>
+</ul>
+</li>
+<li><p>Quality Dashboards:</p>
+<ul>
+<li><p>Used by product owners and data scientists, these dashboards track slower-moving quality metrics such as factual correctness, trajectory adherence, and helpfulness ratings. They trigger alerts for subtle degradations in the agent’s logic or output quality, even when the system itself is running perfectly.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Security &amp; PII: Protecting Your Data:</strong></p>
+<ul class="simple">
+<li><p>Because logs and traces capture the agent’s “thought process” and user interactions, they often contain Personally Identifiable Information (PII).</p></li>
+<li><p>Operationalizing this data safely requires implementing a robust PII scrubbing mechanism in the logging pipeline <em>before</em> the data is stored long-term, ensuring privacy and compliance.</p></li>
+</ul>
+<p><strong>Managing the Trade-off: Granularity vs. Overhead:</strong></p>
+<p>Capturing highly detailed observability data for every request in a production environment can cause severe latency and overhead. To operationalize data effectively, teams use <strong>dynamic sampling</strong>. This involves using high-granularity logging (DEBUG) in development, but switching to a lower default (INFO) in production. For example, a system might only trace 10% of successful requests to gather performance metrics, but capture 100% of all errors to preserve the rich diagnostic details needed to debug failures.</p>
+<p><img alt="alt text" src="../../_images/dynamic_sampling.png" /></p>
+</section>
+</section>
+<section id="the-agent-quality-flywheel">
+<h2>The Agent Quality Flywheel<a class="headerlink" href="#the-agent-quality-flywheel" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The Agent Quality Flywheel is the Ultimate Goal of Operationalizing data</p></li>
+<li><p><strong>Agent Quality Flywheel:</strong> A continuous improvement loop fed by Operationalizing data from agent system.</p></li>
+<li><p>Flywheel (a structured feedback loop)</p>
+<ul>
+<li><p>Programmatically annotate every operational failure captured by data and</p></li>
+<li><p>Convert into a permanent regression test in the system’s evaluation set</p></li>
+</ul>
+</li>
+<li><p>This ensures that every mistake the agent makes in production is used to make it permanently smarter, continuously driving up its overall quality.</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/QFlywheel.png" /></p>
+</section>
+<section id="building-trust">
+<h2>Building Trust<a class="headerlink" href="#building-trust" title="Link to this heading"></a></h2>
+<p><strong>Agent quality in an non-deterministic world</strong>
+<img alt="alt text" src="../../_images/image.png" /></p>
+<p><strong>Principals of Trustworthy agents:</strong>
+<img alt="alt text" src="../../_images/building_trust.png" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../04.Agent_Development_Guide/" class="btn btn-neutral float-left" title="Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Reference/" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+# GPT - Generative Pretrained Transformer model
+
+:::{objectives}
+
+- Understand what GPT is.
+- Explore main components (building blocks) of GPT-2 models
+
+:::
+
+- **Generative**: The model can generate tokens auto-regressive manner (generate one token at a time)
+- **Pretrained**: Trained on a large corpus of data
+- **Transformer**: The model architecture is based on the transformer, introduced in the 2017 paper [“Attention is All You Need” (Self-Attention Mechanism)](https://arxiv.org/abs/1706.03762)
+
+## GPT-2
+
+- Original publication: ["Language Models are Unsupervised Multitask Learners"](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+- GPT-2 original publication lists four models
+  - Smallest GPT-2 model:
+    - 17 million parameters; 12 transformer blocks; Model dimensions: 768
+  - Largest GPT-2 model:
+    - 1542 million parameters; 48 transformer blocks; Model dimensions: 1600
+
+![alt text](images/gpt2.png)
+
+## GPT-2 model variants and their components
+
+| Component                       | Default(Small)      | Medium              | Large              | XL                  |
+| ------------------------------- | ------------------- | ------------------- | ------------------ | ------------------- |
+| 1. Tokenizer (Size of Vocabulary)         | 50,257              | 50,257              | 50,257             | 50,257              |
+| 2. Embedding layer (dimensions) | 786                 | 1024                | 1280               | 1600                |
+| 3. Transformer block            | 12 layers, 12 heads | 24 layers, 16 heads | 36 layers,20 heads | 48 layers, 25 heads |
+| 4. LM head (Output dimensions)  | 50,257              | 50,257              | 50,257             | 50,257              |

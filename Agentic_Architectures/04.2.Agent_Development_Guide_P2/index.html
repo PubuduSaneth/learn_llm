@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Development Guide: Part 2 &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Agent Development Guide: Part 2</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/04.2.Agent_Development_Guide_P2.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="agent-development-guide-part-2">
+<h1>Agent Development Guide: Part 2<a class="headerlink" href="#agent-development-guide-part-2" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Explore core concepts of Autonomous Systems using Norwegian Language Learning Agent</p></li>
+<li><p>Concepts</p>
+<ul>
+<li><p>Tools</p></li>
+<li><p>Interoperability</p></li>
+<li><p>Model Context Protocol (MCP)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="part-2-tools-interoperability">
+<h2>Part 2: Tools &amp; Interoperability<a class="headerlink" href="#part-2-tools-interoperability" title="Link to this heading"></a></h2>
+<section id="what-are-tools">
+<h3>What Are Tools?<a class="headerlink" href="#what-are-tools" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tools are functions that agents can invoke to interact with their environment</p></li>
+<li><p>Tools allow a model to either “know” (retrieve data) or “do” (execute an action)</p></li>
+<li><p>They are the agent’s “hands” for affecting the world</p></li>
+</ul>
+</section>
+<section id="importance-of-tools">
+<h3>Importance of tools<a class="headerlink" href="#importance-of-tools" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Decoupling specific domain capabilities from the core reasoning engine, we enable the agent to dynamically adapt to shifting user missions</p></li>
+</ul>
+</section>
+<section id="tool-categories-in-our-implementation">
+<h3>Tool Categories in Our Implementation<a class="headerlink" href="#tool-categories-in-our-implementation" title="Link to this heading"></a></h3>
+<p><strong>Category 1: State Management Tools:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>State Management Tools</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Changes the active scenario and resets scenario-specific state.&quot;&quot;&quot;</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</details>
+<p><strong>Category 2: Observation Tools:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Observation Tools</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_progress</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Queries current progress without modifying state.&quot;&quot;&quot;</span>
+    <span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">total_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;practiced_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">practiced</span><span class="p">),</span>
+        <span class="s2">&quot;total_words&quot;</span><span class="p">:</span> <span class="n">total_words</span><span class="p">,</span>
+        <span class="s2">&quot;completion_percentage&quot;</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">practiced</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_words</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</details>
+</div>
+<p><strong>Category 3: Complex Multi-Step Tools:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-2">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Complex Multi-Step Tools</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">end_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orchestrates scenario completion, including state analysis and memory updates.&quot;&quot;&quot;</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">words_practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="c1"># Calculate weak words</span>
+    <span class="n">target_words</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;norwegian&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">}</span>
+    <span class="n">practiced_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words_practiced</span><span class="p">)</span>
+    <span class="n">weak_words</span> <span class="o">=</span> <span class="n">target_words</span> <span class="o">-</span> <span class="n">practiced_set</span>
+
+    <span class="c1"># Update cross-session profile</span>
+    <span class="n">all_weak_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">all_weak_words</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">weak_words</span><span class="p">)</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_weak_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="tool-design-best-practices">
+<h3>Tool Design Best Practices<a class="headerlink" href="#tool-design-best-practices" title="Link to this heading"></a></h3>
+<section id="single-responsibility-principle">
+<h4>1. <strong>Single Responsibility Principle:</strong><a class="headerlink" href="#single-responsibility-principle" title="Link to this heading"></a></h4>
+<p>Each tool does one thing well:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-3">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Single Responsibility Principle</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Focused tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vocabulary</span><span class="p">(</span><span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns vocabulary for a scenario. No side effects.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Cannot find vocabulary for &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">]}</span>
+
+<span class="c1"># ✗ BAD: Mixing concerns</span>
+<span class="c1"># def get_vocabulary_and_mark_practiced(scenario_id, word, correct):</span>
+<span class="c1">#     &quot;Violates single responsibility - does two things&quot;</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="clear-input-contracts">
+<h4>2. <strong>Clear Input Contracts:</strong><a class="headerlink" href="#clear-input-contracts" title="Link to this heading"></a></h4>
+<p>Define exactly what parameters are needed:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-4">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Clear Input Contracts</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span>
+    <span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span>      <span class="c1"># Always include context for state access</span>
+    <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>                  <span class="c1"># The vocabulary word</span>
+    <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span>               <span class="c1"># Whether user used it correctly</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clear inputs, clear purpose.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="predictable-output-contracts">
+<h4>3. <strong>Predictable Output Contracts:</strong><a class="headerlink" href="#predictable-output-contracts" title="Link to this heading"></a></h4>
+<p>Tools always return a consistent structure:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-5">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Predictable Output Contracts</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Consistent return types</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;persona&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;opening_line&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1"># or error:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">}</span>
+
+<span class="c1"># ✗ BAD: Unpredictable returns</span>
+<span class="c1"># def select_scenario(...):</span>
+<span class="c1">#     if ok: return scenario</span>
+<span class="c1">#     else: return None  # Inconsistent!</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="explicit-error-handling">
+<h4>4. <strong>Explicit Error Handling:</strong><a class="headerlink" href="#explicit-error-handling" title="Link to this heading"></a></h4>
+<p>Tools should not crash; they return error information:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-6">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Explicit Error Handling</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kjenner ikke til scenarioet &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    <span class="c1"># Happy path follows</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="state-locality">
+<h4>5. <strong>State Locality:</strong><a class="headerlink" href="#state-locality" title="Link to this heading"></a></h4>
+<p>Tools access and modify state through the provided context, not global variables:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-7">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>State Locality</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: State through context</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="c1"># ✗ BAD: Global state</span>
+<span class="c1"># GLOBAL_STATE = {}</span>
+<span class="c1"># def mark_word_practiced(word, correct):</span>
+<span class="c1">#     GLOBAL_STATE[&quot;words_practiced&quot;] = ...  # Hard to trace!</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="the-model-context-protocol-mcp-architecture">
+<h3>The Model Context Protocol (MCP) Architecture<a class="headerlink" href="#the-model-context-protocol-mcp-architecture" title="Link to this heading"></a></h3>
+<p>MCP is a standardized protocol for agents to discover and invoke tools provided by external services.</p>
+<section id="why-mcp">
+<h4>Why MCP?<a class="headerlink" href="#why-mcp" title="Link to this heading"></a></h4>
+<p>In our language learning agent, we need to:</p>
+<ol class="arabic simple">
+<li><p>Look up word definitions in an external vocabulary registry</p></li>
+<li><p>Integrate without hardcoding dependencies</p></li>
+<li><p>Allow the vocabulary service to be replaced or updated independently</p></li>
+</ol>
+<p><strong>Solution - MCP:</strong></p>
+</section>
+<section id="how-mcp-works-in-our-agent">
+<h4>How MCP Works in Our Agent<a class="headerlink" href="#how-mcp-works-in-our-agent" title="Link to this heading"></a></h4>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-8">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>MCP</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">StdioServerParameters</span>
+
+<span class="n">mcp_toolset</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span>
+    <span class="n">connection_params</span><span class="o">=</span><span class="n">StdioServerParameters</span><span class="p">(</span>
+        <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>  <span class="c1"># Package manager (Python environment)</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="s2">&quot;mcp_vocab_server.py&quot;</span><span class="p">)],</span>
+    <span class="p">),</span>
+    <span class="n">use_mcp_resources</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Enable resource discovery</span>
+<span class="p">)</span>
+
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">mcp_toolset</span><span class="p">]</span>  <span class="c1"># MCP tools mixed with local tools</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><strong>What’s happening:</strong></p>
+<ol class="arabic simple">
+<li><p>The agent declares an MCP connection to a vocabulary service</p></li>
+<li><p>The service runs as a separate process (stdio-based communication)</p></li>
+<li><p>At runtime, the agent discovers what tools the service provides</p></li>
+<li><p>The agent can call those tools as if they were local</p></li>
+</ol>
+</section>
+<section id="mcp-component-architecture">
+<h4>MCP Component Architecture<a class="headerlink" href="#mcp-component-architecture" title="Link to this heading"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Agent Process
+    │
+    ├─ Local Tools (list_scenarios, select_scenario, etc.)
+    │
+    └─ MCP Toolset
+        │
+        └─ Stdio Connection
+            │
+            ↕ JSON-RPC Protocol
+            │
+        External MCP Server (mcp_vocab_server.py)
+            │
+            ├─ lookup_word tool
+            ├─ search_dictionary tool
+            └─ get_examples tool
+</pre></div>
+</div>
+</section>
+<section id="mcp-benefits">
+<h4>MCP Benefits<a class="headerlink" href="#mcp-benefits" title="Link to this heading"></a></h4>
+<div class="admonition-benefits instructor-note admonition" id="instructor-note-9">
+<p class="admonition-title">Benefits</p>
+<ul class="simple">
+<li><p>Decoupling</p>
+<ul>
+<li><p>The agent doesn’t depend on vocabulary service internals</p></li>
+</ul>
+</li>
+<li><p>Composability</p>
+<ul>
+<li><p>Multiple MCP servers can be chained</p></li>
+</ul>
+</li>
+<li><p>Isolation</p>
+<ul>
+<li><p>Service failures don’t crash the agent</p></li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>Python implementation</summary>
+<p><strong>Decoupling</strong>: The agent doesn’t depend on vocabulary service internals</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Agent just calls it</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="o">.</span><span class="n">call_tool</span><span class="p">(</span><span class="s2">&quot;lookup_word&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;kaffee&quot;</span><span class="p">})</span>
+<span class="c1"># Service can change implementation without agent knowing</span>
+</pre></div>
+</div>
+<p><strong>Composability</strong>: Multiple MCP servers can be chained</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mcp_toolset1</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span><span class="n">connection_params</span><span class="o">=</span><span class="n">vocab_server</span><span class="p">)</span>
+<span class="n">mcp_toolset2</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span><span class="n">connection_params</span><span class="o">=</span><span class="n">pronunciation_server</span><span class="p">)</span>
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">mcp_toolset1</span><span class="p">,</span> <span class="n">mcp_toolset2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Isolation</strong>: Service failures don’t crash the agent</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c1"># Graceful degradation</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="technical-primitives-and-transport">
+<h3>Technical Primitives and Transport<a class="headerlink" href="#technical-primitives-and-transport" title="Link to this heading"></a></h3>
+<section id="transport-stdio-based-json-rpc">
+<h4>Transport: Stdio-Based JSON-RPC<a class="headerlink" href="#transport-stdio-based-json-rpc" title="Link to this heading"></a></h4>
+<p>Our MCP uses stdio for communication:</p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-10">
+<p class="admonition-title">Python implementation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StdioServerParameters</span><span class="p">(</span>
+    <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;mcp_vocab_server.py&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Message flow:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Agent writes JSON to server&#39;s stdin:
+{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;method&quot;: &quot;lookup_word&quot;, &quot;params&quot;: {&quot;word&quot;: &quot;kaffe&quot;}}
+    ↓
+Server processes, writes JSON to stdout:
+{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: {&quot;definition&quot;: &quot;a beverage...&quot;}}
+    ↓
+Agent parses response and continues
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

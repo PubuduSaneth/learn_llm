@@ -1,0 +1,355 @@
+# Agent Development Guide: Part 2
+
+:::{objectives}
+
+- Explore core concepts of Autonomous Systems using Norwegian Language Learning Agent
+- Concepts
+  - Tools
+  - Interoperability
+  - Model Context Protocol (MCP)
+
+:::
+
+## Part 2: Tools & Interoperability
+
+### What Are Tools?
+
+- Tools are functions that agents can invoke to interact with their environment
+- Tools allow a model to either “know” (retrieve data) or “do” (execute an action)
+- They are the agent's "hands" for affecting the world
+
+### Importance of tools
+
+- Decoupling specific domain capabilities from the core reasoning engine, we enable the agent to dynamically adapt to shifting user missions
+
+### Tool Categories in Our Implementation
+
+**Category 1: State Management Tools:**
+
+:::{instructor-note} Python implementation
+<details>
+<summary>State Management Tools</summary>
+
+```python
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    """Changes the active scenario and resets scenario-specific state."""
+    tool_context.state["active_scenario_id"] = scenario_id
+    tool_context.state["words_practiced"] = []
+    tool_context.state["exchange_count"] = 0
+```
+
+:::
+</details>
+
+**Category 2: Observation Tools:**
+
+:::{instructor-note} Python implementation
+<details>
+<summary>Observation Tools</summary>
+
+```python
+def get_progress(tool_context: Context) -> dict:
+    """Queries current progress without modifying state."""
+    active_scenario_id = tool_context.state.get("active_scenario_id")
+    practiced = tool_context.state.get("words_practiced", [])
+    total_words = len(SCENARIOS[active_scenario_id].get("vocabulary", []))
+    return {
+        "practiced_count": len(practiced),
+        "total_words": total_words,
+        "completion_percentage": (len(practiced) / total_words) * 100
+    }
+```
+
+</details>
+
+:::
+
+**Category 3: Complex Multi-Step Tools:**
+
+:::{instructor-note} Python implementation
+<details>
+<summary>Complex Multi-Step Tools</summary>
+
+```python
+def end_scenario(tool_context: Context) -> str:
+    """Orchestrates scenario completion, including state analysis and memory updates."""
+    scenario = SCENARIOS[active_scenario_id]
+    vocab = scenario.get("vocabulary", [])
+    words_practiced = tool_context.state.get("words_practiced", [])
+
+    # Calculate weak words
+    target_words = {item["norwegian"] for item in vocab}
+    practiced_set = set(words_practiced)
+    weak_words = target_words - practiced_set
+
+    # Update cross-session profile
+    all_weak_words = set(tool_context.state.get("user:weak_words", []))
+    all_weak_words.update(weak_words)
+    tool_context.state["user:weak_words"] = list(all_weak_words)
+```
+
+</details>
+
+:::
+
+### Tool Design Best Practices
+
+#### 1. **Single Responsibility Principle:**
+
+Each tool does one thing well:
+
+:::{instructor-note} Python implementation
+<details>
+<summary>Single Responsibility Principle</summary>
+
+```python
+# ✓ GOOD: Focused tool
+def get_vocabulary(scenario_id: str) -> dict:
+    """Returns vocabulary for a scenario. No side effects."""
+    if scenario_id not in SCENARIOS:
+        return {"error": f"Cannot find vocabulary for '{scenario_id}'."}
+    return {"vocabulary": SCENARIOS[scenario_id]["vocabulary"]}
+
+# ✗ BAD: Mixing concerns
+# def get_vocabulary_and_mark_practiced(scenario_id, word, correct):
+#     "Violates single responsibility - does two things"
+```
+
+</details>
+
+:::
+
+#### 2. **Clear Input Contracts:**
+
+Define exactly what parameters are needed:
+
+:::{instructor-note} Python implementation
+
+<details>
+<summary>Clear Input Contracts</summary>
+
+```python
+def mark_word_practiced(
+    tool_context: Context,      # Always include context for state access
+    word: str,                  # The vocabulary word
+    correct: bool               # Whether user used it correctly
+) -> str:
+    """Clear inputs, clear purpose."""
+```
+
+</details>
+
+:::
+
+#### 3. **Predictable Output Contracts:**
+
+Tools always return a consistent structure:
+
+:::{instructor-note} Python implementation
+
+<details>
+<summary>Predictable Output Contracts</summary>
+
+```python
+# ✓ GOOD: Consistent return types
+def select_scenario(...) -> dict:
+    return {
+        "id": scenario["id"],
+        "title_no": scenario["title_no"],
+        "persona": scenario["persona"],
+        "opening_line": scenario["opening_line"]
+    }
+    # or error:
+    return {"error": "..."}
+
+# ✗ BAD: Unpredictable returns
+# def select_scenario(...):
+#     if ok: return scenario
+#     else: return None  # Inconsistent!
+```
+
+</details>
+
+:::
+
+#### 4. **Explicit Error Handling:**
+
+Tools should not crash; they return error information:
+
+:::{instructor-note} Python implementation
+
+<details>
+<summary>Explicit Error Handling</summary>
+
+```python
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    if scenario_id not in SCENARIOS:
+        return {"error": f"Beklager, jeg kjenner ikke til scenarioet '{scenario_id}'."}
+    # Happy path follows
+```
+
+</details>
+
+:::
+
+#### 5. **State Locality:**
+
+Tools access and modify state through the provided context, not global variables:
+
+:::{instructor-note} Python implementation
+
+<details>
+<summary>State Locality</summary>
+
+```python
+# ✓ GOOD: State through context
+def mark_word_practiced(tool_context: Context, word: str, correct: bool) -> str:
+    practiced = tool_context.state.get("words_practiced", [])
+    tool_context.state["words_practiced"] = practiced + [word]
+
+# ✗ BAD: Global state
+# GLOBAL_STATE = {}
+# def mark_word_practiced(word, correct):
+#     GLOBAL_STATE["words_practiced"] = ...  # Hard to trace!
+```
+
+</details>
+
+:::
+
+### The Model Context Protocol (MCP) Architecture
+
+MCP is a standardized protocol for agents to discover and invoke tools provided by external services.
+
+#### Why MCP?
+
+In our language learning agent, we need to:
+
+1. Look up word definitions in an external vocabulary registry
+2. Integrate without hardcoding dependencies
+3. Allow the vocabulary service to be replaced or updated independently
+
+**Solution - MCP:**
+
+#### How MCP Works in Our Agent
+
+:::{instructor-note} Python implementation
+
+<details>
+<summary>MCP</summary>
+
+```python
+# From agent.py
+from mcp import StdioServerParameters
+
+mcp_toolset = McpToolset(
+    connection_params=StdioServerParameters(
+        command="uv",  # Package manager (Python environment)
+        args=["run", os.path.join(..., "mcp_vocab_server.py")],
+    ),
+    use_mcp_resources=True  # Enable resource discovery
+)
+
+root_agent = LlmAgent(
+    tools=[..., mcp_toolset]  # MCP tools mixed with local tools
+)
+```
+
+:::
+
+**What's happening:**
+
+1. The agent declares an MCP connection to a vocabulary service
+2. The service runs as a separate process (stdio-based communication)
+3. At runtime, the agent discovers what tools the service provides
+4. The agent can call those tools as if they were local
+
+#### MCP Component Architecture
+
+```none
+Agent Process
+    │
+    ├─ Local Tools (list_scenarios, select_scenario, etc.)
+    │
+    └─ MCP Toolset
+        │
+        └─ Stdio Connection
+            │
+            ↕ JSON-RPC Protocol
+            │
+        External MCP Server (mcp_vocab_server.py)
+            │
+            ├─ lookup_word tool
+            ├─ search_dictionary tool
+            └─ get_examples tool
+```
+
+#### MCP Benefits
+
+:::{instructor-note} Benefits
+
+- Decoupling
+  - The agent doesn't depend on vocabulary service internals
+- Composability
+  - Multiple MCP servers can be chained
+- Isolation
+  - Service failures don't crash the agent
+
+<details>
+<summary>Python implementation</summary>
+
+**Decoupling**: The agent doesn't depend on vocabulary service internals
+
+```python
+# Agent just calls it
+result = await agent.call_tool("lookup_word", {"word": "kaffee"})
+# Service can change implementation without agent knowing
+```
+
+**Composability**: Multiple MCP servers can be chained
+
+```python
+mcp_toolset1 = McpToolset(connection_params=vocab_server)
+mcp_toolset2 = McpToolset(connection_params=pronunciation_server)
+root_agent = LlmAgent(tools=[..., mcp_toolset1, mcp_toolset2])
+```
+
+**Isolation**: Service failures don't crash the agent
+
+```python
+try:
+    memories = await callback_context.search_memory("...")
+except Exception:
+    pass  # Graceful degradation
+```
+
+</details>
+
+:::
+
+### Technical Primitives and Transport
+
+#### Transport: Stdio-Based JSON-RPC
+
+Our MCP uses stdio for communication:
+
+:::{instructor-note} Python implementation
+
+```python
+StdioServerParameters(
+    command="uv",
+    args=["run", "mcp_vocab_server.py"]
+)
+```
+
+**Message flow:**
+
+```none
+Agent writes JSON to server's stdin:
+{"jsonrpc": "2.0", "id": 1, "method": "lookup_word", "params": {"word": "kaffe"}}
+    ↓
+Server processes, writes JSON to stdout:
+{"jsonrpc": "2.0", "id": 1, "result": {"definition": "a beverage..."}}
+    ↓
+Agent parses response and continues
+```

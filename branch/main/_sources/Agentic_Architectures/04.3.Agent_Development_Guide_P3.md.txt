@@ -1,0 +1,319 @@
+# Agent Development Guide: Part 3
+
+:::{objectives}
+
+- Understand how memory behave in agentic systems
+- Explore how to apply context engineering techniques in real-world
+
+:::
+
+## What Is Context?
+
+Context is the complete information the agent needs to make decisions. It includes:
+
+- **Short-term context:**
+  - Immediate context: Current conversation, active scenario
+  - Session context: User's state within one session
+- **Long-term context**: User's profile across sessions
+
+### Session Management
+
+#### What Is a Session?
+
+A session represents one continuous interaction between user and agent:
+
+```python
+session_service = SqliteSessionService("sessions.db")
+```
+
+Sessions are:
+
+- **Persistent**: Stored in a database
+- **Isolated**: One user, one conversation thread
+- **Stateful**: Maintain variables that evolve during the conversation
+
+### How Sessions Store State
+
+:::{instructor-note} Python implementation
+
+```python
+# In tools.py
+def select_scenario(tool_context: Context, scenario_id: str) -> dict:
+    # These go into session state
+    tool_context.state["active_scenario_id"] = scenario_id
+    tool_context.state["words_practiced"] = []
+    tool_context.state["exchange_count"] = 0
+
+# In agent.py - on_after_agent callback
+async def on_after_agent(callback_context: CallbackContext):
+    count = callback_context.state.get("exchange_count", 0)
+    callback_context.state["exchange_count"] = count + 1  # Persisted
+```
+
+:::
+
+#### Session State Schema
+
+```none
+Session State = {
+  "active_scenario_id": "cafe",           # Current practice scenario
+  "words_practiced": ["en kaffe", "å betale"],  # Words learned this session
+  "exchange_count": 5,                    # Number of turns in conversation
+
+  # Cross-session profile
+  "user:completed_scenarios": 3,
+  "user:weak_words": ["kort eller kontant?", "heisen"],
+
+  # Additional context
+  "user:preferred_difficulty": "intermediate"
+}
+```
+
+### Retrieving Session State
+
+:::{instructor-note} Python implementation
+
+```python
+# In on_before_agent
+state = callback_context.state
+scenario_id = state.get("active_scenario_id")
+words_practiced = state.get("words_practiced", [])
+
+# Used to build dynamic instruction
+if scenario_id and scenario_id in SCENARIOS:
+    scenario = SCENARIOS[scenario_id]
+    new_instruction = build_instruction(scenario, state)
+```
+
+:::
+
+## Memory Architectures
+
+Our agent uses **two-tier memory**:
+
+### Tier 1: Short-Term Memory (Session State)
+
+**Scope**: Current conversation only
+**Capacity**: Small (dictionary)
+**Retrieval**: Instant (in-memory access)
+**Content**: Active scenario, current words practiced, exchange count
+
+:::{instructor-note} Python implementation
+
+```python
+# Accessed every turn
+state.get("active_scenario_id")
+state.get("words_practiced")
+```
+
+:::
+
+### Tier 2: Long-Term Memory (Persistent Storage)
+
+**Scope**: Across all sessions
+**Capacity**: Large (database)
+**Retrieval**: On-demand (memory search)
+**Content**: Completed scenarios, weak words, interaction history
+
+:::{instructor-note} Python implementation
+
+```python
+# From on_before_agent
+memories = await callback_context.search_memory("scenario fullført")
+if memories and memories.memories:
+    memory_info = "\n\nKontekst fra tidligere samtaler:\n"
+    for mem in memories.memories[-3:]:  # Last 3 memories
+        memory_info += f"- {mem.content...}\n"
+```
+
+:::
+
+#### Memory Lifecycle
+
+```none
+Turn 1 of Session A:
+    ├─ Short-term: empty
+    ├─ Long-term: search for past completions
+    └─ Add personalization to instruction
+
+Turn 2 of Session A:
+    ├─ Short-term: words_practiced = ["en kaffe"]
+    └─ Update persists in session
+
+Turn 3 of Session A:
+    ├─ on_after_agent: serialize session to memory
+    ├─ Long-term: "User practiced scenario:cafe, learned 1 words"
+    └─ Memory serves future sessions
+
+Session B (next day):
+    ├─ Short-term: reset (new session)
+    ├─ Long-term: "User completed cafe scenario before"
+    └─ Memory retrieval enables personalization ("Glad to see you back!")
+```
+
+## How Memory Informs Behavior
+
+**Dynamic Instruction Building Using Memory:**
+
+:::{instructor-note} Python implementation
+
+```python
+# From prompts.py
+def build_instruction(scenario: dict, state: dict) -> str:
+    weak_words = state.get("user:weak_words", [])
+
+    # Memory informs instruction
+    if weak_words:
+        instruction += f"VIKTIG: In previous conversations, the user struggled with: {weak_words}.\n"
+        instruction += "Try to incorporate them into the conversation.\n"
+```
+
+:::
+
+The instruction evolves based on:
+
+1. **Immediate session state** (active scenario)
+2. **Long-term memory** (weak words from past attempts)
+
+**Example:**
+
+```none
+Session 1:
+  User struggles with: "kort eller kontant?" (card or cash?)
+  → Stored in memory as weak_word
+
+Session 2 (next day):
+  on_before_agent loads memory
+  build_instruction includes: "Try to use 'kort eller kontant?' in conversation"
+  → Agent naturally steers conversation to practice this phrase
+```
+
+## Memory Search vs. Full Retrieval
+
+**Benefits:**
+
+- **Efficiency**: Only relevant memories retrieved
+- **Relevance**: Recent memories prioritized
+- **Scalability**: System works with large memory stores
+
+:::{instructor-note} Python implementation
+
+```python
+# Selective retrieval - only get relevant memories
+memories = await callback_context.search_memory("scenario fullført")
+# Instead of: all_memories = memory_service.get_all()
+
+# Filter by recency
+for mem in memories.memories[-3:]:  # Last 3 only
+    memory_info += f"- {mem.content...}\n"
+```
+
+:::
+
+### Practical Memory Example: The Learning Journey
+
+Let's trace how memory enables adaptive learning across sessions:
+
+```none
+DAY 1 - Session 1:
+┌─ User selects "café" scenario
+├─ on_before_agent: no memory (first time)
+│  └─ Instruction: basic introduction
+├─ Conversation: user practices 8/12 words
+│  └─ Weak: "kort eller kontant?", "kvittering"
+├─ on_after_agent: session → memory
+│  └─ Memory: "completed scenario:cafe, weak_words: [...]"
+└─ Session ends
+
+DAY 2 - Session 2:
+┌─ User starts fresh (new session)
+├─ on_before_agent: search memory "scenario fullført"
+│  ├─ Found: "User completed café scenario"
+│  └─ Instruction += "Context: User has practiced café before.\n"
+│  └─ Instruction += "Try to use: 'kort eller kontant?', 'kvittering'\n"
+├─ Conversation: agent naturally steers toward weak words
+│  └─ Agent: "Hvordan vil du betale – kort eller kontant?"
+│  └─ User: "Kort, takk!"
+│  └─ weak_words now practiced!
+├─ on_after_agent: updated memory
+│  └─ Memory: weak_words reduced, user profile updated
+└─ Session ends
+
+DAY 7 - Session 3:
+┌─ User tries "hotel" scenario
+├─ on_before_agent: search memory for context
+│  ├─ Found: "User completed café, weak words practiced"
+│  └─ Instruction += "User is advancing to new scenario\n"
+│  └─ Instruction += "Build on café vocabulary where it applies\n"
+├─ Conversation: new scenario with continuity
+└─ Session ends
+```
+
+## Context Integration Patterns
+
+- Pattern 1: Dynamic Instruction Generation
+- Pattern 2: Callback-Driven State Management
+- Pattern 3: Tool-Based State Mutation
+
+## Pattern 1: Dynamic Instruction Generation
+
+The agent doesn't have a static system prompt. Instead, it's constructed based on state:
+
+```python
+# on_before_agent
+if scenario_id and scenario_id in SCENARIOS:
+    scenario = SCENARIOS[scenario_id]
+    new_instruction = build_instruction(scenario, state)
+    root_agent.instruction = new_instruction  # ← Dynamic assignment
+else:
+    root_agent.instruction = SYSTEM_INSTRUCTION + memory_info
+```
+
+**Why dynamic?**
+
+- Reduces context window usage (only relevant info included)
+- Enables precision (instruction tailored to current scenario)
+- Supports learning (instruction references weak words, completed scenarios)
+
+## Pattern 2: Callback-Driven State Management
+
+The agent doesn't directly manage state. Instead, callbacks hook into the agent's lifecycle:
+
+```none
+User Input
+    ↓
+on_before_agent() ← Prepare context
+    ↓
+Agent Reasoning Loop
+    ↓
+on_after_agent() ← Persist state
+    ↓
+Response
+```
+
+**Why callbacks?**
+
+- **Separation of concerns**: Agent reasoning separate from state management
+- **Testability**: Callbacks can be mocked
+- **Extensibility**: New concerns added without modifying agent core
+
+## Pattern 3: Tool-Based State Mutation
+
+State changes only happen through tools, never directly in callbacks:
+
+```python
+# ✓ GOOD: Tool modifies state
+def mark_word_practiced(tool_context: Context, word: str, correct: bool) -> str:
+    practiced = tool_context.state.get("words_practiced", [])
+    tool_context.state["words_practiced"] = practiced + [word]
+
+# ✗ BAD: Callback modifies state
+# async def on_after_agent(callback_context):
+#     callback_context.state["words_practiced"].append(word)  # Side effect!
+```
+
+**Why?**
+
+- **Auditability**: All state changes are tool calls (logged)
+- **Consistency**: State mutations always go through validation (error checking in tool)
+- **Understandability**: Reading tools shows what state changes are possible

@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent Interoperability and MCP &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AI Agent Interoperability and MCP</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="ai-agent-interoperability-and-mcp">
+<h1>AI Agent Interoperability and MCP<a class="headerlink" href="#ai-agent-interoperability-and-mcp" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand Agent interoperability:</p>
+<ul>
+<li><p>Analyze the “N x M” integration challenge and how standardized communication layers facilitate ecosystem scaling</p></li>
+</ul>
+</li>
+<li><p>Explore the Tool Taxonomy:</p>
+<ul>
+<li><p>Master the functional contracts and design requirements for various tool categories</p></li>
+</ul>
+</li>
+<li><p>MCP Security:</p>
+<ul>
+<li><p>Identify unique agentic threat vectors and implement multi-layered enterprise defenses.</p></li>
+<li><p>Key Definition: Agentic AI  An AI system that leverages a foundation model’s reasoning capabilities to interact with users and achieve specific goals through the autonomous orchestration of external tools.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition-references instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/whitepaper-agent-tools-and-interoperability-with-mcp">Agent Tools &amp; Interoperability with Model Context Protocol (MCP)</a></p></li>
+</ul>
+</div>
+<section id="the-evolution-from-models-to-agents">
+<h2>The Evolution from Models to Agents<a class="headerlink" href="#the-evolution-from-models-to-agents" title="Link to this heading"></a></h2>
+<p><img alt="alt text" src="../../_images/Models_to_Agents.png" /></p>
+<ul class="simple">
+<li><p>Foundation models were treated as isolated pattern prediction engines, restricted to the static data present at the time of their training</p></li>
+<li><p>LLMs pass high-level examinations or generate creative prose,</p>
+<ul>
+<li><p>they remained “blind and paralyzed” regarding the real-time world</p></li>
+</ul>
+</li>
+<li><p>Agentic AI represents the most significant shift in modern software architecture: moving from models that simply talk about the world to agents that act within it</p></li>
+<li><p>Tool-calling and integration to LLMs provide the “eyes and hands” necessary to perceive external environments and execute complex workflows</p></li>
+</ul>
+</section>
+<section id="anatomy-and-taxonomy-of-ai-tools">
+<h2>Anatomy and Taxonomy of AI Tools<a class="headerlink" href="#anatomy-and-taxonomy-of-ai-tools" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A tool is a functional contract:</p>
+<ul>
+<li><p>a strict declaration of parameters and purposes that allows a model to extend its capabilities</p></li>
+</ul>
+</li>
+<li><p>Tools allow a model to either “know” (retrieve data) or “do” (execute an action)</p></li>
+</ul>
+<section id="anatomy-of-a-tool">
+<h3>Anatomy of a tool<a class="headerlink" href="#anatomy-of-a-tool" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Anatomy of a tool is essentially a defined <strong>contract between the model and the tool itself</strong>, similar to a <strong>function in a traditional, non-AI program</strong></p></li>
+<li><p>Well-structured tool typically consists of the following core anatomical components:</p>
+<ul>
+<li><p>The Name</p></li>
+<li><p>The Description</p></li>
+<li><p>Parameters (Input Schema)</p></li>
+<li><p>Output Schema</p></li>
+<li><p>Descriptive Error Messages</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Anatomical components:</strong></p>
+<ul class="simple">
+<li><p>The Name</p>
+<ul>
+<li><p>a clear, unique identifier</p></li>
+<li><p>Best practices: name should be highly descriptive and human-readable to help the model accurately decide which tool to select.</p></li>
+<li><p>For example, a specific name like <code class="docutils literal notranslate"><span class="pre">create_critical_bug_in_jira_with_priority</span></code> is much more effective than a generic name like <code class="docutils literal notranslate"><span class="pre">update_jira</span></code></p></li>
+</ul>
+</li>
+<li><p>The Description</p>
+<ul>
+<li><p>A natural language description</p></li>
+<li><p>Should explain the tool’s purpose and instructs the LLM on how and when it should be used</p></li>
+<li><p>A robust description should:</p>
+<ul>
+<li><p>Clearly explain the tool’s inputs, outputs, and purpose without using obscure shorthand or technical jargon</p></li>
+<li><p>Describe the <em>action</em> the agent needs to perform (what to do) rather than dictating the specific implementation (how to do it)</p></li>
+<li><p>Include targeted examples to clarify ambiguities and show the model how to handle tricky requests</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Parameters (Input Schema)</p>
+<ul>
+<li><p>Must define the expected input parameters, explicitly detailing their required data types and how the tool will use them.</p></li>
+<li><p>To prevent confusing the model, parameter lists should be kept short with clearly named variables, and default values should be provided and documented whenever possible</p></li>
+<li><p>In standardized protocols like the Model Context Protocol (MCP), this is formalized as an <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> that uses standard JSON schema formatting.</p></li>
+</ul>
+</li>
+<li><p>Output Schema</p>
+<ul>
+<li><p>Tools should define the structure of the data they return</p></li>
+<li><p>Establishing a clear output schema (such as a JSON object) serves a dual purpose:</p>
+<ul>
+<li><p>Allows the client application to validate the tool’s results, and</p></li>
+<li><p>Communicates to the LLM exactly what kind of data it should expect to receive and process</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Tools should be designed to return <strong>concise output</strong></p>
+<ul>
+<li><p>as large data tables or downloaded files can quickly overwhelm the LLM’s context window, degrading performance and increasing costs</p></li>
+</ul>
+</li>
+<li><p>Descriptive Error Messages</p>
+<ul>
+<li><p>Often overlooked aspect</p></li>
+<li><p>When a tool fails, it should return descriptive error messages back to the calling LLM rather than just raw error codes</p></li>
+<li><p>These messages provide an additional channel to give the model instructions on how to failover or correct its next action</p>
+<ul>
+<li><p>such as telling the model to “Ask the customer to confirm the product name” if a product ID lookup fails</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/general_rules_tooling.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>MCP-Specific Anatomy (Annotations):</strong></p>
+<p>If the tool is built using the <strong>Model Context Protocol (MCP)</strong>, its JSON schema anatomy can also include an <code class="docutils literal notranslate"><span class="pre">annotations</span></code> field. Annotations provide the model with behavioral hints about the tool, such as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">destructiveHint</span></code>: Indicates the tool may perform destructive updates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readOnlyHint</span></code>: Indicates the tool does not modify its environment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">idempotentHint</span></code>: Indicates that calling the tool repeatedly with the same arguments will have no additional effect.</p></li>
+</ul>
+<p><em>(Note: Because MCP servers may be untrusted, these annotations are considered hints and are not guaranteed to be strictly true).</em></p>
+</div>
+</section>
+<section id="good-and-bad-tool-documentation">
+<h3>Good and bad tool documentation<a class="headerlink" href="#good-and-bad-tool-documentation" title="Link to this heading"></a></h3>
+<div class="admonition-coding instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Coding</p>
+<p><strong>Good documentation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_product_information</span><span class="p">(</span><span class="n">product_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves comprehensive information about a product based on the unique product ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        product_id: The unique identifier for the product.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing product details. Expected keys include:</span>
+<span class="sd">        &#39;product_name&#39;: The name of the product.</span>
+<span class="sd">        &#39;brand&#39;: The brand name of the product</span>
+<span class="sd">        &#39;description&#39;: A paragraph of text describing the product.</span>
+<span class="sd">        &#39;category&#39;: The category of the product.</span>
+<span class="sd">        &#39;status&#39;: The current status of the product (e.g., &#39;active&#39;,&#39;inactive&#39;, &#39;suspended&#39;).</span>
+<span class="sd">    Example return value:</span>
+<span class="sd">        {</span>
+<span class="sd">        &#39;product_name&#39;: &#39;Astro Zoom Kid&#39;s Trainers&#39;,</span>
+<span class="sd">        &#39;brand&#39;: &#39;Cymbal Athletic Shoes&#39;,</span>
+<span class="sd">        &#39;description&#39;: &#39;...&#39;,</span>
+<span class="sd">        &#39;category&#39;: &#39;Children&#39;s Shoes&#39;,</span>
+<span class="sd">        &#39;status&#39;: &#39;active&#39;</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Bad documentation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fetchpd</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves product data</span>
+<span class="sd">    Args:</span>
+<span class="sd">        pid: id</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict of data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><em>Source: Agent Tools &amp; Interoperability with MCP; Authors: Mike Styer, Kanchana Patlolla,Madhuranjan Mohan, and Sal Diaz</em></p>
+</div>
+</section>
+<section id="taxonomy-of-tools">
+<h3>Taxonomy of tools<a class="headerlink" href="#taxonomy-of-tools" title="Link to this heading"></a></h3>
+<p>Tool taxonomy is based on their primary functions and the types of interactions they facilitate.</p>
+<p><strong>Four main categories:</strong></p>
+<ul class="simple">
+<li><p>Information Retrieval:</p>
+<ul>
+<li><p>These tools allow agents to fetch data from a variety of sources, including web searches, databases, and unstructured documents. This category requires specific design considerations depending on the data type:</p></li>
+<li><p><em>Structured Data Retrieval:</em> Used for querying databases or spreadsheets (e.g., NL2SQL), which requires developers to define clear schemas and handle data types gracefully.</p></li>
+<li><p><em>Unstructured Data Retrieval:</em> Used for searching documents or knowledge bases (e.g., RAG), requiring robust search algorithms and clear retrieval instructions while managing context window limitations.</p></li>
+</ul>
+</li>
+<li><p>Action / Execution:</p>
+<ul>
+<li><p>These tools enable agents to perform real-world operations.</p></li>
+<li><p>Examples include sending emails, posting messages, initiating code execution, or controlling physical devices.</p></li>
+</ul>
+</li>
+<li><p>System / API Integration:</p>
+<ul>
+<li><p>These tools allow agents to connect with existing software systems, integrate into enterprise workflows, or interact with third-party services. The source highlights specific use cases like:</p></li>
+<li><p><em>Google Connectors:</em> Interacting with Workspace apps like Gmail or Calendar, which requires handling authentication and API rate limits.</p></li>
+<li><p><em>Third-Party Connectors:</em> Integrating with external apps, which necessitates managing API keys securely and implementing error handling for the external calls.</p></li>
+</ul>
+</li>
+<li><p>Human-in-the-Loop:</p>
+<ul>
+<li><p>These tools are designed to facilitate collaboration with human users. They allow the agent to ask for clarification, seek human approval before taking critical actions, or hand off tasks that require human judgment.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/Tool_taxonomy.png" /></p>
+</section>
+</section>
+<section id="engineering-best-practices-for-tool-design">
+<h2>Engineering Best Practices for Tool Design<a class="headerlink" href="#engineering-best-practices-for-tool-design" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>LLM’s reasoning engine uses the tool documentation as the “instruction manual” for data processing</p></li>
+<li><p>Best practices for tool design are important for any reliable and effective agentic system</p></li>
+<li><p>Adhering to tool design best practices is important for</p>
+<ul>
+<li><p><em>Improving Dynamic Execution:</em></p>
+<ul>
+<li><p>Tools should be designed to represent granular, user-facing tasks rather than acting as thin wrappers over complex internal APIs</p></li>
+<li><p>Human developers can navigate complex APIs, but an agent must decide at runtime which parameters to use.</p></li>
+<li><p>If a tool captures a specific task, the agent is much more likely to call it correctly</p></li>
+</ul>
+</li>
+<li><p><em>Driving Consistency:</em></p>
+<ul>
+<li><p>Making tools as granular as possible, limited to a single function with clear responsibilities, makes it easier for the agent to consistently determine when a tool is needed</p></li>
+<li><p>Multi-tools (tools that take many steps in turn or encapsulate a long workflow) can be difficult for models to use reliably</p></li>
+</ul>
+</li>
+<li><p><em>Protecting Performance and Cost:</em></p>
+<ul>
+<li><p>Poorly designed tools that return large volumes of data (like large tables or files) can quickly swamp an LLM’s context window. Designing for concise output prevents context bloat, which can adversely affect the system’s performance, cost, and ability to reason accurately</p></li>
+</ul>
+</li>
+<li><p><em>Guiding the Agent’s Reasoning:</em></p>
+<ul>
+<li><p>Best practices like implementing clear input/output schemas and providing descriptive error messages are essential for guiding the agent</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="the-five-pillars-of-tool-engineering">
+<h3>The Five Pillars of Tool Engineering<a class="headerlink" href="#the-five-pillars-of-tool-engineering" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Semantic Naming:</p>
+<ul>
+<li><p>Use human-readable, specific names (e.g., create_critical_jira_bug) to help the planner select the correct tool without ambiguity.</p></li>
+</ul>
+</li>
+<li><p>Parameter Simplification:</p>
+<ul>
+<li><p>Keep parameter lists short.</p></li>
+<li><p>Complex enterprise APIs with hundreds of parameters should be distilled into specialized tool signatures to prevent model confusion.</p></li>
+</ul>
+</li>
+<li><p>Action-Oriented Descriptions:</p>
+<ul>
+<li><p>Document  what  the tool does, not its internal implementation logic.</p></li>
+<li><p>Describe the objective to allow the model scope for autonomous tool use.</p></li>
+</ul>
+</li>
+<li><p>Granularity:</p>
+<ul>
+<li><p>Keep tools focused on a single function.</p></li>
+<li><p>Granular tools allow the agent to be more consistent in determining when the tool is needed.</p></li>
+<li><p>Avoid “multi-tool” workflows that increase the probability of model hallucination or refusal.</p></li>
+</ul>
+</li>
+<li><p>Output Conciseness:</p>
+<ul>
+<li><p>Do not return massive datasets.</p></li>
+<li><p>Return reference IDs or temporary database table names.</p></li>
+<li><p>Large responses swamp the context window and poison the agent’s conversation history.</p></li>
+</ul>
+</li>
+<li><p>Expert Tip:  Use  descriptive error messages  as a feedback loop. If a tool fails, return a message that guides the LLM on how to correct the call (e.g., “ID not found; ask the user for the product name and look up the ID again”).</p></li>
+</ul>
+<div class="admonition-extended-note instructor-note admonition" id="instructor-note-2">
+<p class="admonition-title">Extended note</p>
+<details>
+<summary>Tool Engineering best-practices</summary>
+<p><strong>1. Prioritize Thorough Documentation</strong>
+Because a tool’s name, description, and attributes are passed directly to the model as part of its request context, they are vital for guiding the model’s behavior.</p>
+<ul class="simple">
+<li><p><strong>Use Clear Names:</strong> Tool names should be descriptive, specific, and human-readable (e.g., <code class="docutils literal notranslate"><span class="pre">create_critical_bug_in_jira_with_priority</span></code> instead of <code class="docutils literal notranslate"><span class="pre">update_jira</span></code>) to help the model select the right tool and to create clearer audit logs.</p></li>
+<li><p><strong>Clarify Descriptions:</strong> Provide detailed descriptions of the tool’s purpose without using shorthand or technical jargon.</p></li>
+<li><p><strong>Describe Parameters Explicitly:</strong> Clearly detail all input and output parameters, their required types, and how the tool will use them. Keep parameter lists short and well-named.</p></li>
+<li><p><strong>Provide Examples and Defaults:</strong> Use targeted examples to clarify ambiguities and show the model how to handle complex requests. Additionally, provide and document default values for key parameters, which LLMs can often use correctly if guided.</p></li>
+</ul>
+<p><strong>2. Describe Actions, Not Implementations</strong>
+The instructions provided to the model should focus on the overarching objective rather than dictating the use of specific tools.</p>
+<ul class="simple">
+<li><p><strong>Focus on “What”, Not “How”:</strong> Instruct the model on what it needs to achieve (e.g., “create a bug to describe the issue”) rather than how to execute it (e.g., “use the create_bug tool”).</p></li>
+<li><p><strong>Avoid Redundancy and Rigid Workflows:</strong> Do not repeat the tool’s documentation in the system instructions, as this can confuse the model. Furthermore, avoid dictating a rigid sequence of actions; instead, allow the model scope to act autonomously.</p></li>
+<li><p><strong>Explain Interactions:</strong> If a tool has a side effect that impacts another tool (like saving a retrieved web page to a file), document this explicitly so the agent knows how to access the resulting data.</p></li>
+</ul>
+<p><strong>3. Publish Tasks, Not API Calls</strong>
+Tools should be designed to encapsulate specific tasks an agent needs to perform, rather than acting as thin wrappers over existing internal APIs. While complex APIs are designed for humans who understand the full context of the available data, agents must decide dynamically which parameters to use. Defining a tool around a specific task greatly increases the likelihood that the agent will call it correctly.</p>
+<p><strong>4. Make Tools as Granular as Possible</strong>
+Standard software coding practices apply to agent tools: they should be concise and limited to a single function.</p>
+<ul class="simple">
+<li><p><strong>Define Clear Responsibilities:</strong> Ensure each tool has a well-documented purpose, outlining exactly what it does, when it should be called, and what it returns.</p></li>
+<li><p><strong>Avoid Multi-Tools:</strong> Do not create tools that encompass long, multi-step workflows, as these are difficult to document and maintain, and LLMs struggle to use them consistently.</p></li>
+</ul>
+<p><strong>5. Design for Concise Output</strong>
+Returning massive amounts of data—such as large tables, generated images, or downloaded files—can easily swamp an LLM’s context window, degrading performance and increasing costs. Instead of returning large responses directly, tools should leverage external systems for data storage. For instance, a tool could insert a large query result into a temporary database table and simply return the table’s name to the LLM.</p>
+<p><strong>6. Use Validation Effectively</strong>
+Implement input and output schema validation wherever possible. Clearly defined schemas serve as runtime checks for the application while acting as additional documentation that helps the LLM understand how to formulate requests and interpret results.</p>
+<p><strong>7. Provide Descriptive Error Messages</strong>
+When a tool fails, returning a simple error code is a missed opportunity. Because the tool’s error message is returned to the calling LLM, it should be used as an instructional channel. A descriptive error message should explicitly tell the LLM how to failover or correct its next action, such as instructing the model to ask the user to clarify a product name if a product ID lookup fails.</p>
+</details>
+</div>
+</section>
+</section>
+<section id="mcp-model-context-protocol">
+<h2>MCP - Model Context Protocol<a class="headerlink" href="#mcp-model-context-protocol" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The AI industry is currently struggling with fragmentation</p></li>
+<li><p>Every new model (N) and every new tool (M) requires a custom connector,</p>
+<ul>
+<li><p>leading to an “N x M” integration explosion.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/NxM_MCP.png" /></p>
+<section id="the-n-x-m-problem-and-the-mcp-solution">
+<h3>The “N x M” Problem and the MCP Solution<a class="headerlink" href="#the-n-x-m-problem-and-the-mcp-solution" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>MCP solves “N x M” Problem by providing a universal interface, functioning for AI agents exactly as the Language Server Protocol (LSP) does for IDEs.</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/mcp3.png" /></p>
+<div class="admonition-additional-figure instructor-note admonition" id="instructor-note-3">
+<p class="admonition-title">Additional figure</p>
+<details>
+<summary>MCP in an AI application</summary>
+<p><img alt="alt text" src="../../_images/mcp2.png" />
+<em>Source: Agent Tools &amp; Interoperability with MCP; Authors: Mike Styer, Kanchana Patlolla,Madhuranjan Mohan, and Sal Diaz</em></p>
+</details>
+</div>
+</section>
+<section id="core-components-of-mcp">
+<h3>Core Components of MCP<a class="headerlink" href="#core-components-of-mcp" title="Link to this heading"></a></h3>
+<div class="admonition-mcp-architectural-components exercise important admonition" id="exercise-0">
+<p class="admonition-title">MCP - Architectural Components</p>
+<ul class="simple">
+<li><p>MCP design separates the AI application from its tool integrations,</p>
+<ul>
+<li><p>creating a modular and extensible approach to AI apps and tool development</p></li>
+</ul>
+</li>
+<li><p>Allows modular development</p>
+<ul>
+<li><p>AI agent developers - focus on core competencies like reasoning and user experience,</p></li>
+<li><p>AI tool and third-party developers - build specialized servers for any tool or API</p></li>
+</ul>
+</li>
+<li><p>Core architectural components</p>
+<ul>
+<li><p>MCP Host (AI application)</p></li>
+<li><p>MCP Server (adapter or a proxy for an external tool, data source, or API)</p></li>
+<li><p>MCP Client (maintains the active connection with the Server)</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>High-level overview:</strong></p>
+<p><img alt="alt text" src="../../_images/Components-MCP.png" /></p>
+<p><strong>How components are connected?</strong>
+<img alt="alt text" src="../../_images/Components-MCPs.png" /></p>
+</div>
+</section>
+<section id="mcp-host">
+<h3>MCP Host<a class="headerlink" href="#mcp-host" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>MCP Host is the AI application:</p>
+<ul>
+<li><p>MCP Host pperate as a standalone application or as a sub-component within a larger multi-agent system</p></li>
+</ul>
+</li>
+<li><p>Responsible for</p>
+<ul>
+<li><p>orchestrating the use of tools,</p></li>
+<li><p>user experience, and</p></li>
+<li><p>enforcing security policies and content guardrails</p></li>
+</ul>
+</li>
+<li><p>MCP Host creates and manages individual MCP clients</p></li>
+</ul>
+</section>
+<section id="mcp-server">
+<h3>MCP Server<a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Functions as an adapter or a proxy for an external tool, data source, or API</p></li>
+<li><p>Provides a specific set of capabilities that a developer wants to make available to AI applications</p></li>
+<li><p>Main responsibilities:</p>
+<ul>
+<li><p>Advertising its available tools (tool discovery),</p></li>
+<li><p>receiving and executing commands from the Client, and</p></li>
+<li><p>formatting and returning the results</p></li>
+</ul>
+</li>
+<li><p>In enterprise contexts, the Server is also tasked with handling security, scalability, and governance</p></li>
+</ul>
+</section>
+<section id="mcp-client">
+<h3>MCP Client<a class="headerlink" href="#mcp-client" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The embedded component within the host that maintains the active connection with the Server</p></li>
+<li><p>Dose not interact with user or reason with LLM</p></li>
+<li><p>Responsible for (strictly handel)</p>
+<ul>
+<li><p>issuing commands,</p></li>
+<li><p>receiving responses, and</p></li>
+<li><p>managing the lifecycle of the communication session with its designated MCP Server</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/mcp-anatomy.png" /></p>
+</section>
+</section>
+<section id="mcp-the-technical-stack">
+<h2>MCP - The Technical Stack<a class="headerlink" href="#mcp-the-technical-stack" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>MCP is built upon a standardized communication layer to ensure consistency and interoperability between clients and servers.</p></li>
+</ul>
+<div class="admonition-mcp-tech-stack exercise important admonition" id="exercise-1">
+<p class="admonition-title">MCP - Tech-stack</p>
+<p>This stack consists of three primary components:</p>
+<ul class="simple">
+<li><p>Base Protocol</p></li>
+<li><p>Message Types</p></li>
+<li><p>Transport Mechanisms</p></li>
+</ul>
+<p><strong>Tech-stack:</strong>
+<img alt="alt text" src="../../_images/MCP-Tech-stack.png" /></p>
+</div>
+<section id="base-protocol">
+<h3>Base Protocol<a class="headerlink" href="#base-protocol" title="Link to this heading"></a></h3>
+<p>MCP uses <strong>JSON-RPC 2.0</strong> as its foundational message format. This gives the protocol a structure that is lightweight, text-based, and completely language-agnostic for all its communications.</p>
+<p><img alt="alt text" src="../../_images/mcp_message_typs1.png" /></p>
+</section>
+<section id="message-types">
+<h3>Message Types<a class="headerlink" href="#message-types" title="Link to this heading"></a></h3>
+<p>The interaction flow within MCP is governed by four fundamental types of messages:</p>
+<ul class="simple">
+<li><p>Requests:</p>
+<ul>
+<li><p>Remote Procedure Calls (RPC) sent from one party to the other that expect a response.</p></li>
+</ul>
+</li>
+<li><p>Results:</p>
+<ul>
+<li><p>Messages that contain the successful outcome of a corresponding request.</p></li>
+</ul>
+</li>
+<li><p>Errors:</p>
+<ul>
+<li><p>Messages that indicate a request failed, which include both an error code and a description.</p></li>
+</ul>
+</li>
+<li><p>Notifications:</p>
+<ul>
+<li><p>One-way messages that do not require a response and cannot be replied to.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/mcp_message_typs.png" /></p>
+</section>
+<section id="transport-mechanisms">
+<h3>Transport Mechanisms<a class="headerlink" href="#transport-mechanisms" title="Link to this heading"></a></h3>
+<p>To ensure that the client and server can interpret each other’s messages, MCP relies on standard transport protocols. It supports two primary transport mechanisms depending on the deployment environment:</p>
+<ul class="simple">
+<li><p>Stdio (Standard Input/Output):</p>
+<ul>
+<li><p>This is utilized for fast and direct local communication, specifically when the MCP server runs as a subprocess of the Host application. It is typically used when tools need to access local resources, such as the user’s filesystem.</p></li>
+</ul>
+</li>
+<li><p>Streamable HTTP:</p>
+<ul>
+<li><p>This is the recommended protocol for remote client-server connections. While it supports Server-Sent Events (SSE) for streaming responses, it also allows for stateless servers and can be implemented in a plain HTTP server without strictly requiring SSE.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/mcp_transport.png" /></p>
+</section>
+<section id="mcp-primitives">
+<h3>MCP Primitives<a class="headerlink" href="#mcp-primitives" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Key concepts or capabilities defined by the MCP specification</p></li>
+<li><p>Enable LLM-based applications to interact with external systems.</p></li>
+<li><p>Divided into two categories based on which component provides the capability:</p></li>
+<li><p>Systematically break down the barriers between isolated AI reasoning engines and the real world</p></li>
+</ul>
+<p><strong>Server-Side:</strong></p>
+<ul class="simple">
+<li><p>Capabilities offered by Server to Client</p></li>
+<li><p>Tools: A standardized way for a server to describe functions it makes available to clients (e.g., <code class="docutils literal notranslate"><span class="pre">read_file</span></code>, <code class="docutils literal notranslate"><span class="pre">get_weather</span></code>, <code class="docutils literal notranslate"><span class="pre">execute_sql</span></code>). Tools are the core driver of MCP’s value and are currently the most widely supported primitive.</p></li>
+<li><p>Resources: Contextual data that the server makes available for the host application to use, such as database records, file contents, log files, or images.</p></li>
+<li><p>Prompts: Reusable prompt templates or examples provided by the server to help clients understand how to best interact with its specific tools and resources.</p></li>
+</ul>
+<p><strong>Client-Side Capabilities:</strong></p>
+<ul class="simple">
+<li><p>Capabilities offered by Client to Server</p></li>
+<li><p>Sampling:</p>
+<ul>
+<li><p>This reverses the typical flow of control by allowing an MCP server to request an LLM completion (a “thought” or summarization) from the client.</p></li>
+</ul>
+</li>
+<li><p>Elicitation:</p>
+<ul>
+<li><p>Allows an MCP server to pause its operation and request additional information directly from the human user via the client’s user interface.</p></li>
+</ul>
+</li>
+<li><p>Roots:</p>
+<ul>
+<li><p>Defines specific boundaries (currently restricted to <code class="docutils literal notranslate"><span class="pre">file:</span></code> URIs) that dictate where a server is permitted to operate within a filesystem.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/mcp_primitives.png" /></p>
+<p><em>Note on Adoption:</em> While all these primitives are defined in the protocol, <strong>Tools</strong> are currently supported by roughly 99% of clients and drive the primary value of MCP. The other primitives (like Sampling, Roots, and Elicitation) have significantly lower adoption (under 10%), so their long-term importance in production environments is still emerging.</p>
+</section>
+<section id="strategic-advantages-of-mcps">
+<h3>Strategic Advantages of MCPs<a class="headerlink" href="#strategic-advantages-of-mcps" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Accelerating Development and a Reusable Ecosystem</p>
+<ul>
+<li><p>MCP significantly simplifies the development process bue to the common, standardized protocol for tool integration</p></li>
+<li><p>plug-and-play” ecosystem where tools become easily shareable and reusable assets, supported by centralized directories like the MCP Registry</p></li>
+</ul>
+</li>
+<li><p>Dynamically Enhancing Agent Capabilities and Autonomy</p>
+<ul>
+<li><p>Instead of relying on hard-coded tools, MCP-enabled applications can discover available tools at runtime, which grants agents greater adaptability and autonomy</p></li>
+</ul>
+</li>
+<li><p>Architectural Flexibility and Future-Proofing</p>
+<ul>
+<li><p>MCP decouples an AI agent’s core reasoning architecture from the specific implementation details of the tools it uses.</p></li>
+<li><p>MCP enables highly modular systems - Logic, memory, and tools are treated as independent components/modules</p></li>
+<li><p>Modularity makes it easier to swap out models or backend services without needing to rebuild the entire integration layer</p></li>
+<li><p>Modularity makes systems much easier to debug, scale, and maintain, allowing organizations to easily swap out underlying LLM providers or backend services without needing to re-architect their integration layer</p></li>
+</ul>
+</li>
+</ul>
+<p>The Model Context Protocol (MCP) presents a powerful new paradigm for connecting AI agents to external tools, but it comes with a distinct set of tradeoffs. While it offers significant strategic advantages for development and architecture, it also introduces critical challenges regarding performance, enterprise readiness, and security.</p>
+</section>
+<section id="the-disadvantages-and-challenges-the-risks-of-mcp">
+<h3>The Disadvantages and Challenges (The Risks of MCP)<a class="headerlink" href="#the-disadvantages-and-challenges-the-risks-of-mcp" title="Link to this heading"></a></h3>
+<p><strong>Performance and Scalability Issues:</strong></p>
+<ul class="simple">
+<li><p>Context Window Bloat:</p>
+<ul>
+<li><p>To know what tools are available, the agent must load all tool definitions and schemas from connected MCP servers into its context window.</p></li>
+<li><p>This can consume a massive amount of tokens, leading to increased costs, higher latency, and the loss of other critical context.</p></li>
+</ul>
+</li>
+<li><p>Degraded Reasoning:</p>
+<ul>
+<li><p>Loading too many tool definitions can overwhelm the model, causing it to ignore useful tools, invoke irrelevant ones, or lose track of the user’s original intent</p></li>
+</ul>
+</li>
+<li><p>Stateful Complexity:</p>
+<ul>
+<li><p>Using stateful, persistent connections for remote servers can complicate the system architecture, making horizontal scaling and load balancing much harder than with stateless REST APIs.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Enterprise Readiness Gaps:</strong></p>
+<ul class="simple">
+<li><p>Authentication and Identity:</p>
+<ul>
+<li><p>The base MCP specification lacks robust, enterprise-ready standards for fine-grained authentication and authorization.</p></li>
+<li><p>Furthermore, it struggles with identity management, making it ambiguous whether an action is initiated by the end-user, the AI agent, or a generic system account, which complicates auditing.</p></li>
+</ul>
+</li>
+<li><p>Lack of Native Observability:</p>
+<ul>
+<li><p>The protocol does not natively define standards for logging, tracing, or metrics,</p></li>
+<li><p>These are essential for debugging and threat detection in production systems</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>New Security Vulnerabilities:</strong></p>
+<ul class="simple">
+<li><p>Dynamic Capability Injection:</p>
+<ul>
+<li><p>Because MCP servers can change the tools they offer without explicit client notification, an agent could unexpectedly inherit dangerous capabilities (e.g., a “read-only” agent suddenly gaining the ability to execute financial transactions).
+-Tool Shadowing:
+A malicious tool can be created with a description or trigger very similar to a legitimate tool. If the LLM gets confused and chooses the malicious “shadow” tool, it could hand over sensitive data to an attacker.</p></li>
+</ul>
+</li>
+<li><p>Confused Deputy Problem:</p>
+<ul>
+<li><p>Because the MCP server acts as a highly privileged intermediary, a malicious user could use prompt injection to trick the AI into ordering the MCP server to misuse its privileges (e.g., exfiltrating a secure code repository).</p></li>
+</ul>
+</li>
+<li><p>Coarse Access Controls:</p>
+<ul>
+<li><p>The protocol only supports coarse-grained client-server authorization. It lacks support for limiting access on a per-tool or per-resource basis, making it difficult to enforce the principle of least privilege.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

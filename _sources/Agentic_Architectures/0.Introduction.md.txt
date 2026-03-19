@@ -1,0 +1,33 @@
+# Lesson introduction
+
+## Architecting Autonomous Systems
+
+This lesson notes are designed to transition participants from "bricklayer" coding—where every logical step is explicitly defined—to "director-level" orchestration. Notes wil help learners how to set the scene with instructions, select the cast of tools, and provide the necessary context.
+
+## Learning outcomes
+
+- Deconstruct systems into the essential four-pillar architecture
+  - Model, Tools, Orchestration, and Deployment
+- Architect multi-step reasoning loops using ReAct and Chain-of-Thought frameworks.
+- Implement the Model Context Protocol (MCP) to resolve the "N x M" integration bottleneck.
+- Manage persistent state and "Context Rot" through advanced Context Engineering.
+- Secure enterprise fleets by treating Agent Identity as a Third Class of Principal
+
+## Lesson Roadmap & Content
+
+- Stage 1: Fundamentals of Autonomous Systems
+  - The Anatomy and Taxonomy of Agents
+- Stage 2: Tools, Interoperability, and the Model Context Protocol (MCP)
+  - AI Agent Interoperability and MCP
+- Stage 3: Context Engineering; Sessions, Persistent Memory and context injection
+  - Context Engineering for Stateful AI Agents
+- Stage 4: Case-study explore real-world implementation of Stage 1, 2 & 3
+  - Agent Development Guide: Part 1 (Covers in Stage 1)
+  - Agent Development Guide: Part 2 (Covers in Stage 2)
+  - Agent Development Guide: Part 3 (Covers in Stage 3)
+- Stage 5: Agent Ops – Quality, Security, and Governance
+  - Engineering Trust
+
+## Source materials
+
+- [AI Agents Intensive Course with Google](https://www.kaggle.com/learn-guide/5-day-agents)

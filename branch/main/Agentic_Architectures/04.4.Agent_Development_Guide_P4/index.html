@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Development Guide: Part 4 &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Agent Development Guide: Part 4</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/04.4.Agent_Development_Guide_P4.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="agent-development-guide-part-4">
+<h1>Agent Development Guide: Part 4<a class="headerlink" href="#agent-development-guide-part-4" title="Link to this heading"></a></h1>
+<section id="integration-patterns">
+<h2>Integration Patterns<a class="headerlink" href="#integration-patterns" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Pattern 1: Dynamic Instruction Generation</p></li>
+<li><p>Pattern 2: Callback-Driven State Management</p></li>
+<li><p>Pattern 3: Tool-Based State Mutation</p></li>
+</ul>
+</section>
+<section id="pattern-1-dynamic-instruction-generation">
+<h2>Pattern 1: Dynamic Instruction Generation<a class="headerlink" href="#pattern-1-dynamic-instruction-generation" title="Link to this heading"></a></h2>
+<p>The agent doesn’t have a static system prompt. Instead, it’s constructed based on state:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on_before_agent</span>
+<span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">new_instruction</span>  <span class="c1"># ← Dynamic assignment</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+</pre></div>
+</div>
+<p><strong>Why dynamic?</strong></p>
+<ul class="simple">
+<li><p>Reduces context window usage (only relevant info included)</p></li>
+<li><p>Enables precision (instruction tailored to current scenario)</p></li>
+<li><p>Supports learning (instruction references weak words, completed scenarios)</p></li>
+</ul>
+</section>
+<section id="pattern-2-callback-driven-state-management">
+<h2>Pattern 2: Callback-Driven State Management<a class="headerlink" href="#pattern-2-callback-driven-state-management" title="Link to this heading"></a></h2>
+<p>The agent doesn’t directly manage state. Instead, callbacks hook into the agent’s lifecycle:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>User Input
+    ↓
+on_before_agent() ← Prepare context
+    ↓
+Agent Reasoning Loop
+    ↓
+on_after_agent() ← Persist state
+    ↓
+Response
+</pre></div>
+</div>
+<p><strong>Why callbacks?</strong></p>
+<ul class="simple">
+<li><p><strong>Separation of concerns</strong>: Agent reasoning separate from state management</p></li>
+<li><p><strong>Testability</strong>: Callbacks can be mocked</p></li>
+<li><p><strong>Extensibility</strong>: New concerns added without modifying agent core</p></li>
+</ul>
+</section>
+<section id="pattern-3-tool-based-state-mutation">
+<h2>Pattern 3: Tool-Based State Mutation<a class="headerlink" href="#pattern-3-tool-based-state-mutation" title="Link to this heading"></a></h2>
+<p>State changes only happen through tools, never directly in callbacks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Tool modifies state</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="c1"># ✗ BAD: Callback modifies state</span>
+<span class="c1"># async def on_after_agent(callback_context):</span>
+<span class="c1">#     callback_context.state[&quot;words_practiced&quot;].append(word)  # Side effect!</span>
+</pre></div>
+</div>
+<p><strong>Why?</strong></p>
+<ul class="simple">
+<li><p><strong>Auditability</strong>: All state changes are tool calls (logged)</p></li>
+<li><p><strong>Consistency</strong>: State mutations always go through validation (error checking in tool)</p></li>
+<li><p><strong>Understandability</strong>: Reading tools shows what state changes are possible</p></li>
+</ul>
+</section>
+<section id="pattern-4-memory-informed-adaptation">
+<h2>Pattern 4: Memory-Informed Adaptation<a class="headerlink" href="#pattern-4-memory-informed-adaptation" title="Link to this heading"></a></h2>
+<p>Memory is consulted during context preparation, not during reasoning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on_before_agent (called BEFORE reasoning)</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="c1"># Memory informs instruction...</span>
+<span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+
+<span class="c1"># Agent reasoning (happens AFTER memory consultation)</span>
+<span class="c1"># Agent has memory-informed instruction in context window</span>
+</pre></div>
+</div>
+<p><strong>Why separate?</strong></p>
+<ul class="simple">
+<li><p><strong>Efficiency</strong>: No need to query memory multiple times per turn</p></li>
+<li><p><strong>Clarity</strong>: Memory influence is transparent (in the instruction)</p></li>
+<li><p><strong>Control</strong>: Agent doesn’t autonomously decide what memories to use</p></li>
+</ul>
+</section>
+<section id="summary-the-complete-picture">
+<h2>Summary: The Complete Picture<a class="headerlink" href="#summary-the-complete-picture" title="Link to this heading"></a></h2>
+<section id="the-agent-stack">
+<h3>The Agent Stack<a class="headerlink" href="#the-agent-stack" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────────────────────┐
+│         User (Natural Language)                 │
+└──────────────────────┬──────────────────────────┘
+                       ↓
+        ┌──────────────────────────────┐
+        │   on_before_agent Callback   │
+        │  - Retrieve session state    │
+        │  - Search memory for context │
+        │  - Build dynamic instruction │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  Agent Reasoning Loop        │
+        │  (Gemini 2.5 Flash)          │
+        │  - Perceive user intent      │
+        │  - Select tools to invoke    │
+        │  - Generate response         │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │       Tool Invocation        │
+        ├──────────────────────────────┤
+        │  Local Tools:                │
+        │  - select_scenario           │
+        │  - mark_word_practiced       │
+        │  - get_progress              │
+        │  - end_scenario              │
+        │  - get_user_profile          │
+        │                              │
+        │  MCP Tools:                  │
+        │  - lookup_word (external)    │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  on_after_agent Callback     │
+        │  - Increment exchange count  │
+        │  - Persist session to memory │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │   State Persistence Layer    │
+        ├──────────────────────────────┤
+        │  Session Store:              │
+        │  - SqliteSessionService      │
+        │  - Current: state dict       │
+        │                              │
+        │  Long-Term Memory:           │
+        │  - InMemoryMemoryService     │
+        │  - Historical: completed     │
+        │    scenarios, weak words     │
+        └──────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="key-takeaways">
+<h3>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Agents are autonomous reasoners</strong> operating in a perceive-reason-act loop</p></li>
+<li><p><strong>Tools are the agent’s interface</strong> to affect state and gather information</p></li>
+<li><p><strong>MCP enables decoupled tool integration</strong> through a standard protocol</p></li>
+<li><p><strong>Sessions provide short-term context</strong> that evolves during a conversation</p></li>
+<li><p><strong>Memory provides long-term context</strong> that enables continuity across sessions</p></li>
+<li><p><strong>Dynamic instructions</strong> adapt agent behavior based on current state and historical context</p></li>
+</ol>
+<p>This Norwegian language learning agent demonstrates how these concepts combine to create an agent that’s both powerful and maintainable.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
