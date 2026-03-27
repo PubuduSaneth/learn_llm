@@ -44,3 +44,16 @@ Agentic_Architectures/Reference.md
 ```
 
 :::
+
+:::{exercise} Under active development (preview stage)
+
+**Pre-release notes for preview:**
+
+```{toctree}
+:caption: AI Agent tutorials
+:maxdepth: 1
+
+Agent_tutorials/01.ADK_agents_Gemini_3.1.md
+```
+
+:::
