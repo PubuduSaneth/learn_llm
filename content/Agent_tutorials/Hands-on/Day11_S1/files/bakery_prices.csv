@@ -1,0 +1,11 @@
+store_name,product_type,price,region,is_organic
+Erewhon Market,Sourdough Loaf,18.5,Los Angeles Metro,True
+Tartine Sycamore,Sourdough Loaf,12.12,Los Angeles Metro,False
+Lodge Bread Co,Sourdough Loaf,12.77,Los Angeles Metro,False
+Bread Lounge,Sourdough Loaf,10.13,Los Angeles Metro,True
+Clark Street Bread,Sourdough Loaf,10.29,Los Angeles Metro,True
+Gjusta,Sourdough Loaf,11.83,Los Angeles Metro,False
+Superba Food + Bread,Sourdough Loaf,9.55,Los Angeles Metro,False
+Republique,Sourdough Loaf,9.67,Los Angeles Metro,True
+Bub and Grandma's,Sourdough Loaf,8.66,Los Angeles Metro,True
+Seed Bakery,Sourdough Loaf,13.06,Los Angeles Metro,False

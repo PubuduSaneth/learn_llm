@@ -1,0 +1,13 @@
+zip_code,city,neighborhood,median_household_income,total_population,median_age,bachelors_degree_pct,foot_traffic_index
+90001,Los Angeles,South Central Los Angeles,60751,33626,30.3,37.9,42.5
+90002,Los Angeles,Watts,56158,52915,39.3,40.0,53.0
+90003,Los Angeles,South Los Angeles,54781,52697,36.1,34.7,50.6
+90004,Los Angeles,Koreatown,62655,54259,37.0,46.3,59.2
+90005,Los Angeles,Koreatown,52755,61755,34.5,34.2,49.8
+90006,Los Angeles,Koreatown,49847,60745,34.5,30.2,26.0
+90007,Los Angeles,University Park,36032,57658,29.4,26.8,37.1
+90008,Los Angeles,Baldwin Hills,61822,52067,32.9,36.8,56.5
+90010,Los Angeles,Koreatown,100901,40687,39.3,57.3,53.7
+90011,Los Angeles,South Los Angeles,53781,36207,32.5,32.5,37.7
+90012,Los Angeles,Chinatown,67635,33149,30.2,42.4,46.5
+90013,Los Angeles,Downtown Los Angeles,32848,27406,39.6,22.5,39.5

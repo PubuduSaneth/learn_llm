@@ -1,0 +1,37 @@
+week_start_date,store_location,product_type,quantity_sold,total_revenue
+2023-11-27,Playa Vista,Sourdough Loaf,621,6986.25
+2023-11-27,Playa Vista,Croissant,1241,5584.5
+2023-11-27,Playa Vista,Baguette,413,2065.0
+2023-11-27,Silver Lake,Sourdough Loaf,151,1698.75
+2023-11-27,Silver Lake,Croissant,508,2286.0
+2023-11-27,Silver Lake,Baguette,174,870.0
+2023-11-27,Downtown LA,Sourdough Loaf,324,3645.0
+2023-11-27,Downtown LA,Croissant,593,2668.5
+2023-11-27,Downtown LA,Baguette,201,1005.0
+2023-12-04,Playa Vista,Sourdough Loaf,565,6356.25
+2023-12-04,Playa Vista,Croissant,1117,5026.5
+2023-12-04,Playa Vista,Baguette,515,2575.0
+2023-12-04,Silver Lake,Sourdough Loaf,241,2711.25
+2023-12-04,Silver Lake,Croissant,457,2056.5
+2023-12-04,Silver Lake,Baguette,147,735.0
+2023-12-04,Downtown LA,Sourdough Loaf,298,3352.5
+2023-12-04,Downtown LA,Croissant,541,2434.5
+2023-12-04,Downtown LA,Baguette,189,945.0
+2023-12-11,Playa Vista,Sourdough Loaf,702,7897.5
+2023-12-11,Playa Vista,Croissant,1389,6250.5
+2023-12-11,Playa Vista,Baguette,601,3005.0
+2023-12-11,Silver Lake,Sourdough Loaf,278,3127.5
+2023-12-11,Silver Lake,Croissant,521,2344.5
+2023-12-11,Silver Lake,Baguette,163,815.0
+2023-12-11,Downtown LA,Sourdough Loaf,341,3836.25
+2023-12-11,Downtown LA,Croissant,612,2754.0
+2023-12-11,Downtown LA,Baguette,214,1070.0
+2023-12-18,Playa Vista,Sourdough Loaf,734,8257.5
+2023-12-18,Playa Vista,Croissant,1502,6759.0
+2023-12-18,Playa Vista,Baguette,645,3225.0
+2023-12-18,Silver Lake,Sourdough Loaf,312,3510.0
+2023-12-18,Silver Lake,Croissant,598,2691.0
+2023-12-18,Silver Lake,Baguette,201,1005.0
+2023-12-18,Downtown LA,Sourdough Loaf,389,4376.25
+2023-12-18,Downtown LA,Croissant,701,3154.5
+2023-12-18,Downtown LA,Baguette,244,1220.0
