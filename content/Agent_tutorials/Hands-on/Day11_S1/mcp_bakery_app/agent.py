@@ -16,13 +16,21 @@ import os
 
 import dotenv
 from mcp_bakery_app import tools
+import google.auth
 from google.adk.agents import LlmAgent
+from google.adk.models import Gemini
+from google.genai import types
 
 dotenv.load_dotenv()
 
 # ── Project config ────────────────────────────────────────────────────────────
-PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT", "project_not_set")
+#PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT", "project_not_set")
 DATASET    = "mcp_bakery"
+
+_, project_id = google.auth.default()
+os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
+os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
+os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
 # ── Initialise MCP toolsets ───────────────────────────────────────────────────
 # Each call connects to the remote MCP server and discovers its tools.
@@ -32,8 +40,11 @@ bigquery_toolset = tools.get_bigquery_mcp_toolset()
 
 # ── Agent definition ──────────────────────────────────────────────────────────
 root_agent = LlmAgent(
-    model="gemini-2.0-flash",          # use gemini-2.0-flash (gemini-3.1-pro-preview not yet GA)
     name="root_agent",
+    model=Gemini(
+        model="gemini-3-flash-preview",
+        retry_options=types.HttpRetryOptions(attempts=3),
+    ),
     instruction=f"""
 You are an expert Bakery Location Intelligence Agent helping an entrepreneur
 decide where to open a new bakery in the Los Angeles area.
@@ -43,8 +54,8 @@ You have access to two complementary data sources:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  1. BIGQUERY TOOLSET  — structured data in the `{DATASET}` dataset
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Run all jobs from project: {PROJECT_ID}
-Always fully qualify table names: `{PROJECT_ID}.{DATASET}.TABLE_NAME`
+Run all jobs from project: {project_id}
+Always fully qualify table names: `{project_id}.{DATASET}.TABLE_NAME`
 
 Available tables and their purpose:
   • demographics          — zip_code, neighborhood, median_household_income,

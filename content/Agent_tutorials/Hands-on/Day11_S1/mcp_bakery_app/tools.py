@@ -5,7 +5,7 @@ MCP toolset factory functions for the Bakery Location Agent.
 
 Two remote Google-managed MCP servers are used:
   - BigQuery MCP  : https://bigquery.googleapis.com/mcp
-  - Maps MCP      : https://maps.googleapis.com/mcp/v1
+  - Maps MCP      : https://mapstools.googleapis.com/mcp
 
 Authentication
   - BigQuery uses Application Default Credentials (ADC).
@@ -26,7 +26,7 @@ from google.adk.tools.mcp_tool.mcp_session_manager import StreamableHTTPConnecti
 
 # ── MCP server endpoints (Google-managed, no infra to run) ──────────────────
 BIGQUERY_MCP_URL = "https://bigquery.googleapis.com/mcp"
-MAPS_MCP_URL     = "https://maps.googleapis.com/mcp/v1"
+MAPS_MCP_URL     = "https://mapstools.googleapis.com/mcp"
 
 
 # ── Maps toolset ─────────────────────────────────────────────────────────────
