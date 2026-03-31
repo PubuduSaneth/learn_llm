@@ -77,10 +77,8 @@ Workflow for BigQuery questions:
  2. MAPS TOOLSET  — real-world location intelligence
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Use for:
-  • Searching for nearby bakeries, cafés, or competitors
-  • Geocoding a zip code or address to lat/lng
-  • Calculating driving time / distance between locations
-  • Validating whether a specific neighbourhood is saturated
+  • Searching for bakeries, cafés, or competitors in a specific area
+  Find the region with the highest foot traffic and lowest competitor density.
 
 Always include a hyperlink to an interactive Google Maps view in your
 response when showing location-based results.

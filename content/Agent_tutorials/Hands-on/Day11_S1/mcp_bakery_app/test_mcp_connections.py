@@ -18,56 +18,6 @@ async def get_tools_safely(toolset):
 
     raise AttributeError("Could not find a method to list tools on McpToolset.")
 
-async def test_toolsets_v0():
-    print("🚀 Starting MCP Connection Tests...\n")
-
-    # --- Test Maps MCP ---
-    print("--- Testing Maps MCP ---")
-    try:
-        maps_toolset = get_maps_mcp_toolset()
-        # list_tools() is a standard method in the McpToolset
-        tools = await get_tools_safely(maps_toolset)
-        print(f"✅ Connection Successful. Found {len(tools)} tools.")
-        print(f"🛠️ Sample Tool: {tools[0].name if tools else 'None'}")
-    except Exception as e:
-        print(f"❌ Maps MCP Failed: {e}")
-
-    print("\n" + "-"*30 + "\n")
-
-    # --- Test BigQuery MCP ---
-    print("--- Testing BigQuery MCP ---")
-    try:
-        bq_toolset = get_bigquery_mcp_toolset()
-        tools = await get_tools_safely(bq_toolset)
-        print(f"✅ Connection Successful. Found {len(tools)} tools.")
-        print(f"🛠️ Sample Tool: {tools[0].name if tools else 'None'}")
-        
-        # Optional: Deep test - Try to list datasets to verify permissions
-        # We find the specific tool in the toolset to call it
-        print("🔍 Attempting to list datasets (Deep Test)...")
-        # Note: Tool names might vary slightly based on server version
-        # We'll look for a tool that lists datasets
-        # 
-        if tools:
-            for t in tools:
-                print(f"Tool: {t.name}")
-        else:
-            print("⚠️ No tools found to verify permissions.") 
-
-        # list_tool = next((t for t in tools if "list_datasets" in t.name), None)
-        
-        # if list_tool:
-        #     # We assume the tool might take a project_id or use default
-        #     # Check the tool schema if this fails
-        #     result = await bq_toolset.call_tool(list_tool.name, arguments={})
-        #     print("✅ BigQuery Data Access Verified.")
-        # else:
-        #     print("⚠️ Could not find 'list_datasets' tool to verify permissions.")
-
-    except Exception as e:
-        print(f"❌ BigQuery MCP Failed: {e}")
-        print("💡 Tip: Ensure you ran 'gcloud auth application-default login'")
-
 async def test_toolsets():
     print("🚀 Starting MCP Connection Tests...\n")
 
