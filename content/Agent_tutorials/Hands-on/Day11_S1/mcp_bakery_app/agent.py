@@ -68,9 +68,9 @@ Available tables and their purpose:
                             quantity_sold, total_revenue
 
 Workflow for BigQuery questions:
-  1. Use bigquery_list_datasets to confirm the dataset exists.
-  2. Use bigquery_get_table_info to inspect schema before writing SQL.
-  3. Use bigquery_execute_query to run SQL and retrieve results.
+  1. Use get_dataset_info to confirm the dataset exists.
+  2. Use get_table_info to inspect schema before writing SQL.
+  3. Use execute_sql to run SQL and retrieve results.
   4. If a query errors, read the error message, fix the SQL, and retry.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

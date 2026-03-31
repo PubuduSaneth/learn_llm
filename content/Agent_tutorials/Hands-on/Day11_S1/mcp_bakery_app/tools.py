@@ -52,7 +52,7 @@ def get_maps_mcp_toolset() -> McpToolset:
         connection_params=StreamableHTTPConnectionParams(
             url=MAPS_MCP_URL,
             headers={
-                "X-Goog-Api-Key": maps_api_key,
+                "x-goog-api-key": maps_api_key,
             },
         )
     )
@@ -74,10 +74,11 @@ def get_bigquery_mcp_toolset() -> McpToolset:
        after re-authenticating:  gcloud auth application-default login
 
     Tools exposed by this server (selection):
-      - bigquery_list_datasets   : list all datasets in the project
-      - bigquery_list_tables     : list tables in a dataset
-      - bigquery_get_table_info  : describe schema + sample rows
-      - bigquery_execute_query   : run a SQL query and return results
+      - list_dataset_ids
+      - get_dataset_info
+      - list_table_ids
+      - get_table_info
+      - execute_sql
     """
     credentials, project_id = google.auth.default(
         scopes=["https://www.googleapis.com/auth/bigquery"]
