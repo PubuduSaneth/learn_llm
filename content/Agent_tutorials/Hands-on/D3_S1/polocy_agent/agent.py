@@ -10,7 +10,10 @@ dotenv.load_dotenv()
 
 
 # 1. Initialize Gemini 3 Flash
-llm = Gemini(model_name="gemini-3-flash-preview")
+llm = Gemini(
+    model="gemini-3-flash-preview",
+    retry_options=types.HttpRetryOptions(attempts=3),
+)
 
 # 2. Define the Static Policy (Script 1)
 STATIC_POLICY = """You are a strict compliance assistant.
@@ -20,7 +23,7 @@ Refuse medical advice. Use active voice."""
 # This function runs every time a user sends a message.
 def dynamic_steering_callback(ctx: Context):
     user_msg = ctx.session.last_user_message.text.lower()
-    
+
     # Simple intent routing
     if "summarize" in user_msg:
         goal = "Summarize the findings."
@@ -38,15 +41,12 @@ root_agent = LlmAgent(
     name="policy_agent",
     model=llm,
     static_instruction=STATIC_POLICY,
-    before_agent_callback=dynamic_steering_callback # This links your steering logic
+    before_agent_callback=dynamic_steering_callback,  # This links your steering logic
 )
 
 # 5. Define the App (Script 1)
 app = App(
     name="compliance_app",
     root_agent=root_agent,
-    context_cache_config=ContextCacheConfig(
-        ttl_seconds=3600,
-        min_tokens=1000
-    )
+    context_cache_config=ContextCacheConfig(ttl_seconds=3600, min_tokens=1000),
 )
