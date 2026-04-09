@@ -12,8 +12,12 @@ from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types as genai_types
 
-from agent import app, root_agent                          # wired agent + App
-from steering import SteeringInputs, build_turn_instruction
+try:
+    from .agent import app, root_agent
+    from .steering import SteeringInputs, build_turn_instruction
+except ImportError:
+    from agent import app, root_agent
+    from steering import SteeringInputs, build_turn_instruction
 
 
 # ── Session bootstrap ──────────────────────────────────────────────────────────

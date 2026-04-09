@@ -1,5 +1,9 @@
 # An Example of a chat handler which composes the turn instruction
-from steering import SteeringInputs, build_turn_instruction
+try:
+    from .steering import SteeringInputs, build_turn_instruction
+except ImportError:
+    from steering import SteeringInputs, build_turn_instruction
+
 from google.adk.agents import Agent
 
 # agent imported from app_startup.py

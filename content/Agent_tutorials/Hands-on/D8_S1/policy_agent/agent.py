@@ -8,8 +8,12 @@ from google.adk.models import Gemini
 from google.adk.apps import App
 from google.genai import types
 
-from policy_agent.app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG          # static layer + App container
-from policy_agent.steering import SteeringInputs, build_turn_instruction  # dynamic layer
+try:
+    from .app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG
+    from .steering import SteeringInputs, build_turn_instruction
+except ImportError:
+    from app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG
+    from steering import SteeringInputs, build_turn_instruction
 
 dotenv.load_dotenv()
 
@@ -44,7 +48,7 @@ root_agent = LlmAgent(
 # ── 4. Attach agent to App (picks up ContextCacheConfig from app_setup) ────────
 
 app = App(
-    name="policy_qa_app",
+    name="policy_agent",
     context_cache_config=CACHE_CONFIG,
     root_agent=root_agent,        # pass LlmAgent directly, no orphan
 )
