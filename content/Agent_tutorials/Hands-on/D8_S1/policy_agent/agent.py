@@ -1,8 +1,8 @@
 # agent.py
 # Context-Engineering demo: static policy header (cached) + per-turn steering
 # Project created with: uv run adk create policy_agent
-
-import dotenv
+import os
+import google.auth
 from google.adk.agents import LlmAgent
 from google.adk.models import Gemini
 from google.adk.apps import App
@@ -15,7 +15,11 @@ except ImportError:
     from app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG
     from steering import SteeringInputs, build_turn_instruction
 
-dotenv.load_dotenv()
+
+_, project_id = google.auth.default()
+os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
+os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
+os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
 # ── 1. Static context layer ────────────────────────────────────────────────────
 # STATIC_POLICY_HEADER is cached by the App's ContextCacheConfig (1 h TTL,
