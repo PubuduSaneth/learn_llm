@@ -1,8 +1,6 @@
-# An Example of Static Context Policy 
-from google.adk.apps import App
-from google.adk.agents import Agent
 from google.adk.agents.context_cache_config import ContextCacheConfig
 
+# An Example of Static Context Policy
 STATIC_POLICY_HEADER = """You are a strict policy assistant for internal compliance Q&A.
 
 Follow this exact JSON schema in every response:
@@ -32,13 +30,16 @@ Tools:
 # The safer long-term pattern is to not construct the App in app_setup.py at all,
 #     and instead keep it only as a config/constants module:
 # """
-
+#
+# from google.adk.agents import Agent
 # agent = Agent(
 #     name="policy_agent",
 #     static_instruction=STATIC_POLICY_HEADER,
 #     instruction="Default: be concise and include at most two citations."
 # )
-
+#
+# from google.adk.apps import App
+#
 # app = App(
 #     name="policy_qa_app",
 #     context_cache_config=ContextCacheConfig(

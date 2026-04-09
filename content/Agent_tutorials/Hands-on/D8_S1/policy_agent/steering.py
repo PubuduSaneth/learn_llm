@@ -27,4 +27,4 @@ def build_turn_instruction(s: SteeringInputs) -> str:
         parts.append(f"Tenant: {s.tenant_hint}")
     if s.corrective:
         parts.append(f"Correction: {s.corrective}")
-    return "".join(parts)
+    return "\n".join(parts)
