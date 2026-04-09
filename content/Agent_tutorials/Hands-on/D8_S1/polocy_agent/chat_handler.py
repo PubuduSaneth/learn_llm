@@ -1,43 +1,134 @@
-# An Example of a chat handler which composes the turn instruction
+# chat_handler.py
+# Runtime loop: accepts per-turn SteeringInputs, injects them as the agent's
+# dynamic instruction, then runs one conversation turn.
+
+from __future__ import annotations
+
+import asyncio
+import json
+from typing import Optional
+
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.genai import types as genai_types
+
+from agent import app, root_agent                          # wired agent + App
 from steering import SteeringInputs, build_turn_instruction
-from google.adk.agents import Agent
 
-# agent imported from app_startup.py
 
-def route_intent(user_message: str) -> str:
-    text = user_message.lower()
-    if "compare" in text: return "compare"
-    if "list" in text and "control" in text: return "list_controls"
-    if "summarize" in text: return "summarize"
-    return "answer"
+# ── Session bootstrap ──────────────────────────────────────────────────────────
+_session_service = InMemorySessionService()
+_APP_NAME = app.name
+_USER_ID  = "default_user"
+_SESSION_ID = "default_session"
 
-INTENT_TO_GOAL = {
-    "summarize": "Summarize ACME-42 in plain English.",
-    "list_controls": "List mandatory controls from ACME-42 with one-line rationales.",
-    "compare": "Compare ACME-42 to ISO 27001 at a high level, return a short markdown table inside the JSON 'answer'.",
-    "answer": "Answer the user directly."
-}
-
-def chat(session_id: str, user_message: str, ui_style: str | None = None):
-    intent = route_intent(user_message)
-    goal = INTENT_TO_GOAL.get(intent, f"Answer the user: {user_message[:120]}")
-
-    style = ui_style or get_flag(session_id, "style", default="concise")
-    max_cites = get_flag(session_id, "max_citations", default=2)
-    tenant_hint = get_tenant_hint(session_id)     # e.g., "EU employees only" or None
-    corrective = get_last_validation_error(session_id)  # None or short string
-
-    turn_instruction = build_turn_instruction(
-        SteeringInputs(
-            goal=goal,
-            style=style,
-            max_cites=max_cites,
-            tenant_hint=tenant_hint,
-            corrective=(f"Your last reply failed validation: {corrective}. Fix it this turn." if corrective else None)
+async def _ensure_session() -> None:
+    """Create the ADK session once; no-op on subsequent calls."""
+    existing = await _session_service.get_session(
+        app_name=_APP_NAME,
+        user_id=_USER_ID,
+        session_id=_SESSION_ID,
+    )
+    if existing is None:
+        await _session_service.create_session(
+            app_name=_APP_NAME,
+            user_id=_USER_ID,
+            session_id=_SESSION_ID,
+            state={},
         )
+
+
+# ── Core turn function ─────────────────────────────────────────────────────────
+async def run_turn(
+    user_message: str,
+    steering: Optional[SteeringInputs] = None,
+) -> dict:
+    """
+    Run one conversation turn.
+
+    Parameters
+    ----------
+    user_message : str
+        The raw text the user typed.
+    steering : SteeringInputs | None
+        Per-turn context knobs.  If None, the agent keeps its current
+        instruction (set at startup or from the previous turn).
+
+    Returns
+    -------
+    dict
+        Parsed JSON matching the policy schema:
+        {"answer": str, "citations": [str], "confidence": float}
+        Falls back to {"answer": raw_text, "citations": [], "confidence": 0.0}
+        if the model doesn't return valid JSON.
+    """
+    await _ensure_session()
+
+    # ── Inject per-turn steering instruction ───────────────────────────────────
+    if steering is not None:
+        root_agent.instruction = build_turn_instruction(steering)
+
+    runner = Runner(
+        app_name=_APP_NAME,
+        agent=root_agent,
+        session_service=_session_service,
     )
 
-    agent.instruction = turn_instruction
-    response = agent.run(user_message=user_message)
-    validate_and_record(session_id, response)     # optional schema check + feedback
-    return response
+    # ── Stream the response ────────────────────────────────────────────────────
+    raw_parts: list[str] = []
+    async for event in runner.run_async(
+        user_id=_USER_ID,
+        session_id=_SESSION_ID,
+        new_message=genai_types.Content(
+            role="user",
+            parts=[genai_types.Part(text=user_message)],
+        ),
+    ):
+        if event.is_final_response() and event.content:
+            for part in event.content.parts:
+                if part.text:
+                    raw_parts.append(part.text)
+
+    raw_text = "".join(raw_parts).strip()
+
+    # ── Parse expected JSON schema ─────────────────────────────────────────────
+    try:
+        # Strip markdown fences the model sometimes adds
+        clean = raw_text.removeprefix("```json").removesuffix("```").strip()
+        return json.loads(clean)
+    except json.JSONDecodeError:
+        return {"answer": raw_text, "citations": [], "confidence": 0.0}
+
+
+# ── Interactive CLI loop ───────────────────────────────────────────────────────
+async def _cli_loop() -> None:
+    print("Policy Q&A agent ready.  Type 'quit' to exit.\n")
+
+    # Example: first turn uses a tenant-scoped steering override
+    first_turn = True
+
+    while True:
+        user_input = input("You: ").strip()
+        if user_input.lower() in {"quit", "exit", "q"}:
+            break
+        if not user_input:
+            continue
+
+        # Demonstrate per-turn steering: EU tenant hint only on turn 1
+        steering = None
+        if first_turn:
+            steering = SteeringInputs(
+                goal="Answer the user's compliance question accurately.",
+                style="concise",
+                max_cites=2,
+                tenant_hint="Answer for EU employees only.",
+                confidence_range=(0.6, 0.9),
+            )
+            first_turn = False
+
+        result = await run_turn(user_input, steering=steering)
+        print(f"\nAgent: {json.dumps(result, indent=2)}\n")
+
+
+if __name__ == "__main__":
+    asyncio.run(_cli_loop())
