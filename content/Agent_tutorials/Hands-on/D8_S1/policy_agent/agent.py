@@ -8,8 +8,8 @@ from google.adk.models import Gemini
 from google.adk.apps import App
 from google.genai import types
 
-from polocy_agent.app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG          # static layer + App container
-from polocy_agent.steering import SteeringInputs, build_turn_instruction  # dynamic layer
+from policy_agent.app_setup import STATIC_POLICY_HEADER, CACHE_CONFIG          # static layer + App container
+from policy_agent.steering import SteeringInputs, build_turn_instruction  # dynamic layer
 
 dotenv.load_dotenv()
 
