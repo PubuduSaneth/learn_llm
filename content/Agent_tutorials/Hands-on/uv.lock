@@ -12,6 +12,7 @@ name = "agent-tutorials-hands-on"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "goodmem-adk" },
     { name = "google-adk" },
     { name = "mcp" },
     { name = "python-dotenv" },
@@ -19,6 +20,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "goodmem-adk" },
     { name = "google-adk", specifier = ">=1.27.0" },
     { name = "mcp", specifier = ">=1.26.0" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
@@ -617,6 +619,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/89/76/c615883b7b521ead2944bb3480398cbb07e12b7b4e4d073d3752eb721558/frozenlist-1.8.0-cp314-cp314t-win_amd64.whl", hash = "sha256:06be8f67f39c8b1dc671f5d83aaefd3358ae5cdcf8314552c57e7ed3e6475bdd", size = 49451, upload-time = "2025-10-06T05:37:53.425Z" },
     { url = "https://files.pythonhosted.org/packages/e0/a3/5982da14e113d07b325230f95060e2169f5311b1017ea8af2a29b374c289/frozenlist-1.8.0-cp314-cp314t-win_arm64.whl", hash = "sha256:102e6314ca4da683dca92e3b1355490fed5f313b768500084fbe6371fddfdb79", size = 42507, upload-time = "2025-10-06T05:37:54.513Z" },
     { url = "https://files.pythonhosted.org/packages/9a/9a/e35b4a917281c0b8419d4207f4334c8e8c5dbf4f3f5f9ada73958d937dcc/frozenlist-1.8.0-py3-none-any.whl", hash = "sha256:0c18a16eab41e82c295618a77502e17b195883241c563b00f0aa5106fc4eaa0d", size = 13409, upload-time = "2025-10-06T05:38:16.721Z" },
+]
+
+[[package]]
+name = "goodmem-adk"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-adk" },
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ac/76/39bd0d8f3fb2c3becb2cf2f243515278dbbc1dedcfb121287c63b61c9df9/goodmem_adk-0.1.1.tar.gz", hash = "sha256:3b32c1e389f28617707b1709d7fe39b685ff3042a3e5c7145f401740df898fd7", size = 60398, upload-time = "2026-02-13T02:37:01.164Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c7/be/503d366e792d01a84c44790419a8a853f3dac0d71383fa496a15e9ba84d5/goodmem_adk-0.1.1-py3-none-any.whl", hash = "sha256:ed06227abeab878dcb8245e13267659ae82392a7503c2169bbbe335b16da5ca7", size = 38621, upload-time = "2026-02-13T02:36:59.38Z" },
 ]
 
 [[package]]
