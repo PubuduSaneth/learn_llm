@@ -40,11 +40,11 @@ my_agent = Agent(
 
 # 3. Configure Persistent Memory (The 'Goodmem' Plugin)
 # This handles the Silent Observer and Context Injection patterns.
-# persistent_memory = GoodmemPlugin(
-#     base_url=os.getenv("GOODMEM_BASE_URL"),
-#     api_key=os.getenv("GOODMEM_API_KEY"),
-#     top_k=5 # Retrieve the 5 most relevant past interactions
-# )
+persistent_memory = GoodmemPlugin(
+    base_url=os.getenv("GOODMEM_BASE_URL"),
+    api_key=os.getenv("GOODMEM_API_KEY"),
+    top_k=5 # Retrieve the 5 most relevant past interactions
+)
 
 # 4. Initialize the App with the "Triple-Threat" Context Strategy
 app = App(
@@ -52,7 +52,7 @@ app = App(
     root_agent=my_agent,
     
     # Attach Persistent Memory
-    # plugins=[persistent_memory],
+    plugins=[persistent_memory],
 
     # 1. Cache the massive Policy Manual
     context_cache_config=ContextCacheConfig(
