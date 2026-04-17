@@ -5,7 +5,7 @@ import sys
 from google.adk.runners import Runner
 from google.genai import types
 
-from policy_compliance_memory.agent import app, my_agent, session_service
+from policy_compliance_memory.agent import app, session_service
 
 APP_NAME = app.name
 USER_ID = os.getenv("ADK_USER_ID", "user")
@@ -31,8 +31,7 @@ async def run_once(user_message: str) -> str:
     await ensure_session()
 
     runner = Runner(
-        app_name=APP_NAME,
-        agent=my_agent,
+        app=app,
         session_service=session_service,
     )
 

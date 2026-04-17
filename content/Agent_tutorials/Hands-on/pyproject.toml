@@ -5,7 +5,9 @@ description = "Hands-on tutorials for agents."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "aiosqlite",
     "goodmem-adk",
+    "greenlet",
     "google-adk>=1.27.0",
     "mcp>=1.26.0",
     "python-dotenv>=1.0.1",

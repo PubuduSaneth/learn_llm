@@ -62,6 +62,8 @@ ADK does not fetch URLs — the model receives this string verbatim.]
 persistent_memory = GoodmemPlugin(
     base_url=os.getenv("GOODMEM_BASE_URL"),
     api_key=os.getenv("GOODMEM_API_KEY"),
+    embedder_id=os.getenv("GOODMEM_EMBEDDER_ID"),
+    space_id=os.getenv("GOODMEM_SPACE_ID"),
     space_name=os.getenv("GOODMEM_SPACE_NAME"),
     debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on"),
     top_k=5,  # Retrieve the 5 most relevant past interactions
@@ -76,6 +78,8 @@ def search_memory(query: str):
 fetch_tool = GoodmemFetchTool(
     base_url=os.getenv("GOODMEM_BASE_URL"),
     api_key=os.getenv("GOODMEM_API_KEY"),
+    embedder_id=os.getenv("GOODMEM_EMBEDDER_ID"),
+    space_id=os.getenv("GOODMEM_SPACE_ID"),
     space_name=os.getenv("GOODMEM_SPACE_NAME"),
     debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on"),
     top_k=5
@@ -84,6 +88,8 @@ fetch_tool = GoodmemFetchTool(
 save_tool = GoodmemSaveTool(
     base_url=os.getenv("GOODMEM_BASE_URL"),
     api_key=os.getenv("GOODMEM_API_KEY"),
+    embedder_id=os.getenv("GOODMEM_EMBEDDER_ID"),
+    space_id=os.getenv("GOODMEM_SPACE_ID"),
     space_name=os.getenv("GOODMEM_SPACE_NAME"),
     debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on")
 )
