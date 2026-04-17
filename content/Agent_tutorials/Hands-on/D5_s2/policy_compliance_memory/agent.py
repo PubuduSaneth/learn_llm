@@ -1,3 +1,25 @@
+import httpx
+
+# 1. Save the original Client classes
+_original_client = httpx.Client
+_original_async_client = httpx.AsyncClient
+
+# 2. Define a "force-unverified" version of the Client
+class UnverifiedClient(_original_client):
+    def __init__(self, *args, **kwargs):
+        kwargs['verify'] = False  # Force verify to False
+        super().__init__(*args, **kwargs)
+
+# 3. Define a "force-unverified" version of the AsyncClient
+class UnverifiedAsyncClient(_original_async_client):
+    def __init__(self, *args, **kwargs):
+        kwargs['verify'] = False  # Force verify to False
+        super().__init__(*args, **kwargs)
+
+# 4. Swap the global httpx classes with our unverified versions
+httpx.Client = UnverifiedClient
+httpx.AsyncClient = UnverifiedAsyncClient
+
 import os
 import google.auth
 from pathlib import Path
@@ -7,11 +29,12 @@ from google.adk.agents import Agent
 from google.adk.apps.app import App, EventsCompactionConfig
 from google.adk.agents.context_cache_config import ContextCacheConfig
 from google.adk.models import Gemini
-from goodmem_adk import GoodmemPlugin
+from goodmem_adk import GoodmemPlugin, GoodmemFetchTool, GoodmemSaveTool
+from google.adk.sessions import DatabaseSessionService
+
 
 
 load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
-
 
 # 1. Define the Models
 # FIX #1: Corrected model name from "gemini-3-flash-preview" (doesn't exist)
@@ -35,30 +58,65 @@ POLICY_MANUAL = """
 ADK does not fetch URLs — the model receives this string verbatim.]
 """
 
-my_agent = Agent(
-    name="compliance_specialist",
-    model=Gemini(
-        model=main_model,
-        retry_options=types.HttpRetryOptions(attempts=3),
-    ),
-    static_instruction=f"You are a compliance expert. Use this manual: {POLICY_MANUAL}",
-    instruction=(
-        "You have access to the user's past interaction history via persistent memory. "
-        "Use this history to provide personalized compliance advice. "
-        "If they previously mentioned a specific department or role, tailor your citations to them."
-    )
-)
-
 # 3. Configure Persistent Memory (The 'Goodmem' Plugin)
 persistent_memory = GoodmemPlugin(
     base_url=os.getenv("GOODMEM_BASE_URL"),
     api_key=os.getenv("GOODMEM_API_KEY"),
     space_name=os.getenv("GOODMEM_SPACE_NAME"),
     debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on"),
-    top_k=5  # Retrieve the 5 most relevant past interactions
+    top_k=5,  # Retrieve the 5 most relevant past interactions
+)
+
+# Define the search wrapper if the plugin doesn't provide a direct BaseTool
+def search_memory(query: str):
+    """Searches the persistent memory for past user interactions and facts."""
+    return persistent_memory.search(query)
+
+
+fetch_tool = GoodmemFetchTool(
+    base_url=os.getenv("GOODMEM_BASE_URL"),
+    api_key=os.getenv("GOODMEM_API_KEY"),
+    space_name=os.getenv("GOODMEM_SPACE_NAME"),
+    debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on"),
+    top_k=5
+)
+
+save_tool = GoodmemSaveTool(
+    base_url=os.getenv("GOODMEM_BASE_URL"),
+    api_key=os.getenv("GOODMEM_API_KEY"),
+    space_name=os.getenv("GOODMEM_SPACE_NAME"),
+    debug=os.getenv("GOODMEM_DEBUG", "false").lower() in ("1", "true", "yes", "on")
+)
+
+
+my_agent = Agent(
+    name="compliance_specialist",
+    model=Gemini(
+        model=main_model,
+        retry_options=types.HttpRetryOptions(attempts=3),
+    ),
+    tools=[fetch_tool, save_tool],
+    static_instruction=f"You are a compliance expert. Use this manual: {POLICY_MANUAL}",
+    instruction=(
+        "You have access to the user's past interaction history via persistent memory. "
+        "Use this history to provide personalized compliance advice. "
+        "If they previously mentioned a specific department or role, tailor your citations to them."
+        "You have tools to save and fetch memories. "
+            "1. Whenever the user provides personal details (like department, role, or goals), "
+            "   immediately use 'GoodmemSaveTool' to persist that information. "
+            "2. If the user asks a question about their history, use 'GoodmemFetchTool' to retrieve context before answering."
+        "You have a memory fetch tool. When you need to recall information: "
+            "1. DO NOT search using the user's question. "
+            "2. Instead, generate a search query that looks like a statement of fact. "
+            "Example: If user asks 'What is my role?', search for 'The user's role and department'."
+        "When asked to retrieve something, search for statements describing the user's attributes (e.g., 'user department', 'user role'"
+    )
 )
 
 # 4. Initialize the App with the "Triple-Threat" Context Strategy
+# ADK compatibility: keep session service as a separate exported object.
+session_service = DatabaseSessionService(db_url=f"sqlite+aiosqlite:///{Path(__file__).with_name('agent_history.db')}")
+
 app = App(
     name='policy_compliance_memory',
     root_agent=my_agent,

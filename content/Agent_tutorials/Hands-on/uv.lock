@@ -16,6 +16,7 @@ dependencies = [
     { name = "google-adk" },
     { name = "mcp" },
     { name = "python-dotenv" },
+    { name = "sqlalchemy" },
 ]
 
 [package.metadata]
@@ -24,6 +25,7 @@ requires-dist = [
     { name = "google-adk", specifier = ">=1.27.0" },
     { name = "mcp", specifier = ">=1.26.0" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "sqlalchemy" },
 ]
 
 [[package]]

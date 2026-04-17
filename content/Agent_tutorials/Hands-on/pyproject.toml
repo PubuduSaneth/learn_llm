@@ -9,4 +9,5 @@ dependencies = [
     "google-adk>=1.27.0",
     "mcp>=1.26.0",
     "python-dotenv>=1.0.1",
+    "sqlalchemy",
 ]
