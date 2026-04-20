@@ -3,7 +3,7 @@
 /venv*
 .jupyter_cache
 jupyter_execute
-**/.env
+**/.env*
 **/__pycache__
 **/.DS_Store
 **/.vscode

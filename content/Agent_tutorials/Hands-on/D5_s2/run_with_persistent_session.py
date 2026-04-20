@@ -11,7 +11,6 @@ APP_NAME = app.name
 USER_ID = os.getenv("ADK_USER_ID", "user")
 SESSION_ID = os.getenv("ADK_SESSION_ID", "policy_compliance_memory_persistent")
 
-
 async def ensure_session() -> None:
     existing = await session_service.get_session(
         app_name=APP_NAME,
