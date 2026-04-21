@@ -67,6 +67,7 @@ exclude_patterns = [
     ".DS_Store",
     "jupyter_execute",
     "*venv*",
+    "**/Hands-on"
 ]
 
 

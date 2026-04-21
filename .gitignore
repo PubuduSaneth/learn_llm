@@ -3,3 +3,8 @@
 /venv*
 .jupyter_cache
 jupyter_execute
+**/.env*
+**/__pycache__
+**/.DS_Store
+**/.vscode
+**/session.db
