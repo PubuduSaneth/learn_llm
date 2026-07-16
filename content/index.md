@@ -1,8 +1,9 @@
 # Learn LLMs
 
-I’ve spent the last 15+ years working in genomics, and I see myself as infinite learner. Recently, I began studying the technology behind Large Language Models (LLMs) —not to ride the latest AI-HASS (“hype as a service”) wave, but to understand the core technology that make these systems work.
+I’ve spent the last 15+ years working in genomics, and I see myself as an infinite learner. My background demands verifiable data and scientific rigor, while my curiosity drives me to explore new frontiers. This is my journey applying both to understand the architecture behind Large Language Models (LLMs) and agentic systems.
 
-These notes are my learning journal: a place where I collect, organize, and clarify what I’m discovering about LLMs and the broader ecosystem around them.
+I’m not here for the AI-HaaS (“hype as a service”) wave. I’m here to understand the core technologies that make these systems work from the inside out. This learning hub is my technical journal —a public space where I collect, organize, and clarify my discoveries about LLMs and the ecosystem being built around them.
+
 
 ```{toctree}
 :caption: Building Blocks of GPT-2 LLM
