@@ -15,6 +15,7 @@ on:
 
 env:
   DEFAULT_BRANCH: "main"
+  CUSTOM_DOMAIN: "learn.vintsys.com"
   # If these SPHINXOPTS are enabled, then be strict about the
   # builds and fail on any warnings.
   #SPHINXOPTS: "-W --keep-going -T"
@@ -131,6 +132,12 @@ jobs:
         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         run: |
           touch _gh-pages/.nojekyll
+
+      # Keep GitHub Pages custom domain on every publish.
+      - name: Add CNAME
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "${CUSTOM_DOMAIN}" > _gh-pages/CNAME
 
       # Save artifact for the next step.
       - uses: actions/upload-artifact@v4
