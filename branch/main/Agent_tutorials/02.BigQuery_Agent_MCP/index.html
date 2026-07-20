@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Mastering Context Engineering with Google ADK" href="../03.ContextEng/" />
+    <link rel="prev" title="Build ADK Agents with Gemini 3.1 Pro" href="../01.ADK_agents_Gemini_3.1/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.1.Agent_Development_Guide_P1/">Case-study part 1: Explore Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.3.Agent_Development_Guide_P3/">Case-study part 2: Explore basics of context engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/05.Engineering_trust/">Engineering Trust</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/Reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AI Agent tutorials using Google ADK</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.ADK_agents_Gemini_3.1/">Build ADK Agents with Gemini 3.1 Pro</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mcp-core-pattern">MCP Core Pattern</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operationalizing-mcp">Operationalizing MCP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#agent-planner-tools-pattern">Agent Planner + Tools Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication-patterns">Authentication Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tool-composition-multi-tool-agents">Tool Composition - Multi-Tool Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03.ContextEng/">Mastering Context Engineering with Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Context_caching_and_compaction/">Context Caching &amp; Compaction in Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Add_persistent_memory/">Implementing Persistent Memory with GoodMem and ADK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agent_tutorials/02.BigQuery_Agent_MCP.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="building-a-bigquery-google-maps-agent-with-google-adk-mcp">
+<h1>Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP<a class="headerlink" href="#building-a-bigquery-google-maps-agent-with-google-adk-mcp" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand how to connect to MCP server and call MCP tools</p></li>
+<li><p>Uses a real, working BigQuery agent to explore following foundational patterns</p>
+<ul>
+<li><p>MCP Core Pattern</p></li>
+<li><p>Agent Planner + Tools Pattern</p></li>
+<li><p>Authentication Patterns for MCP</p></li>
+<li><p>Tool Composition</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition-what-to-build exercise important admonition" id="exercise-0">
+<p class="admonition-title">What to build</p>
+<p>An adk web agent that connects to Google’s fully managed BigQuery and Maps MCP servers, authenticates using Application Default Credentials, and answers natural language questions about data stored in BigQuery</p>
+</div>
+<section id="mcp-core-pattern">
+<h2>MCP Core Pattern<a class="headerlink" href="#mcp-core-pattern" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>MCP (Concept):</strong></p>
+<ul class="simple">
+<li><p>MCP design separates the AI application from its tool integrations</p></li>
+<li><p>MCP help create a modular and extensible approach to AI apps and tool development</p></li>
+<li><p>Core architectural components</p>
+<ul>
+<li><p>MCP Host (AI application)</p></li>
+<li><p>MCP Server (adapter or a proxy for an external tool, data source, or API)</p></li>
+<li><p>MCP Client (maintains the active connection with the Server)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="operationalizing-mcp">
+<h3>Operationalizing MCP<a class="headerlink" href="#operationalizing-mcp" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Agent never imports a BigQuery &amp; Google maps Python library directly. Instead, connect to a server that exposes operations as MCP tools</p></li>
+<li><p>This decouples agent from the data source entirely</p></li>
+<li><p>Use ADK <code class="docutils literal notranslate"><span class="pre">McpToolset</span></code> to automatically connect, discover, adapt and proxy</p></li>
+<li><p>Connect</p>
+<ul>
+<li><p>Opens a persistent HTTPS connection to the MCP server endpoint using <code class="docutils literal notranslate"><span class="pre">StreamableHTTPConnectionParams</span></code></p></li>
+</ul>
+</li>
+<li><p>Discover</p>
+<ul>
+<li><p>Calls <code class="docutils literal notranslate"><span class="pre">list_tools</span></code> on the MCP server to get a manifest of all available tools and their input schemas</p></li>
+<li><p><em>Note: The <code class="docutils literal notranslate"><span class="pre">list_tools</span></code> method is an internal function of an MCP server used to advertise its capabilities to an Agent Development Kit (ADK) client. You would not typically call list_tools() directly as an end-user but rather configure your ADK agent to connect to an MCP server, upon which the agent will automatically discover and use the available tools</em></p></li>
+</ul>
+</li>
+<li><p>Adapt</p>
+<ul>
+<li><p>Converts MCP tool schemas into ADK-native BaseTool objects that the <code class="docutils literal notranslate"><span class="pre">LlmAgent</span></code> can use.</p></li>
+</ul>
+</li>
+<li><p>Proxy</p>
+<ul>
+<li><p>When the agent calls a tool, McpToolset forwards the call via call_tool and returns the result.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="agent-planner-tools-pattern">
+<h2>Agent Planner + Tools Pattern<a class="headerlink" href="#agent-planner-tools-pattern" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Keep the instruction focused on reasoning strategy, not data</p></li>
+<li><p>Agent doesn’t hardcode column names or SQL in the instructions</p>
+<ul>
+<li><p>Agent discover schema at runtime via the MCP tools</p></li>
+</ul>
+</li>
+<li><p>This makes the agent resilient to schema changes</p></li>
+</ul>
+</section>
+<section id="authentication-patterns">
+<h2>Authentication Patterns<a class="headerlink" href="#authentication-patterns" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>BigQuery remote MCP (Model Context Protocol) servers use the OAuth 2.0 protocol with Google Cloud Identity and Access Management (IAM) for authentication and authorization</p>
+<ul>
+<li><p>API keys are not supported.</p></li>
+</ul>
+</li>
+<li><p>Use Application Default Credentials (ADC) — the Google Cloud standard</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">gcloud</span> <span class="pre">auth</span> <span class="pre">application-default</span> <span class="pre">login</span></code> (in terminal)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">google.auth.transport.requests</span></code> (import in agent; used in .refresh())</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tool-composition-multi-tool-agents">
+<h2>Tool Composition - Multi-Tool Agents<a class="headerlink" href="#tool-composition-multi-tool-agents" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Composing multiple tool servers enables agent to reason across completely different data domains in a single conversation turn</p></li>
+<li><p>i.e., Reason using data from BigQuery and Google maps MCP in a single conversation turn</p></li>
+</ul>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
+<div class="admonition-agent instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Agent</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">agent.py</span>
+<span class="sd">--------</span>
+<span class="sd">Bakery Location Intelligence Agent.</span>
+
+<span class="sd">Uses two Google-managed MCP servers:</span>
+<span class="sd">  1. BigQuery MCP  — demographic, foot-traffic, pricing, and sales data</span>
+<span class="sd">  2. Maps MCP      — place search, routing, and distance calculations</span>
+
+<span class="sd">Run with:</span>
+<span class="sd">    cd bakery_agent/       # parent directory of mcp_bakery_app/</span>
+<span class="sd">    adk web .</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp_bakery_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">tools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">google.auth</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">LlmAgent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gemini</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span>
+
+<span class="n">dotenv</span><span class="o">.</span><span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># ── Project config ────────────────────────────────────────────────────────────</span>
+<span class="c1">#PROJECT_ID = os.getenv(&quot;GOOGLE_CLOUD_PROJECT&quot;, &quot;project_not_set&quot;)</span>
+<span class="n">DATASET</span>    <span class="o">=</span> <span class="s2">&quot;mcp_bakery&quot;</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">project_id</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">default</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_CLOUD_PROJECT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_id</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_CLOUD_LOCATION&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_GENAI_USE_VERTEXAI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
+
+<span class="c1"># ── Initialise MCP toolsets ───────────────────────────────────────────────────</span>
+<span class="c1"># Each call connects to the remote MCP server and discovers its tools.</span>
+<span class="c1"># Toolsets are created once at module load time and reused across requests.</span>
+<span class="n">maps_toolset</span>     <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">get_maps_mcp_toolset</span><span class="p">()</span>
+<span class="n">bigquery_toolset</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">get_bigquery_mcp_toolset</span><span class="p">()</span>
+
+<span class="c1"># ── Agent definition ──────────────────────────────────────────────────────────</span>
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;root_agent&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Gemini</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-3-flash-preview&quot;</span><span class="p">,</span>
+        <span class="n">retry_options</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">HttpRetryOptions</span><span class="p">(</span><span class="n">attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are an expert Bakery Location Intelligence Agent helping an entrepreneur</span>
+<span class="s2">decide where to open a new bakery in the Los Angeles area.</span>
+
+<span class="s2">You have access to two complementary data sources:</span>
+
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2"> 1. BIGQUERY TOOLSET  — structured data in the `</span><span class="si">{</span><span class="n">DATASET</span><span class="si">}</span><span class="s2">` dataset</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">Run all jobs from project: </span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span>
+<span class="s2">Always fully qualify table names: `</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">DATASET</span><span class="si">}</span><span class="s2">.TABLE_NAME`</span>
+
+<span class="s2">Available tables and their purpose:</span>
+<span class="s2">  • demographics          — zip_code, neighborhood, median_household_income,</span>
+<span class="s2">                            total_population, median_age, bachelors_degree_pct,</span>
+<span class="s2">                            foot_traffic_index</span>
+<span class="s2">  • foot_traffic          — zip_code, time_of_day (morning/afternoon/evening),</span>
+<span class="s2">                            foot_traffic_score</span>
+<span class="s2">  • bakery_prices         — store_name, product_type, price, region, is_organic</span>
+<span class="s2">  • sales_history_weekly  — week_start_date, store_location, product_type,</span>
+<span class="s2">                            quantity_sold, total_revenue</span>
+
+<span class="s2">Workflow for BigQuery questions:</span>
+<span class="s2">  1. Use get_dataset_info to confirm the dataset exists.</span>
+<span class="s2">  2. Use get_table_info to inspect schema before writing SQL.</span>
+<span class="s2">  3. Use execute_sql to run SQL and retrieve results.</span>
+<span class="s2">  4. If a query errors, read the error message, fix the SQL, and retry.</span>
+
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2"> 2. MAPS TOOLSET  — real-world location intelligence</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">Use for:</span>
+<span class="s2">  • Searching for bakeries, cafés, or competitors in a specific area</span>
+<span class="s2">  Find the region with the highest foot traffic and lowest competitor density.</span>
+
+<span class="s2">Always include a hyperlink to an interactive Google Maps view in your</span>
+<span class="s2">response when showing location-based results.</span>
+
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">RESPONSE GUIDELINES</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">• Combine data insights with real-world location context in every answer.</span>
+<span class="s2">• Be specific — cite zip codes, neighbourhoods, dollar amounts, and scores.</span>
+<span class="s2">• Format numbers clearly: currency as $X.XX, percentages as X.X%.</span>
+<span class="s2">• When you recommend a location, justify it with at least two data points</span>
+<span class="s2">  from BigQuery AND one real-world observation from Maps.</span>
+<span class="s2">• Keep responses concise but complete. Use bullet points for comparisons.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">maps_toolset</span><span class="p">,</span> <span class="n">bigquery_toolset</span><span class="p">],</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="admonition-tool-collection instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Tool collection</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">tools.py</span>
+<span class="sd">--------</span>
+<span class="sd">MCP toolset factory functions for the Bakery Location Agent.</span>
+
+<span class="sd">Two remote Google-managed MCP servers are used:</span>
+<span class="sd">  - BigQuery MCP  : https://bigquery.googleapis.com/mcp</span>
+<span class="sd">  - Maps MCP      : https://mapstools.googleapis.com/mcp</span>
+
+<span class="sd">Authentication</span>
+<span class="sd">  - BigQuery uses Application Default Credentials (ADC).</span>
+<span class="sd">    Run once before starting the agent:</span>
+<span class="sd">        gcloud auth application-default login</span>
+<span class="sd">  - Maps uses a plain API key injected as an X-Goog-Api-Key header.</span>
+<span class="sd">    Set MAPS_API_KEY in your .env file.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">google.auth</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">google.auth.transport.requests</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.tools.mcp_tool.mcp_toolset</span><span class="w"> </span><span class="kn">import</span> <span class="n">McpToolset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.tools.mcp_tool.mcp_session_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamableHTTPConnectionParams</span>
+
+<span class="c1"># ── MCP server endpoints (Google-managed, no infra to run) ──────────────────</span>
+<span class="n">BIGQUERY_MCP_URL</span> <span class="o">=</span> <span class="s2">&quot;https://bigquery.googleapis.com/mcp&quot;</span>
+<span class="n">MAPS_MCP_URL</span>     <span class="o">=</span> <span class="s2">&quot;https://mapstools.googleapis.com/mcp&quot;</span>
+
+
+<span class="c1"># ── Maps toolset ─────────────────────────────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_maps_mcp_toolset</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">McpToolset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Connect to the Google Maps Platform MCP server.</span>
+
+<span class="sd">    Auth: API key passed as X-Goog-Api-Key header.</span>
+<span class="sd">    The MAPS_API_KEY env var must be set in .env (or the shell environment).</span>
+
+<span class="sd">    Tools exposed by this server (selection):</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dotenv</span><span class="o">.</span><span class="n">load_dotenv</span><span class="p">()</span>
+    <span class="n">maps_api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MAPS_API_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;no_api_key_found&quot;</span><span class="p">)</span>
+
+    <span class="n">toolset</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span>
+        <span class="n">connection_params</span><span class="o">=</span><span class="n">StreamableHTTPConnectionParams</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">MAPS_MCP_URL</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;x-goog-api-key&quot;</span><span class="p">:</span> <span class="n">maps_api_key</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Maps MCP toolset configured (Streamable HTTP).&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">toolset</span>
+
+
+<span class="c1"># ── BigQuery toolset ──────────────────────────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_bigquery_mcp_toolset</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">McpToolset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Connect to the Google BigQuery MCP server using Application Default Credentials.</span>
+
+<span class="sd">    Auth: OAuth 2.0 Bearer token generated from ADC, refreshed on every call</span>
+<span class="sd">    so the agent always starts with a valid token.</span>
+<span class="sd">    Also passes x-goog-user-project so BigQuery bills the correct project.</span>
+
+<span class="sd">    ⚠  Token lifetime is ~60 min. If adk web runs longer, restart the agent</span>
+<span class="sd">       after re-authenticating:  gcloud auth application-default login</span>
+
+<span class="sd">    Tools exposed by this server (selection):</span>
+<span class="sd">      - list_dataset_ids</span>
+<span class="sd">      - get_dataset_info</span>
+<span class="sd">      - list_table_ids</span>
+<span class="sd">      - get_table_info</span>
+<span class="sd">      - execute_sql</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">credentials</span><span class="p">,</span> <span class="n">project_id</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">default</span><span class="p">(</span>
+        <span class="n">scopes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;https://www.googleapis.com/auth/bigquery&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Force a refresh so the token is valid at agent startup</span>
+    <span class="n">credentials</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">google</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">Request</span><span class="p">())</span>
+    <span class="n">oauth_token</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">token</span>
+
+    <span class="n">toolset</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span>
+        <span class="n">connection_params</span><span class="o">=</span><span class="n">StreamableHTTPConnectionParams</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">BIGQUERY_MCP_URL</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span>     <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">oauth_token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;x-goog-user-project&quot;</span><span class="p">:</span> <span class="n">project_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ BigQuery MCP toolset configured (Streamable HTTP).&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">toolset</span>
+
+
+</pre></div>
+</div>
+</div>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uv run adk web . --no-reload
+</pre></div>
+</div>
+<p><strong>Terminal output:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>INFO:     Started server process [9643]
+INFO:     Waiting for application startup.
+
++-----------------------------------------------------------------------------+
+| ADK Web Server started                                                      |
+|                                                                             |
+| For local testing, access at http://127.0.0.1:8000.                         |
++-----------------------------------------------------------------------------+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<div class="admonition-output instructor-note admonition" id="instructor-note-2">
+<p class="admonition-title">Output</p>
+<p><img alt="alt text" src="../../_images/bigquery_maps.png" /></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../01.ADK_agents_Gemini_3.1/" class="btn btn-neutral float-left" title="Build ADK Agents with Gemini 3.1 Pro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../03.ContextEng/" class="btn btn-neutral float-right" title="Mastering Context Engineering with Google ADK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

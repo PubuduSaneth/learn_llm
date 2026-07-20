@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case-study part 1: Explore Anatomy and Taxonomy of Agents &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Case-study part 2: Explore basics of context engineering" href="../04.3.Agent_Development_Guide_P3/" />
+    <link rel="prev" title="Context Engineering for Stateful AI Agents" href="../03.Context_Engineering/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Case-study part 1: Explore Anatomy and Taxonomy of Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conversational-agent-for-language-learning">Conversational Agent for language learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#explore-core-anatomy-and-taxonomy-of-the-conversational-agent">Explore Core Anatomy and Taxonomy of the Conversational Agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-agent-py">Agent <code class="docutils literal notranslate"><span class="pre">agent.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-tools-py">Tools <code class="docutils literal notranslate"><span class="pre">tools.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orchestration-layer">Orchestration Layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-agent-s-operational-loop">The Agent’s Operational Loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#phase-1-context-preparation-before-agent">Phase 1: Context Preparation (Before Agent)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phase-2-agent-reasoning-core-loop">Phase 2: Agent Reasoning (Core Loop)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phase-3-tool-execution-tool-integration">Phase 3: Tool Execution (Tool Integration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phase-4-state-persistence-after-agent">Phase 4: State Persistence (After Agent)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-loop-diagram">Complete Loop Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#taxonomy-of-capabilities">Taxonomy of Capabilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#observation-perception">Observation (Perception)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#action-effecting-state">Action (Effecting State)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#communication-expression">Communication (Expression)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-persistent-knowledge">Memory (Persistent Knowledge)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../04.3.Agent_Development_Guide_P3/">Case-study part 2: Explore basics of context engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Engineering_trust/">Engineering Trust</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AI Agent tutorials using Google ADK</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/01.ADK_agents_Gemini_3.1/">Build ADK Agents with Gemini 3.1 Pro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/02.BigQuery_Agent_MCP/">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/03.ContextEng/">Mastering Context Engineering with Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/04.Context_caching_and_compaction/">Context Caching &amp; Compaction in Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/05.Add_persistent_memory/">Implementing Persistent Memory with GoodMem and ADK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Case-study part 1: Explore Anatomy and Taxonomy of Agents</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/04.1.Agent_Development_Guide_P1.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-part-1-explore-anatomy-and-taxonomy-of-agents">
+<h1>Case-study part 1: Explore Anatomy and Taxonomy of Agents<a class="headerlink" href="#case-study-part-1-explore-anatomy-and-taxonomy-of-agents" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Explore core concepts of Autonomous Systems using Norwegian Language Learning Agent</p></li>
+<li><p>Concepts</p>
+<ul>
+<li><p>Core Anatomy and Taxonomy of Agents</p></li>
+<li><p>The Agent’s Operational Loop</p></li>
+<li><p>Complete Loop Diagram</p></li>
+<li><p>Taxonomy of Capabilities</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="conversational-agent-for-language-learning">
+<h2>Conversational Agent for language learning<a class="headerlink" href="#conversational-agent-for-language-learning" title="Link to this heading"></a></h2>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Agent Codebase</summary>
+<p><code class="docutils literal notranslate"><span class="pre">agent.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">LlmAgent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents.callback_context</span><span class="w"> </span><span class="kn">import</span> <span class="n">CallbackContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.sessions.sqlite_session_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">SqliteSessionService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.memory.in_memory_memory_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemoryMemoryService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.genai.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">GenerateContentConfig</span><span class="p">,</span> <span class="n">ThinkingConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents.run_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunConfig</span><span class="p">,</span> <span class="n">StreamingMode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_scenarios</span><span class="p">,</span> <span class="n">select_scenario</span><span class="p">,</span> <span class="n">get_vocabulary</span><span class="p">,</span> <span class="n">mark_word_practiced</span><span class="p">,</span> <span class="n">get_progress</span><span class="p">,</span> <span class="n">end_scenario</span><span class="p">,</span> <span class="n">get_user_profile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_instruction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.scenarios</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCENARIOS</span>
+
+<span class="n">SYSTEM_INSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Du er en vennlig og tålmodig norsk språkpartner. </span>
+<span class="s2">Bruk alltid norsk.</span>
+
+<span class="s2">Du befinner deg først i en &quot;meny&quot;-modus. </span>
+<span class="s2">Hovedoppgaven din her er å hjelpe brukeren med å velge et praksis-scenario.</span>
+<span class="s2">Bruk `list_scenarios`-verktøyet for å fortelle brukeren hvilke scenarioer (situasjoner) de kan øve på.</span>
+
+<span class="s2">Når brukeren har valgt et scenario, eller du forstår hvilket de vil bruke, bruk `select_scenario`-verktøyet for å bytte rolle.</span>
+<span class="s2">Etter å ha byttet rolle, ta umiddelbart på deg den nye personligheten (persona) og start samtalen med &#39;opening_line&#39; fra scenarioet.</span>
+<span class="s2">Hold deg i denne rollen og svar utelukkende på norsk.</span>
+<span class="s2">Hold svarene dine svært korte (1-2 små setninger).</span>
+<span class="s2">Dersom brukeren gjør grammatikkfeil eller uttaler noe feil, gi en rask og vennlig korreksjon på norsk.</span>
+
+<span class="s2">Hvis brukeren står fast eller ber om hjelp til noen ord (&quot;hva sier jeg?&quot;, &quot;trenger vokabular&quot;), bruk `get_vocabulary`-verktøyet for det valgte scenarioet og foreslå 2-3 relevante norske uttrykk med engelsk oversettelse.</span>
+
+<span class="s2">VIKTIG: Hvis brukeren spør om betydningen eller definisjonen av et ord (&quot;hva betyr&quot;, &quot;definer&quot;, &quot;hva er&quot;), MÅ du bruke `lookup_word` verktøyet fra det eksterne registeret. Hvis MCP-serveren ikke svarer eller feiler, bruk den lokale kunnskapen din som fallback.</span>
+
+<span class="s2">Dersom brukeren sier &quot;bytt scenario&quot; eller &quot;new scenario&quot;, gå ut av rollen din og tilbake til &quot;meny&quot;-modus for å velge et nytt scenario.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_before_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+    <span class="n">scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+    
+    <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="c1"># Search memory if no active scenario yet to personalize greeting</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">scenario_id</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">memories</span> <span class="ow">and</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">:</span>
+                <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Kontekst fra tidligere samtaler:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]:</span> <span class="c1"># last 3 memories</span>
+                    <span class="n">memory_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">parts</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+        <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">new_instruction</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_after_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">add_session_to_memory</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<span class="n">session_service</span> <span class="o">=</span> <span class="n">SqliteSessionService</span><span class="p">(</span><span class="s2">&quot;sessions.db&quot;</span><span class="p">)</span>
+<span class="n">memory_service</span> <span class="o">=</span> <span class="n">InMemoryMemoryService</span><span class="p">()</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="s2">&quot;gemini-live-2.5-flash-native-audio&quot;</span>
+
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;norsk_agent&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="n">SYSTEM_INSTRUCTION</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">list_scenarios</span><span class="p">,</span> <span class="n">select_scenario</span><span class="p">,</span> <span class="n">get_vocabulary</span><span class="p">,</span> <span class="n">mark_word_practiced</span><span class="p">,</span> <span class="n">get_progress</span><span class="p">,</span> <span class="n">end_scenario</span><span class="p">,</span> <span class="n">get_user_profile</span><span class="p">],</span>
+    <span class="n">before_agent_callback</span><span class="o">=</span><span class="n">on_before_agent</span><span class="p">,</span>
+    <span class="n">after_agent_callback</span><span class="o">=</span><span class="n">on_after_agent</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">prompts.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builds a dynamic system instruction based on the scenario and the user&#39;s progress.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">persona</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;persona&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">vocabulary</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    
+    <span class="n">words_practiced</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">exchange_count</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">exchange_count</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">weak_words</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    
+    <span class="c1"># Base setup</span>
+    <span class="n">instruction</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">persona</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Du må kun snakke NORSK til enhver tid.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">instruction</span> <span class="o">+=</span> <span class="s2">&quot;Svarene dine må være svært korte (1-2 små setninger).</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">instruction</span> <span class="o">+=</span> <span class="s2">&quot;Dersom brukeren gjør feil, rett dem raskt og vennlig på norsk.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    
+    <span class="k">if</span> <span class="n">weak_words</span><span class="p">:</span>
+        <span class="n">instruction</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;VIKTIG: I tidligere samtaler har brukeren hatt problemer med disse ordene: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">weak_words</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Prøv å flette dem inn i samtalen hvis det passer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    
+    <span class="c1"># Inject state awareness if vocabulary exists</span>
+    <span class="k">if</span> <span class="n">vocabulary</span><span class="p">:</span>
+        <span class="n">instruction</span> <span class="o">+=</span> <span class="s2">&quot;Brukeren prøver å lære følgende vokabular:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vocabulary</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot; [LÆRT]&quot;</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;no&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">words_practiced</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">instruction</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;no&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        
+        <span class="n">instruction</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Prøv å styre samtalen slik at brukeren får bruk for ordene som IKKE er lært ennå.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        
+        <span class="k">if</span> <span class="n">exchange_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">instruction</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Dere har snakket sammen i </span><span class="si">{</span><span class="n">exchange_count</span><span class="si">}</span><span class="s2"> utvekslinger. Fortsett naturlig.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            
+    <span class="k">return</span> <span class="n">instruction</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">scenarios.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SCENARIOS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;cafe&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;cafe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="s2">&quot;På kafé&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="s2">&quot;At the café&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="s2">&quot;Du er en vennlig servitør på en kafé i Oslo.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="s2">&quot;Hei! Hva kan jeg friste med i dag?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en kaffe&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a coffee&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;kan jeg få&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;can I get&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en bolle&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a bun/pastry&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å betale&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to pay&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;kort eller kontant?&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;card or cash?&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;kvittering&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;receipt&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en te&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a tea&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et smørbrød&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a sandwich&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;sukker&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;sugar&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;melk&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;milk&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;takk&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;thanks&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;vær så snill&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;please&quot;</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;hotel&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;hotel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="s2">&quot;På hotellet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="s2">&quot;At the hotel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="s2">&quot;Du er en imøtekommende resepsjonist på et hotell.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="s2">&quot;Velkommen til oss! Har du en reservasjon?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en reservasjon&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a reservation&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et rom&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a room&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et enkeltrom&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a single room&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et dobbeltrom&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a double room&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;frokost inkludert&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;breakfast included&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;nøkkelkort&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;key card&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å sjekke inn&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to check in&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å sjekke ut&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to check out&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;bagasje&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;luggage&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;legitimasjon&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;ID&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;underskrift&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;signature&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;heisen&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;the elevator&quot;</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="s2">&quot;På togstasjonen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="s2">&quot;At the train station&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="s2">&quot;Du er en hjelpsom billettør på togstasjonen.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="s2">&quot;Hei! Hvor vil du reise i dag?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en billett&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a ticket&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;enveisbillett&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;one-way ticket&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;tur-retur&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;round trip&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;neste tog&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;next train&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;plassbillett&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;seat reservation&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et spor&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a track&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en perrong&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a platform&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;forsinket&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;delayed&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;i tide&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;on time&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;avgang&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;departure&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;ankomst&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;arrival&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;vindusplass&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;window seat&quot;</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;grocery&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;grocery&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="s2">&quot;I matbutikken&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="s2">&quot;At the grocery store&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="s2">&quot;Du sitter i kassa på en travel matbutikk.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="s2">&quot;Hei! Trenger du en pose?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en pose&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a bag&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å betale&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to pay&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;kvittering&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;receipt&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;tilbud&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;offer/sale&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;brød&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;bread&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;melk&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;milk&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;grønnsaker&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;vegetables&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;frukt&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;fruit&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;dyrt&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;expensive&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;billig&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;cheap&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å kaste&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to throw away&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en kasse&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a checkout&quot;</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;doctor&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;doctor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="s2">&quot;Hos legen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="s2">&quot;At the doctor&#39;s&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="s2">&quot;Du er en profesjonell og omsorgsfull lege.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="s2">&quot;Hei, kom inn og sett deg. Hva kan jeg hjelpe deg med?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;vondt i hodet&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;headache&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;feber&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;fever&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å hoste&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to cough&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;forkjølet&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a cold&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en resept&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a prescription&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;et apotek&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;a pharmacy&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;en time&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;an appointment&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;piller&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;pills&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;å puste&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;to breathe&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;slapp&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;lethargic/weak&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;bedring&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;recovery&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;no&quot;</span><span class="p">:</span> <span class="s2">&quot;god bedring&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;get well soon&quot;</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tools.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Context</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.scenarios</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCENARIOS</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">list_scenarios</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the list of available practice scenarios.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of dictionaries, where each contains:</span>
+<span class="sd">          - id: the internal scenario ID</span>
+<span class="sd">          - title_no: the Norwegian title</span>
+<span class="sd">          - title_en: the English title</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;title_en&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+    <span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Selects a scenario by ID and returns its context, triggering a persona switch.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tool_context: The ADK context object containing session state.</span>
+<span class="sd">        scenario_id: The ID of the scenario to switch to.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary with the scenario details (id, title_no, title_en, persona, opening_line)</span>
+<span class="sd">        or an error message in Norwegian if the ID is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kjenner ikke til scenarioet &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    
+    <span class="c1"># Initialize state</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_en&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_en&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;persona&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;opening_line&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vocabulary</span><span class="p">(</span><span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the vocabulary list for a given scenario.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        scenario_id: The ID of the scenario.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing the English-Norwegian vocabulary pairs, or an error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kan ikke finne vokabular for &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">]}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marks a vocabulary word as practiced by the user.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        tool_context: The ADK context.</span>
+<span class="sd">        word: The Norwegian vocabulary word that was practiced.</span>
+<span class="sd">        correct: True if the user used it correctly, False otherwise.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A confirmation string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">if</span> <span class="n">correct</span> <span class="ow">and</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">practiced</span><span class="p">:</span>
+        <span class="n">practiced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Flott! &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; er markert som lært.&quot;</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">correct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Notert at &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; trenger mer øving.&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; er allerede lært.&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_progress</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the user&#39;s progress in the current scenario.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        tool_context: The ADK context.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary with the progress statistics.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">active_scenario_id</span> <span class="ow">or</span> <span class="n">active_scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Ingen aktivt scenario for å vise fremgang.&quot;</span><span class="p">}</span>
+        
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span>
+    <span class="n">total_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">practiced_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">practiced</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;scenario_id&quot;</span><span class="p">:</span> <span class="n">active_scenario_id</span><span class="p">,</span>
+        <span class="s2">&quot;words_practiced&quot;</span><span class="p">:</span> <span class="n">practiced</span><span class="p">,</span>
+        <span class="s2">&quot;practiced_count&quot;</span><span class="p">:</span> <span class="n">practiced_count</span><span class="p">,</span>
+        <span class="s2">&quot;total_words&quot;</span><span class="p">:</span> <span class="n">total_words</span><span class="p">,</span>
+        <span class="s2">&quot;completion_percentage&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">practiced_count</span> <span class="o">/</span> <span class="n">total_words</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">total_words</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">end_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ends the current practice scenario, calculating accuracy and saving progress to the user&#39;s profile.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        tool_context: The ADK context.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A string summarizing the user&#39;s performance and returning to menu mode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">active_scenario_id</span> <span class="ow">or</span> <span class="n">active_scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Bruk &#39;select_scenario&#39; for å velge et scenario først.&quot;</span>
+        
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">words_practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    
+    <span class="n">target_words</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;norwegian&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">}</span>
+    <span class="n">practiced_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words_practiced</span><span class="p">)</span>
+    <span class="n">weak_words</span> <span class="o">=</span> <span class="n">target_words</span> <span class="o">-</span> <span class="n">practiced_set</span>
+    
+    <span class="n">completed</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:completed_scenarios&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;user:completed_scenarios&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">completed</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">all_weak_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">all_weak_words</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">weak_words</span><span class="p">)</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_weak_words</span><span class="p">)</span>
+    
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">weak_str</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">weak_words</span><span class="p">)</span> <span class="k">if</span> <span class="n">weak_words</span> <span class="k">else</span> <span class="s1">&#39;Ingen&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Scenario fullført! Du klarte </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">practiced_set</span><span class="p">)</span><span class="si">}</span><span class="s2"> av </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">target_words</span><span class="p">)</span><span class="si">}</span><span class="s2"> ord. Ord for ekstra øving: </span><span class="si">{</span><span class="n">weak_str</span><span class="si">}</span><span class="s2">. Du er nå i meny-modus.&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_profile</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the user&#39;s cross-session practice profile and statistics.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        tool_context: The ADK context.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing the user&#39;s statistics across all sessions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;completed_scenarios&quot;</span><span class="p">:</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:completed_scenarios&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;weak_words&quot;</span><span class="p">:</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="p">}</span>
+
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>Codebase is developed via a coding agent, following Specs-driven development practices</p></li>
+</ul>
+</div>
+</div>
+</details>
+</section>
+<section id="explore-core-anatomy-and-taxonomy-of-the-conversational-agent">
+<h2>Explore Core Anatomy and Taxonomy of the Conversational Agent<a class="headerlink" href="#explore-core-anatomy-and-taxonomy-of-the-conversational-agent" title="Link to this heading"></a></h2>
+<section id="agent-agent-py">
+<h3>Agent <code class="docutils literal notranslate"><span class="pre">agent.py</span></code><a class="headerlink" href="#agent-agent-py" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Instantiates a single <code class="docutils literal notranslate"><span class="pre">LlmAgent</span></code> around Gemini <code class="docutils literal notranslate"><span class="pre">gemini-live-2.5-flash-native-audio</span></code></p>
+<ul>
+<li><p>Bootstrapped with a Norwegian-only <code class="docutils literal notranslate"><span class="pre">SYSTEM_INSTRUCTION</span></code></p></li>
+<li><p>Session persistence via <code class="docutils literal notranslate"><span class="pre">SqliteSessionService</span></code>, and</p></li>
+<li><p>Volatile personalization through <code class="docutils literal notranslate"><span class="pre">InMemoryMemoryService</span></code></p></li>
+</ul>
+</li>
+<li><p>Dynamic persona shifts happen inside <code class="docutils literal notranslate"><span class="pre">on_before_agent</span></code>,</p>
+<ul>
+<li><p>which swaps the root instruction with <code class="docutils literal notranslate"><span class="pre">build_instruction()</span></code> output whenever <code class="docutils literal notranslate"><span class="pre">active_scenario_id</span></code> changes,</p></li>
+<li><p>while <code class="docutils literal notranslate"><span class="pre">on_after_agent</span></code> increments the turn counter and syncs conversation traces into memory</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tools-tools-py">
+<h3>Tools <code class="docutils literal notranslate"><span class="pre">tools.py</span></code><a class="headerlink" href="#tools-tools-py" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Exposes a taxonomy of stateful ADK tools:</p>
+<ul>
+<li><p>Menu-level selectors (<code class="docutils literal notranslate"><span class="pre">list_scenarios</span></code>, <code class="docutils literal notranslate"><span class="pre">select_scenario</span></code>),</p></li>
+<li><p>formative assessment helpers (<code class="docutils literal notranslate"><span class="pre">mark_word_practiced</span></code>, <code class="docutils literal notranslate"><span class="pre">get_progress</span></code>, <code class="docutils literal notranslate"><span class="pre">end_scenario</span></code>), and</p></li>
+<li><p>longitudinal profiling (<code class="docutils literal notranslate"><span class="pre">get_user_profile</span></code>).</p></li>
+</ul>
+</li>
+<li><p>Vocabulary scaffolding comes from <code class="docutils literal notranslate"><span class="pre">get_vocabulary</span></code></p></li>
+<li><p>Every tool either reads from or mutates <code class="docutils literal notranslate"><span class="pre">Context.state</span></code>,</p>
+<ul>
+<li><p>which becomes the single source of truth for exchange counts, weak-word tracking, and persona activation</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="orchestration-layer">
+<h3>Orchestration Layer<a class="headerlink" href="#orchestration-layer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Conversation flow blends declarative prompts with scenario metadata from prompts.py and scenarios.py</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build_instruction()</span></code> injects adaptive cues (weak words, practiced vocabulary, exchange counts) into the system prompt so the LLM stays context-aligned without bespoke planner code.</p></li>
+<li><p>Callbacks + state + tool contracts form an implicit orchestration layer without a separate conductor service.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-agent-s-operational-loop">
+<h2>The Agent’s Operational Loop<a class="headerlink" href="#the-agent-s-operational-loop" title="Link to this heading"></a></h2>
+<p>The agent’s operational loop consists of four phases:</p>
+<ul class="simple">
+<li><p>Phase 1: Context Preparation (Before Agent)</p></li>
+<li><p>Phase 2: Agent Reasoning (Core Loop)</p></li>
+<li><p>Phase 3: Tool Execution (Tool Integration)</p></li>
+<li><p>Phase 4: State Persistence (After Agent)</p></li>
+</ul>
+<section id="phase-1-context-preparation-before-agent">
+<h3>Phase 1: Context Preparation (Before Agent)<a class="headerlink" href="#phase-1-context-preparation-before-agent" title="Link to this heading"></a></h3>
+<p>Before the agent processes any input, it prepares its context</p>
+<p><strong>Why this matters:</strong></p>
+<ul class="simple">
+<li><p>The agent’s behavior depends in the context (behavior is context-aware, not one-size-fits-all)</p></li>
+<li><p>Session continuity should be maintained across conversations</p></li>
+<li><p>The agent’s instruction set evolves based on user progress</p></li>
+</ul>
+<p><strong>What happens here:</strong></p>
+<ol class="arabic simple">
+<li><p>State Retrieval: The agent accesses persisted session state (current scenario, words practiced, exchange count)</p></li>
+<li><p>Memory Search: It queries the memory service for past interactions to provide context-aware personalization</p></li>
+<li><p>Dynamic Instruction Building: The system instruction is reconstructed based on current state, not static</p></li>
+</ol>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Context Preparation</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py: on_before_agent callback</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_before_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+    <span class="n">scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+
+    <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="c1"># Search memory for personalization</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">scenario_id</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">memories</span> <span class="ow">and</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">:</span>
+                <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Kontekst fra tidligere samtaler:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]:</span>
+                    <span class="n">memory_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">...</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="c1"># Dynamically build instruction based on state</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+        <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">new_instruction</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="phase-2-agent-reasoning-core-loop">
+<h3>Phase 2: Agent Reasoning (Core Loop)<a class="headerlink" href="#phase-2-agent-reasoning-core-loop" title="Link to this heading"></a></h3>
+<p>The agent receives user input, applies tools to gather information, and generates a response:</p>
+<p><strong>The internal loop:</strong></p>
+<ol class="arabic simple">
+<li><p>Observe: Receive user utterance (“Jeg vil velge kafé-scenarioet”)</p></li>
+<li><p>Plan: Reason about which tools to use (e.g., <code class="docutils literal notranslate"><span class="pre">select_scenario</span></code>)</p></li>
+<li><p>Act: Call the tool with appropriate arguments</p></li>
+<li><p>Observe: Receive tool output with scenario details</p></li>
+<li><p>Generate: Compose response based on tool results</p></li>
+</ol>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-2">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Agent Reasoning</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;norsk_agent&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="n">SYSTEM_INSTRUCTION</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">list_scenarios</span><span class="p">,</span> <span class="n">select_scenario</span><span class="p">,</span> <span class="n">get_vocabulary</span><span class="p">,</span>
+           <span class="n">mark_word_practiced</span><span class="p">,</span> <span class="n">get_progress</span><span class="p">,</span> <span class="n">end_scenario</span><span class="p">,</span>
+           <span class="n">get_user_profile</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="phase-3-tool-execution-tool-integration">
+<h3>Phase 3: Tool Execution (Tool Integration)<a class="headerlink" href="#phase-3-tool-execution-tool-integration" title="Link to this heading"></a></h3>
+<p>The agent invokes tools to affect state or retrieve information:
+<strong>State mutation happens here</strong>: The agent’s tools modify session state directly.</p>
+<p><strong>Example tool call sequence:</strong></p>
+<ul class="simple">
+<li><p>User: “Jeg vil velge kafé-scenarioet”</p></li>
+<li><p>Agent reasoning: “User wants cafe scenario → call select_scenario(‘cafe’)”</p></li>
+</ul>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-3">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Agent Reasoning</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tool execution (tools.py):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kjenner ikke til scenarioet &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+
+    <span class="c1"># Modify state</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Return result</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;persona&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;opening_line&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+<section id="phase-4-state-persistence-after-agent">
+<h3>Phase 4: State Persistence (After Agent)<a class="headerlink" href="#phase-4-state-persistence-after-agent" title="Link to this heading"></a></h3>
+<p>After generating a response, the agent persists relevant information:</p>
+<p><strong>What happens:</strong></p>
+<ol class="arabic simple">
+<li><p>Exchange counter is incremented (used to track conversation depth)</p></li>
+<li><p>The entire session is serialized to long-term memory</p></li>
+<li><p>Future conversations can query this memory for context</p></li>
+</ol>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-4">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>State Persistence</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py: on_after_agent callback</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_after_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># Add current session to long-term memory</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">add_session_to_memory</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="complete-loop-diagram">
+<h2>Complete Loop Diagram<a class="headerlink" href="#complete-loop-diagram" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>User Input
+    ↓
+[1] on_before_agent()
+    ├─ Retrieve session state
+    ├─ Query memory for personalization
+    └─ Rebuild dynamic instruction
+    ↓
+[2] Agent Reasoning
+    ├─ Observe: Parse user intent
+    ├─ Plan: Decide which tools to call
+    ├─ Act: Execute tools
+    └─ Generate: Create response
+    ↓
+[3] Tool Execution
+    ├─ Modify state (active_scenario_id, words_practiced, etc.)
+    └─ Return results to agent
+    ↓
+[4] on_after_agent()
+    ├─ Increment exchange counter
+    └─ Persist session to memory
+    ↓
+Response to User
+</pre></div>
+</div>
+</section>
+<section id="taxonomy-of-capabilities">
+<h2>Taxonomy of Capabilities<a class="headerlink" href="#taxonomy-of-capabilities" title="Link to this heading"></a></h2>
+<p>Agent capabilities fall into distinct categories:</p>
+<ul class="simple">
+<li><p>Observation (Perception)</p></li>
+<li><p>Action (Effecting State)</p></li>
+<li><p>Communication (Expression)</p></li>
+<li><p>Memory (Persistent Knowledge)</p></li>
+</ul>
+<section id="observation-perception">
+<h3>Observation (Perception)<a class="headerlink" href="#observation-perception" title="Link to this heading"></a></h3>
+<p><strong>How the agent perceives its environment:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-5">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Observation (Perception)</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 1: Access to session state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+<span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+<span class="n">words_practiced</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">exchange_count</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</details>
+</div>
+<p>The agent observes:</p>
+<ul class="simple">
+<li><p>Current scenario ID</p></li>
+<li><p>Words practiced in this session</p></li>
+<li><p>Number of exchanges (conversation depth)</p></li>
+<li><p>User’s cross-session profile (completed scenarios, weak words)</p></li>
+</ul>
+</section>
+<section id="action-effecting-state">
+<h3>Action (Effecting State)<a class="headerlink" href="#action-effecting-state" title="Link to this heading"></a></h3>
+<p><strong>How the agent affects its environment:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-6">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Action (Effecting State)</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 2: Direct state mutation through tools</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">if</span> <span class="n">correct</span> <span class="ow">and</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">practiced</span><span class="p">:</span>
+        <span class="n">practiced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span>  <span class="c1"># ← State mutation</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Flott! &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; er markert som lært.&quot;</span>
+</pre></div>
+</div>
+</details>
+</div>
+<p>The agent can:</p>
+<ul class="simple">
+<li><p>Change the active scenario</p></li>
+<li><p>Mark words as learned</p></li>
+<li><p>Update user profiles</p></li>
+<li><p>Track progress</p></li>
+</ul>
+</section>
+<section id="communication-expression">
+<h3>Communication (Expression)<a class="headerlink" href="#communication-expression" title="Link to this heading"></a></h3>
+<p><strong>How the agent expresses itself:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-7">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Communication (Expression)</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 3: Natural language generation constrained by instruction</span>
+<span class="n">SYSTEM_INSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Du er en vennlig og tålmodig norsk språkpartner.</span>
+<span class="s2">Bruk alltid norsk.</span>
+<span class="s2">Hold svarene dine svært korte (1-2 små setninger).</span>
+<span class="s2">Dersom brukeren gjør grammatikkfeil, gi en rask og vennlig korreksjon.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</details>
+</div>
+<p>The agent is instructed to:</p>
+<ul class="simple">
+<li><p>Speak only Norwegian</p></li>
+<li><p>Keep responses short (1-2 sentences)</p></li>
+<li><p>Provide gentle corrections</p></li>
+<li><p>Adapt persona based on scenario</p></li>
+</ul>
+</section>
+<section id="memory-persistent-knowledge">
+<h3>Memory (Persistent Knowledge)<a class="headerlink" href="#memory-persistent-knowledge" title="Link to this heading"></a></h3>
+<p><strong>How the agent remembers:</strong></p>
+<div class="admonition-python-implementation instructor-note admonition" id="instructor-note-8">
+<p class="admonition-title">Python implementation</p>
+<details>
+<summary>Memory (Persistent Knowledge)</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 4: Long-term memory retrieval and storage</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="c1"># Can query for:</span>
+<span class="c1"># - Completed scenarios</span>
+<span class="c1"># - Weak words (weak_words list)</span>
+<span class="c1"># - Past interactions</span>
+</pre></div>
+</div>
+</details>
+</div>
+<p>The agent remembers:</p>
+<ul class="simple">
+<li><p>Which scenarios have been completed</p></li>
+<li><p>Words the user struggles with</p></li>
+<li><p>The trajectory of learning progress</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../03.Context_Engineering/" class="btn btn-neutral float-left" title="Context Engineering for Stateful AI Agents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../04.3.Agent_Development_Guide_P3/" class="btn btn-neutral float-right" title="Case-study part 2: Explore basics of context engineering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

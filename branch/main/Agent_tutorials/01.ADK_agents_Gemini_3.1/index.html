@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build ADK Agents with Gemini 3.1 Pro &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP" href="../02.BigQuery_Agent_MCP/" />
+    <link rel="prev" title="Reference" href="../../Agentic_Architectures/Reference/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.1.Agent_Development_Guide_P1/">Case-study part 1: Explore Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.3.Agent_Development_Guide_P3/">Case-study part 2: Explore basics of context engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/05.Engineering_trust/">Engineering Trust</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/Reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AI Agent tutorials using Google ADK</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build ADK Agents with Gemini 3.1 Pro</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#google-adk-and-asp">Google ADK and ASP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adk-agent-development-kit">ADK (Agent Development Kit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-agent-starter-pack-asp">The Agent Starter Pack (ASP)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-first-adk-agent-with-gemini-3-1-pro-from-scratch">Build first ADK Agent with Gemini 3.1 Pro from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02.BigQuery_Agent_MCP/">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.ContextEng/">Mastering Context Engineering with Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Context_caching_and_compaction/">Context Caching &amp; Compaction in Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Add_persistent_memory/">Implementing Persistent Memory with GoodMem and ADK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build ADK Agents with Gemini 3.1 Pro</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agent_tutorials/01.ADK_agents_Gemini_3.1.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="build-adk-agents-with-gemini-3-1-pro">
+<h1>Build ADK Agents with Gemini 3.1 Pro<a class="headerlink" href="#build-adk-agents-with-gemini-3-1-pro" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how to use Agent Starter Pack bootstraps high-performance agents in seconds</p></li>
+<li><p>Explore how the “Template-First” approach allows you to leverage language-specific strengths</p></li>
+</ul>
+</div>
+<section id="google-adk-and-asp">
+<h2>Google ADK and ASP<a class="headerlink" href="#google-adk-and-asp" title="Link to this heading"></a></h2>
+<section id="adk-agent-development-kit">
+<h3>ADK (Agent Development Kit)<a class="headerlink" href="#adk-agent-development-kit" title="Link to this heading"></a></h3>
+<p>A framework designed to give engineers deep control, customizability, and integration capabilities when building complex, mission-critical AI agents. It serves as the foundational architecture for crafting an agent’s reasoning and orchestration logic, providing built-in programmatic abstractions for:</p>
+<ul class="simple">
+<li><p>Session and Memory Management</p></li>
+<li><p>Multi-Agent Orchestration</p></li>
+<li><p>Security and Observability</p></li>
+</ul>
+</section>
+<section id="the-agent-starter-pack-asp">
+<h3>The Agent Starter Pack (ASP)<a class="headerlink" href="#the-agent-starter-pack-asp" title="Link to this heading"></a></h3>
+<p>Python package that provides production-ready Generative AI agent templates specifically designed for Google Cloud. If the ADK is the development framework used to write the agent’s core logic (its “brain” and “nervous system”), the Agent Starter Pack acts as the operational wrapper designed to successfully deploy that ADK-built agent into the real world.</p>
+<p>Moving an agent from a local prototype to a reliable enterprise system requires significant infrastructure. The ASP positions itself as the “AgentOps” foundation that surrounds your ADK agent with these necessary production services, including:</p>
+<ul class="simple">
+<li><p>Automated CI/CD Pipelines</p></li>
+<li><p>Infrastructure as Code (IaC)</p></li>
+<li><p>GitOps Workflows</p></li>
+<li><p>Automated Quality Gates</p></li>
+</ul>
+<p>Use the ADK to build how the agent thinks and acts, and you use the Agent Starter Pack to safely deploy, scale, and monitor that agent in a production environment.</p>
+</section>
+</section>
+<section id="build-first-adk-agent-with-gemini-3-1-pro-from-scratch">
+<h2>Build first ADK Agent with Gemini 3.1 Pro from scratch<a class="headerlink" href="#build-first-adk-agent-with-gemini-3-1-pro-from-scratch" title="Link to this heading"></a></h2>
+<div class="admonition-build-python-agent instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Build Python Agent</p>
+<p><strong>Build the Python Agent:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python</span>
+uvx<span class="w"> </span>agent-starter-pack@latest<span class="w"> </span>create<span class="w"> </span>my-py-agent<span class="w"> </span>-a<span class="w"> </span>adk@python<span class="w"> </span>--adk<span class="w"> </span>-s
+</pre></div>
+</div>
+<p><strong>Terminal:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>╭─────────────────────────────────────────────────────────────────────────────────────────────────── Agent Starter Pack v0.39.6 ───────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                                                                  │
+│  ▄▀▄ █▀▀ █▀▄ │ &quot;To production... and beyond!&quot;                                                                                                                                                                                    │
+│  █▀█ ▀▀█ █▀▀ │                                                                                                                                                                                                                   │
+│  ▀ ▀ ▀▀▀ ▀   │ Powered by Google Cloud - Agent Starter Pack                                                                                                                                                                      │
+│                                                                                                                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+⚡ ADK quickstart: adk + Agent Engine + prototype mode
+
+Info: --agent &#39;adk@python&#39; ignored due to --adk flag (using adk).
+
+✅ Success! Your agent project is ready.
+
+📖 Documentation
+   README:    cat my-py-agent/README.md
+   Dev Guide: https://goo.gle/asp-dev
+
+💡 Tip
+   Once ready for production, run: uvx agent-starter-pack enhance
+
+🚀 Get Started
+   cd my-py-agent &amp;&amp; make install &amp;&amp; make playground
+</pre></div>
+</div>
+<p><strong>Agent:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── app
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   └── agent.cpython-311.pyc
+│   ├── agent_engine_app.py
+│   ├── agent.py
+│   └── app_utils
+│       ├── deploy.py
+│       ├── telemetry.py
+│       └── typing.py
+├── deployment_metadata.json
+├── GEMINI.md
+├── Makefile
+├── pyproject.toml
+├── README.md
+├── tests
+│   ├── eval
+│   │   ├── eval_config.json
+│   │   └── evalsets
+│   │       ├── basic.evalset.json
+│   │       └── README.md
+│   ├── integration
+│   │   ├── test_agent_engine_app.py
+│   │   └── test_agent.py
+│   └── unit
+│       └── test_dummy.py
+└── uv.lock
+</pre></div>
+</div>
+</div>
+<div class="admonition-run-python-agent instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Run Python Agent</p>
+<p><strong>Install dependencies using <code class="docutils literal notranslate"><span class="pre">uv</span></code> and launch local development:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>my-py-agent<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>playground
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uv sync
+Resolved 251 packages in 9ms
+Audited 159 packages in 23ms
+===============================================================================
+| 🚀 Starting your agent playground...                                        |
+|                                                                             |
+| 💡 Try asking: What&#39;s the weather in San Francisco?                         |
+|                                                                             |
+| 🔍 IMPORTANT: Select the &#39;app&#39; folder to interact with your agent.          |
+===============================================================================
+uv run adk web . --port 8501 --reload_agents
+...
+...
+
+INFO:     Started server process [38060]
+INFO:     Waiting for application startup.
+
++-----------------------------------------------------------------------------+
+| ADK Web Server started                                                      |
+|                                                                             |
+| For local testing, access at http://127.0.0.1:8501.                         |
++-----------------------------------------------------------------------------+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8501 (Press CTRL+C to quit)
+
+</pre></div>
+</div>
+<p><strong>Agent via localhost:</strong></p>
+<p><img alt="alt text" src="../../_images/my-py-agent.png" /></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../Agentic_Architectures/Reference/" class="btn btn-neutral float-left" title="Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../02.BigQuery_Agent_MCP/" class="btn btn-neutral float-right" title="Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

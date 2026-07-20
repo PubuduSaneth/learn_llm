@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundations of AI Agentic Architectures and Production Systems &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="AI Agent Interoperability and MCP" href="../02.Agent_AI Agent_Interoperability_MCP/" />
+    <link rel="prev" title="Introduction - Architecting Autonomous Systems" href="../0.Introduction/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Foundations of AI Agentic Architectures and Production Systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-paradigm-shift-from-predictive-ai-to-autonomous-agents">The Paradigm Shift: From Predictive AI to Autonomous Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-centric-vs-agentic-centric">Model-Centric vs. Agentic-Centric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-the-agent">Defining the Agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-components-of-an-agent">Core components of an agent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-mechanics-of-agency-the-5-step-operational-loop">The Mechanics of Agency: The 5-Step Operational Loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-5-step-cycle">The 5-Step Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-taxonomy-of-intelligence">A Taxonomy of Intelligence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#context-engineering">Context engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#levels-0-4-of-agentic-systems">Levels 0-4 of Agentic Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-core-anatomy-model-tools-and-orchestration">The Core Anatomy: Model, Tools, and Orchestration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-brain-the-model">The Brain (The Model)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-hands-the-tools">The Hands (The Tools)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-nervous-system-the-orchestration-layer">The Nervous System (The Orchestration Layer)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#agent-ops-managing-the-stochastic-lifecycle">Agent Ops: Managing the Stochastic Lifecycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-ops-toolkit">Agent Ops Toolkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#measurement-and-kpi-tracking">Measurement and KPI Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quality-assessment-lm-as-judge">Quality Assessment (LM as Judge)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metrics-driven-development">Metrics-Driven Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opentelemetry-traces">OpenTelemetry Traces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#human-feedback-for-closing-the-loop">Human feedback for closing the Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#devops-mlops-and-genaiops">DevOps, MLOps, and GenAIOps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-and-governance-hardening-the-agentic-frontier">Security and Governance: Hardening the Agentic Frontier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hybrid-defense-strategy">Hybrid Defense Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#governing-the-agent-fleet">Governing the Agent Fleet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-future-self-evolving-systems-and-case-studies">The Future: Self-Evolving Systems and Case Studies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-gym">Agent Gym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-case-studies">Advanced Case Studies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Foundations of AI Agentic Architectures and Production Systems</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/01.Foundations_of_Agentic_Architectures.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="foundations-of-ai-agentic-architectures-and-production-systems">
+<h1>Foundations of AI Agentic Architectures and Production Systems<a class="headerlink" href="#foundations-of-ai-agentic-architectures-and-production-systems" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand what AI agents are and their main components</p></li>
+<li><p>Explore Mechanics of Agency and core anatomy of agents</p></li>
+<li><p>Gain basic overview of Agent Ops concepts</p></li>
+</ul>
+</div>
+<section id="the-paradigm-shift-from-predictive-ai-to-autonomous-agents">
+<h2>The Paradigm Shift: From Predictive AI to Autonomous Agents<a class="headerlink" href="#the-paradigm-shift-from-predictive-ai-to-autonomous-agents" title="Link to this heading"></a></h2>
+<p><img alt="alt text" src="../../_images/paradigm_shift.png" />{width=1000px}</p>
+<ul class="simple">
+<li><p>We are moving beyond “Predictive AI”—systems that operate in a passive, discrete paradigm to translate text or generate images—toward “Autonomous Agents”</p></li>
+<li><p>This shift represents a move from the traditional “bricklayer” development model, where engineers define every logical step via explicit code, to a “director” model</p></li>
+<li><p>In this new era, the developer orchestrates an autonomous “actor” by</p>
+<ul>
+<li><p>setting the scene through guiding instructions</p></li>
+<li><p>selecting a cast of specialized tools, and</p></li>
+<li><p>curating the necessary context to achieve high-level goals</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="model-centric-vs-agentic-centric">
+<h2>Model-Centric vs. Agentic-Centric<a class="headerlink" href="#model-centric-vs-agentic-centric" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Model-Centric (Passive AI)</p></th>
+<th class="head"><p>Agentic-Centric (AI Agents)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Autonomy</p></td>
+<td><p>Requires human direction for every discrete step.</p></td>
+<td><p>Capable of autonomous planning and multi-step execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Task Handling</p></td>
+<td><p>Static workflows; input-to-output mapping.</p></td>
+<td><p>Complex, goal-oriented missions with dynamic adaptation.</p></td>
+</tr>
+<tr class="row-even"><td><p>Execution Loop</p></td>
+<td><p>Linear (Input → Model → Output).</p></td>
+<td><p>Cyclical (Think → Act → Observe).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interaction</p></td>
+<td><p>Predictive or creative content generation.</p></td>
+<td><p>Practical agency; the ability to change the state of the world via tools.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defining-the-agent">
+<h2>Defining the Agent<a class="headerlink" href="#defining-the-agent" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>An agent is not merely a model</p>
+<ul>
+<li><p>it is the natural evolution of Language Models (LMs) synthesized into functional software</p></li>
+</ul>
+</li>
+</ul>
+<section id="core-components-of-an-agent">
+<h3>Core components of an agent<a class="headerlink" href="#core-components-of-an-agent" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>The Model (The Brain)</p>
+<ul class="simple">
+<li><p>The reasoning engine that processes information and makes decisions.</p></li>
+</ul>
+</li>
+<li><p>Tools (The Hands):</p>
+<ul class="simple">
+<li><p>Interfaces (APIs, data stores) that connect reasoning to reality.</p></li>
+</ul>
+</li>
+<li><p>The Orchestration Layer (The Nervous System):</p>
+<ul class="simple">
+<li><p>The state machine that manages the operational loop, memory, and strategy.</p></li>
+</ul>
+</li>
+<li><p>Runtime Services (The Body and Legs):</p>
+<ul class="simple">
+<li><p>The production infrastructure (hosting, logging, monitoring) that ensures reliability and accessibility</p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="alt text" src="../../_images/Agent_Core_components.png" />{width=1000px}</p>
+<p>Understanding this definition is the prerequisite for exploring how these systems systematically solve complex, non-deterministic problems.</p>
+</section>
+</section>
+<section id="the-mechanics-of-agency-the-5-step-operational-loop">
+<h2>The Mechanics of Agency: The 5-Step Operational Loop<a class="headerlink" href="#the-mechanics-of-agency-the-5-step-operational-loop" title="Link to this heading"></a></h2>
+<p><img alt="5-Step Operational Loop" src="../../_images/5-StepOperational.png" />{width=1000px}
+<em>Source: Introduction to Agents; Authors: Alan Blount, Antonio Gulli, Shubham Saboo,
+Michael Zimmermann, and Vladimir Vuskovic</em></p>
+<p>Maintain the assurance that the agent remains grounded to the mission despite the probabilistic nature of the underlying model. The “Think, Act, Observe” cycle allows for continuous refinement as the agent interacts with its environment</p>
+<section id="the-5-step-cycle">
+<h3>The 5-Step Cycle<a class="headerlink" href="#the-5-step-cycle" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/5-StepCycle.png" />{width=1000px}</p>
+<ul class="simple">
+<li><p>Get the Mission:</p>
+<ul>
+<li><p>The process is initiated by a high-level goal (e.g., “Organize team travel”).</p></li>
+</ul>
+</li>
+<li><p>Scan the Scene:</p>
+<ul>
+<li><p>The agent perceives its environment by accessing memory and available resources.</p></li>
+</ul>
+</li>
+<li><p>Think It Through:</p>
+<ul>
+<li><p>The reasoning model analyzes the mission against the scene to devise a plan.</p></li>
+</ul>
+</li>
+<li><p>Take Action:</p>
+<ul>
+<li><p>The agent executes a concrete step, such as an API call or database query.
+Observe and Iterate: The agent records the result of the action and feeds it back into the reasoning engine.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="a-taxonomy-of-intelligence">
+<h2>A Taxonomy of Intelligence<a class="headerlink" href="#a-taxonomy-of-intelligence" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Classifying agents is critical when scoping projects to manage the trade-offs between system complexity and autonomous capability.</p></li>
+<li><p>A central differentiator across these levels is Context Engineering:</p></li>
+<li><p>Context Engineering: the art of context window curation</p></li>
+</ul>
+<section id="context-engineering">
+<h3>Context engineering<a class="headerlink" href="#context-engineering" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Context engineering</strong> is the modern evolution of what was formerly known as “prompt engineering”.</p></li>
+<li><p>It is the practice of actively selecting, packaging, and managing the exact information a Language Model (LM) needs to generate a desired output.</p>
+<ul>
+<li><p>For any single call to the LM, context engineering involves carefully curating the input window with a precise blend of elements like</p>
+<ul>
+<li><p>system instructions,</p></li>
+<li><p>user input,</p></li>
+<li><p>available tools,</p></li>
+<li><p>session history,</p></li>
+<li><p>factual grounding from authoritative sources,</p></li>
+<li><p>user profiles, and the</p></li>
+<li><p>results of previously invoked tools</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>key aspects of context engineering:</strong></p>
+<ul class="simple">
+<li><p>Optimizing the Model’s Attention:</p>
+<ul>
+<li><p>An agent’s accuracy relies entirely on a focused, high-quality context.</p></li>
+<li><p>Context engineering curates the model’s limited attention, preventing information overload and ensuring efficient, accurate performance.</p></li>
+</ul>
+</li>
+<li><p>The Core Function of an Agent:</p>
+<ul>
+<li><p>In essence, AI agents are software systems dedicated entirely to the art of context window curation.</p></li>
+</ul>
+</li>
+<li><p>The Orchestration Layer manages a loop of</p>
+<ul>
+<li><p>assembling this context,</p></li>
+<li><p>prompting the model,</p></li>
+<li><p>observing the results of any tool actions, and then</p></li>
+<li><p>re-assembling a new, updated context for the next step.</p></li>
+</ul>
+</li>
+<li><p>Emergence in Strategic Problem-Solvers:</p>
+<ul>
+<li><p>Context engineering is the defining skill that emerges in “Level 2” agentic systems (Strategic Problem-Solvers).</p></li>
+<li><p>For example, if an agent is asked to find a good coffee shop halfway between two locations, it first finds the halfway point (e.g., Millbrae, CA). It then uses context engineering to automatically translate that observation into a new, highly focused search query (e.g., <code class="docutils literal notranslate"><span class="pre">query=&quot;coffee</span> <span class="pre">shop</span> <span class="pre">in</span> <span class="pre">Millbrae,</span> <span class="pre">CA&quot;,</span> <span class="pre">min_rating=4.0</span></code>) to complete the next step.</p></li>
+</ul>
+</li>
+<li><p>Continuous Autonomous Improvement:</p>
+<ul>
+<li><p>“Enhanced Context Engineering” for self-evolving systems/agents.</p></li>
+<li><p>The system autonomously and continuously refines its own prompts by learning from past experiences, session logs, and human feedback.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="levels-0-4-of-agentic-systems">
+<h3>Levels 0-4 of Agentic Systems<a class="headerlink" href="#levels-0-4-of-agentic-systems" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/Agentic_system_in_5_steps.png" />{width=1000px}
+<em>Source: Introduction to Agents; Authors: Alan Blount, Antonio Gulli, Shubham Saboo,
+Michael Zimmermann, and Vladimir Vuskovic</em></p>
+<ul class="simple">
+<li><p>Level 0: The Core Reasoning System (The Isolated Brain)</p>
+<ul>
+<li><p>A Language Model operating solely on pre-trained knowledge.</p></li>
+<li><p>It is “blind” to real-time events (e.g., knowing baseball rules but not last night’s score)</p></li>
+</ul>
+</li>
+<li><p>Level 1: The Connected Problem-Solver (Retrieval/Tools)</p>
+<ul>
+<li><p>The brain gains “hands.”</p></li>
+<li><p>It uses the 5-step loop to access real-time data via search APIs or RAG (Retrieval-Augmented Generation)</p></li>
+</ul>
+</li>
+<li><p>Level 2: The Strategic Problem-Solver (Context Engineering)</p>
+<ul>
+<li><p>The agent performs complex, multi-part goals.</p></li>
+<li><p>It uses context engineering to select and package the most relevant data for each step</p></li>
+<li><p>Enable proactive assistance and intent refinement</p></li>
+</ul>
+</li>
+<li><p>Level 3: The Collaborative Multi-Agent System (Division of Labor)</p>
+<ul>
+<li><p>A “team of specialists” approach</p></li>
+<li><p>A coordinator agent delegates missions to specialized sub-agents (e.g., Market Research vs. Web Dev), mirroring a human organization</p></li>
+</ul>
+</li>
+<li><p>Level 4: The Self-Evolving System (Autonomous Tool Creation)</p>
+<ul>
+<li><p>The frontier. The system identifies capability gaps and autonomously creates new tools or agents (e.g., writing a new Python script to solve a novel math problem) to expand its own resources.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/Agentic_system_in_5_steps_2.png" />{width=1000px}</p>
+<p>Moving through these levels requires a deep dive into the “Tripartite Architecture” of the Brain, Hands, and Nervous System.</p>
+</section>
+</section>
+<section id="the-core-anatomy-model-tools-and-orchestration">
+<h2>The Core Anatomy: Model, Tools, and Orchestration<a class="headerlink" href="#the-core-anatomy-model-tools-and-orchestration" title="Link to this heading"></a></h2>
+<section id="the-brain-the-model">
+<h3>The Brain (The Model)<a class="headerlink" href="#the-brain-the-model" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Benchmark scores are insufficient for agentic tasks</p></li>
+<li><p>Success requires models that excel at reasoning and reliable tool use</p></li>
+</ul>
+<p><strong>Key considerations of a model in a AI agent:</strong></p>
+<ul class="simple">
+<li><p>Strategic Model Routing</p>
+<ul>
+<li><p>Optimize the intersection of quality, speed, and price, architects should use a “team of specialists.”</p></li>
+<li><p>A frontier model like Gemini 2.5 Pro should be routed for heavy-duty planning,</p>
+<ul>
+<li><p>while the faster, more cost-effective Gemini 2.5 Flash handles intent classification and summarization.</p></li>
+<li><p>This avoids the “sledgehammer” approach to simple tasks.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cognitive Ceiling vs. Operational Cost</p>
+<ul>
+<li><p>The model you choose today will be superseded in months</p></li>
+<li><p>Building a nimble “Agent Ops” practice allows for upgrading the “Brain” without overhauling the entire architecture</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="the-hands-the-tools">
+<h3>The Hands (The Tools)<a class="headerlink" href="#the-hands-the-tools" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tools provide the model’s connection to reality</p></li>
+<li><p>These connections are categorized as:</p>
+<ul>
+<li><p>Retrieving Information: Grounding the agent via RAG (Vector Databases) or NL2SQL (Structured Databases).</p></li>
+<li><p>Executing Actions: Changing the world via APIs or Python sandboxes.</p></li>
+<li><p>Computer Use: A critical frontier where the LM takes control of a user interface—navigating pages and pre-filling forms—often with Human-in-the-Loop oversight.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/brain_n_hand.png" />{width=1000px}</p>
+</section>
+<section id="the-nervous-system-the-orchestration-layer">
+<h3>The Nervous System (The Orchestration Layer)<a class="headerlink" href="#the-nervous-system-the-orchestration-layer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The orchestrator is the state machine governing the agent’s behavior (Spectrum of Autonomy)</p></li>
+<li><p>Orchestration Layer</p>
+<ul>
+<li><p>Engine that runs the “Think, Act, Observe” loop</p></li>
+</ul>
+</li>
+<li><p>Implementation: Ranges from deterministic, predictable workflows (AI as a tool) to “LM in the driver’s seat” (dynamic planning)</p></li>
+<li><p>ADK: Code-first frameworks like the Agent Development Kit (ADK) provide the granular control and observability required for mission-critical enterprise systems</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/nervous_sys.png" />{width=1000px}</p>
+</section>
+</section>
+<section id="agent-ops-managing-the-stochastic-lifecycle">
+<h2>Agent Ops: Managing the Stochastic Lifecycle<a class="headerlink" href="#agent-ops-managing-the-stochastic-lifecycle" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Standard DevOps and software development rely on unit tests that check if an output perfectly matches an expected result,</p>
+<ul>
+<li><p>This approach fails with the probabilistic nature of generative AI</p></li>
+</ul>
+</li>
+<li><p>Transition (from deterministic software to stochastic agentic systems) requires a new operational philosophy.</p></li>
+<li><p>Agent Ops is the evolution of MLOps for managing this unpredictability</p>
+<ul>
+<li><p>disciplined, structured approach</p></li>
+<li><p>tailored for the unique challenges of building, deploying, and governing Al agents.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../_images/agentOps.png" />{width=500px}</p>
+<section id="agent-ops-toolkit">
+<h3>Agent Ops Toolkit<a class="headerlink" href="#agent-ops-toolkit" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Measure</p>
+<ul class="simple">
+<li><p>Measurement and KPI Tracking</p></li>
+</ul>
+</li>
+<li><p>Evaluate</p>
+<ul class="simple">
+<li><p>“LM as Judge” for Quality Evaluation</p></li>
+</ul>
+</li>
+<li><p>Improve</p>
+<ul class="simple">
+<li><p>Metrics-Driven Development</p></li>
+</ul>
+</li>
+<li><p>Debug</p>
+<ul class="simple">
+<li><p>OpenTelemetry Traces</p></li>
+<li><p>Human feedback</p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="alt text" src="../../_images/agenops_tk.png" />{width=1000}</p>
+</section>
+<section id="measurement-and-kpi-tracking">
+<h3>Measurement and KPI Tracking<a class="headerlink" href="#measurement-and-kpi-tracking" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Before an agent can be improved, its success must be defined like an A/B experiment</p></li>
+<li><p>Success can be measured by business-aligned KPIs:</p>
+<ul>
+<li><p>Goal completion rates,</p></li>
+<li><p>User satisfaction scores,</p></li>
+<li><p>Cost per interaction, and</p></li>
+<li><p>Task latency.</p></li>
+</ul>
+</li>
+<li><p>Foundational tool in Agent Ops is a <strong>top-down observability strategy that tracks Key Performance Indicators (KPIs) mapping directly to business value</strong>.</p></li>
+</ul>
+</section>
+<section id="quality-assessment-lm-as-judge">
+<h3>Quality Assessment (LM as Judge)<a class="headerlink" href="#quality-assessment-lm-as-judge" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Since pass/fail is impossible, a powerful model evaluates agent outputs against a Golden Dataset (curated prompts/responses) using a rubric (set of instructions or rules) for factuality and tone</p></li>
+<li><p>Agent Ops replaces traditional unit tests with an “LM as Judge”</p></li>
+<li><p>This involves using a powerful language model to assess the agent’s output against a predefined rubric, asking questions like:</p>
+<ul>
+<li><p>Did it give the right answer?</p></li>
+<li><p>Was it factually grounded? Did it follow instructions?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="metrics-driven-development">
+<h3>Metrics-Driven Development<a class="headerlink" href="#metrics-driven-development" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Agent Ops utilizes these quality scores to create a “Go/No-Go” gate for deployments</p></li>
+<li><p>When a developer makes changes, the new agent version is run against the entire evaluation dataset, and its scores are compared directly to the production version</p></li>
+<li><p>For maximum safety, teams use A/B deployments to slowly roll out the new agent and compare real-world production metrics (like latency and cost) alongside the simulated scores</p></li>
+</ul>
+</section>
+<section id="opentelemetry-traces">
+<h3>OpenTelemetry Traces<a class="headerlink" href="#opentelemetry-traces" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>When metrics dip or a bug is reported, developers need to know exactly why the agent failed.</p></li>
+<li><p>Agent Ops relies on OpenTelemetry traces, which provide a high-fidelity, step-by-step recording of the agent’s entire execution trajectory</p></li>
+<li><p>Traces expose the full “thought process” of the agent, including:</p>
+<ul>
+<li><p>The exact prompt sent to the model.</p></li>
+<li><p>The model’s internal reasoning.</p></li>
+<li><p>The specific tool it chose to invoke and the parameters it generated.</p></li>
+<li><p>The raw data it observed in return</p></li>
+</ul>
+</li>
+<li><p>These detailed logs can be collected and visualized in platforms like Google Cloud Trace to streamline root cause analysis</p></li>
+</ul>
+</section>
+<section id="human-feedback-for-closing-the-loop">
+<h3>Human feedback for closing the Loop<a class="headerlink" href="#human-feedback-for-closing-the-loop" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Human feedback (e.g., “thumbs down”) must be captured and converted into new permanent test cases in the evaluation dataset to prevent regression.</p></li>
+</ul>
+</section>
+<section id="devops-mlops-and-genaiops">
+<h3>DevOps, MLOps, and GenAIOps<a class="headerlink" href="#devops-mlops-and-genaiops" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/Ops.png" />{width=1000px}
+<em>Source: https://medium.com/&#64;sokratis.kartakis/genai-in-production-mlops-or-genaiops-25691c9becd0</em></p>
+</section>
+</section>
+<section id="security-and-governance-hardening-the-agentic-frontier">
+<h2>Security and Governance: Hardening the Agentic Frontier<a class="headerlink" href="#security-and-governance-hardening-the-agentic-frontier" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The “Trust Trade-Off” dictates that as agents gain autonomy, risk increases</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/TrustTrade-Off.png" />{width=1000px}</p>
+<section id="hybrid-defense-strategy">
+<h3>Hybrid Defense Strategy<a class="headerlink" href="#hybrid-defense-strategy" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Deterministic Guardrails</p>
+<ul>
+<li><p>Hardcoded policy engines (e.g., “deny all DELETE commands”)</p></li>
+</ul>
+</li>
+<li><p>Reasoning-Based Defenses:</p>
+<ul>
+<li><p>Managed services like Model Armor to screen prompts and plans for injection attacks, jailbreaks, and PII (Personally Identifiable Information) leakage.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="governing-the-agent-fleet">
+<h3>Governing the Agent Fleet<a class="headerlink" href="#governing-the-agent-fleet" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Control Plane:</p></li>
+<li><p>Preventing “Agent Sprawl” through a centralized gateway and registry for runtime policy enforcement and discovery.</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/Governing_the_Agent_Fleet.png" />{width=1000px}</p>
+</section>
+</section>
+<section id="the-future-self-evolving-systems-and-case-studies">
+<h2>The Future: Self-Evolving Systems and Case Studies<a class="headerlink" href="#the-future-self-evolving-systems-and-case-studies" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The final frontier; Learning Agent Loop</p></li>
+<li><p>Combine runtime artifacts (logs/traces) and human feedback to autonomously refine context engineering and tool usage.</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/Self-Evolving.png" />{width=1000px}</p>
+<section id="agent-gym">
+<h3>Agent Gym<a class="headerlink" href="#agent-gym" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A standalone, offline simulation environment that is not in the execution path.</p></li>
+<li><p>It allows agents to “exercise” on synthetic data and pressure-test optimizations before production deployment.</p></li>
+</ul>
+</section>
+<section id="advanced-case-studies">
+<h3>Advanced Case Studies<a class="headerlink" href="#advanced-case-studies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Google Co-Scientist:</p>
+<ul>
+<li><p>A multi-agent ecosystem where a “Supervisor” manages specialized agents to explore complex problem spaces, grounding scientific hypotheses in proprietary and public knowledge.
+AlphaEvolve:
+An evolutionary agentic system that generates human-readable code. It has achieved breakthroughs in improving Google’s data center efficiency, optimizing chip design, and discovering faster matrix multiplication algorithms.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../0.Introduction/" class="btn btn-neutral float-left" title="Introduction - Architecting Autonomous Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../02.Agent_AI Agent_Interoperability_MCP/" class="btn btn-neutral float-right" title="AI Agent Interoperability and MCP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

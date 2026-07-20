@@ -1,0 +1,20 @@
+# Introduction - Architecting Autonomous Systems
+
+## Introduction
+
+This lesson is designed to transition participants from "bricklayer" coding—where every logical step is explicitly defined—to "director-level" orchestration. Participants will learn to set the scene with instructions, select the cast of tools, and provide the necessary context. By the end of this course, you will be able to:
+
+- Deconstruct systems into the essential four-pillar architecture: Model, Tools, Orchestration, and Deployment.
+- Architect multi-step reasoning loops using ReAct and Chain-of-Thought frameworks.
+- Implement the Model Context Protocol (MCP) to resolve the "N x M" integration bottleneck.
+- Manage persistent state and "Context Rot" through advanced Context Engineering.
+- Secure enterprise fleets by treating Agent Identity as a Third Class of Principal
+
+## Lesson Roadmap
+
+- The Anatomy of Agency and Tool Interoperability Focus:
+  - Mastering the structural taxonomy of agents
+  - Technical mechanisms—including transport primitives like stdio and Streamable HTTP—that allow agents to interact with the environment
+- Context Engineering and Enterprise Governance Focus:
+  - Architecting persistent state via declarative and procedural memory
+  - Establishing "Agent Ops" for quality, security, and fleet-wide observability

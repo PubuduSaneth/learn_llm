@@ -1,0 +1,51 @@
+# Feedforward neural network (FNN)
+
+:::{objectives}
+
+- Understand the role of FNN in a transformer block and why it is important
+
+:::
+
+
+:::{instructor-note} Basic (simplest) overview
+
+**What is a single neuron?**
+
+![alt text](images/neuron.png)
+
+- Inputs: Always numerical, can have many inputs, often normalized
+- Weights: Numerical values associated with each input, determine importance
+- Bias: Provides flexibility for the neuron to activate even if all inputs are zero
+
+**What is a FNN?**
+
+![alt text](images/fnn.png)
+
+- Input layer: Receives the inputs, a neuron in a input layer represents a single input feature
+- Hidden layers: process the input data and extract complex features
+- Output layer: Produces the network’s prediction or output
+
+:::
+
+## FNN in the transformer block
+
+![alt text](images/fnn_transformer.png)
+
+- FNN in the transformer block accepts context vector from the attention layer as the input
+- FNN expands this input into a much higher-dimensional space (often 4 times the size)
+  - Explore each context vector in a richer representation space
+  - i.e., Uncompresses the information within each context vector
+- Compressing it back down to model dimensions and generate enriched context vector
+
+## Why FNN is important?
+
+- Perform complex calculations and feature extraction on each token individually in a richer representation space
+- Capture more nuanced and rich feature representations within each context vector
+- Attention mechanism figures out where to look (routing information between words), the feed-forward network figures out what the words actually mean
+
+## Main features
+
+- FNN contains significantly more trainable weights (parameters) than the self-attention layer
+- Account for the bulk of the model's storage
+- Stores the generalized patterns the model learned during training
+- Acting as the main engine for computation within each transformer block

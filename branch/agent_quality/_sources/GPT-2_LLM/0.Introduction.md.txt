@@ -1,0 +1,57 @@
+# Introduction - Building Blocks of GPT-2 LLM
+
+## Introduction
+
+This lesson notes are designed to
+
+- Explore the architecture of LLMs with a special focus on GPT-2 model
+- Introduce fundamental components of LLM (i.e., building blocks of LLM architecture)
+- Provide understanding of basic LLM architecture
+
+## Objective
+
+- Identify key components (building blocks) of LLM (Decoder-only LLMs)
+- Understand
+  - why each building block of a LLM important ?
+  - how these building blocks work ?
+- Understand the dataflow and data parallelization of LLMs
+
+Here, learners will gain knowledge to interpret the processes that enable LLMs to predict the next word from a sequence of input words
+
+:::{prereq}
+Prerequisites
+
+- Basic understanding of Deep learning concepts and methods
+- Python programming
+- Basic understanding of PyTorch implementation
+:::
+
+## Lesson notes (content)
+
+- Introduction to Large Language Models (LLMs)
+- GPT - Generative Pretrained Transformer model
+- Introduction to tokenization
+- Introduction to embedding
+- Transformer blocks
+- Self-attention mechanism
+- Masked Attention
+- Multi-head self-attention
+- Feedforward neural network (FNN)
+- Language Modeling Head (LM Head)
+- Pre-trained GPT-2 model end to end
+- Dataflow across LLM
+
+## Target audience
+
+Lesson notes are for individuals with deep learning knowledge and want to have a basic overview of the architecture of LLMs. The notes are designed not to dive deep into each component but to interpret the underline processes of LLM's key components.
+
+## Credits
+
+- Originally delivered as a two-part lecture in the monthly seminar series of Scientific Computing Services (RDE-SCS), University of Oslo
+- Subsequently expanded and adapted into these comprehensive lecture notes
+- GitHub pages are build via [CodeRefinery sphinx-lesson-template](https://github.com/coderefinery/sphinx-lesson-template)
+
+## Reference
+
+- [Book "Build a Large Language Model (From Scratch)", Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch)
+- [Hands-On Large Language Models, Jay Alammar, Maarten Grootendorst](https://www.llm-book.com/)

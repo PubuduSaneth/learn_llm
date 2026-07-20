@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction - Architecting Autonomous Systems &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Anatomy and Taxonomy of Agents" href="../01.Foundations_of_Agentic_Architectures/" />
+    <link rel="prev" title="Reference" href="../../GPT-2_LLM/quick-reference/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction - Architecting Autonomous Systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lesson-notes-content">Lesson notes (content)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#target-audience">Target audience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.1.Agent_Development_Guide_P1/">Case-study part 1: Explore Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04.3.Agent_Development_Guide_P3/">Case-study part 2: Explore basics of context engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Engineering_trust/">Engineering Trust</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AI Agent tutorials using Google ADK</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/01.ADK_agents_Gemini_3.1/">Build ADK Agents with Gemini 3.1 Pro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/02.BigQuery_Agent_MCP/">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/03.ContextEng/">Mastering Context Engineering with Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/04.Context_caching_and_compaction/">Context Caching &amp; Compaction in Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agent_tutorials/05.Add_persistent_memory/">Implementing Persistent Memory with GoodMem and ADK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction - Architecting Autonomous Systems</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/0.Introduction.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-architecting-autonomous-systems">
+<h1>Introduction - Architecting Autonomous Systems<a class="headerlink" href="#introduction-architecting-autonomous-systems" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>These lesson notes are designed to introduce the following concepts</p>
+<ul class="simple">
+<li><p>Mechanics of Agency &amp; Intelligence</p></li>
+<li><p>Anatomy of AI agents</p></li>
+<li><p>AI agent terminology</p></li>
+</ul>
+</section>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Gain a basic overview of concepts associated with the mechanics of agency and intelligence</p></li>
+<li><p>Understand the anatomy of AI agents (what AI agents are and their main components)</p></li>
+<li><p>Understand the anatomy of AI agents (what AI agents are and what their main components are)</p></li>
+<li><p>Explore code-bases (Python based AI agent examples)</p></li>
+</ul>
+<p>Here, learners will gain knowledge to help them interpret the concepts, processes, and components that make AI agents work.</p>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<p>Prerequisites</p>
+<ul class="simple">
+<li><p>Basic understanding of LLMs (see <a class="reference internal" href="../../GPT-2_LLM/0.Introduction/"><span class="std std-doc">Building Blocks of GPT-2 LLM</span></a>)</p></li>
+<li><p>Python programming</p></li>
+</ul>
+</div>
+</section>
+<section id="lesson-notes-content">
+<h2>Lesson notes (content)<a class="headerlink" href="#lesson-notes-content" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fundamentals of Autonomous Systems</p></li>
+<li><p>Tools, Interoperability, and the Model Context Protocol (MCP)</p></li>
+<li><p>Context Engineering for Stateful AI Agents; Sessions, Persistent Memory and context injection</p></li>
+<li><p>Explore Python code snippets demonstrating a range of concepts</p>
+<ul>
+<li><p>Case study part 1: Explore Anatomy and Taxonomy of Agents</p></li>
+<li><p>Case study part 2: Explore basics of context engineering</p></li>
+</ul>
+</li>
+<li><p>Engineering Trust</p></li>
+</ul>
+</section>
+<section id="target-audience">
+<h2>Target audience<a class="headerlink" href="#target-audience" title="Link to this heading"></a></h2>
+<p>These lesson notes are for individuals who need to explore fundamental concepts associated with AI agents. These notes are not designed to demonstrate how to develop and deploy production-ready AI agents.</p>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>GitHub pages are built using the CodeRefinery Sphinx lesson template</p></li>
+<li><p>Figures are generated using the Google NotebookLM (NotebookLM slides)</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/learn-guide/5-day-agents">AI Agents Intensive Course with Google</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../GPT-2_LLM/quick-reference/" class="btn btn-neutral float-left" title="Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../01.Foundations_of_Agentic_Architectures/" class="btn btn-neutral float-right" title="Anatomy and Taxonomy of Agents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

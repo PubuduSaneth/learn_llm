@@ -1,0 +1,21 @@
+# Introduction - Architecting Autonomous Systems
+
+## Introduction
+
+This lesson notes are designed to transition participants from "bricklayer" coding—where every logical step is explicitly defined—to "director-level" orchestration. Notes wil help learners how to set the scene with instructions, select the cast of tools, and provide the necessary context.
+
+## Learning outcomes
+
+- Deconstruct systems into the essential four-pillar architecture
+  - Model, Tools, Orchestration, and Deployment
+- Architect multi-step reasoning loops using ReAct and Chain-of-Thought frameworks.
+- Implement the Model Context Protocol (MCP) to resolve the "N x M" integration bottleneck.
+- Manage persistent state and "Context Rot" through advanced Context Engineering.
+- Secure enterprise fleets by treating Agent Identity as a Third Class of Principal
+
+## Lesson Roadmap
+
+- Stage 1: The Core Anatomy and Taxonomy of Agents
+- Stage 2: Tools, Interoperability, and the Model Context Protocol (MCP)
+- Stage 3: Context Engineering – Sessions and Persistent Memory
+- Stage 4: Agent Ops – Quality, Security, and Governance

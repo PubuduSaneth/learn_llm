@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mastering Context Engineering with Google ADK &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Context Caching &amp; Compaction in Google ADK" href="../04.Context_caching_and_compaction/" />
+    <link rel="prev" title="Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP" href="../02.BigQuery_Agent_MCP/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/01.Foundations_of_Agentic_Architectures/">Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.1.Agent_Development_Guide_P1/">Case-study part 1: Explore Anatomy and Taxonomy of Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/04.3.Agent_Development_Guide_P3/">Case-study part 2: Explore basics of context engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/05.Engineering_trust/">Engineering Trust</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Agentic_Architectures/Reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AI Agent tutorials using Google ADK</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01.ADK_agents_Gemini_3.1/">Build ADK Agents with Gemini 3.1 Pro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.BigQuery_Agent_MCP/">Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mastering Context Engineering with Google ADK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#static-vs-dynamic-instruction-separation">Static vs. Dynamic Instruction Separation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-static-instruction-instruction">Implementation: <code class="docutils literal notranslate"><span class="pre">static_instruction</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">instruction</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#context-caching">Context Caching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operationalizing-context-caching">Operationalizing Context Caching</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#structured-turn-steering">Structured Turn Steering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-compiled-view-steering">Generate “Compiled View” (Steering)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#intent-based-routing-error-correction">Intent-Based Routing &amp; Error Correction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#insights-of-intent-routing">Insights of intent routing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#policy-agent-in-action">Policy agent in action</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../04.Context_caching_and_compaction/">Context Caching &amp; Compaction in Google ADK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.Add_persistent_memory/">Implementing Persistent Memory with GoodMem and ADK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mastering Context Engineering with Google ADK</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agent_tutorials/03.ContextEng.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="mastering-context-engineering-with-google-adk">
+<h1>Mastering Context Engineering with Google ADK<a class="headerlink" href="#mastering-context-engineering-with-google-adk" title="Link to this heading"></a></h1>
+<p>This tutorial explores how to move beyond “spaghetti context” by using the Google Agent Development Kit (ADK) patterns found in your Python scripts.</p>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand how to optimize token usage</p>
+<ul>
+<li><p>by decouple static system instructions from dynamic per-turn directives</p></li>
+</ul>
+</li>
+<li><p>Explore how to implement Context Caching</p>
+<ul>
+<li><p>to reduce latency and costs for production-scale agents</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition-what-to-build exercise important admonition" id="exercise-0">
+<p class="admonition-title">What to build</p>
+<ul class="simple">
+<li><p>Build a “Steering” Controller that compiles a clean working context for the model.</p></li>
+<li><p>Integrate Intent-Based Routing to provide targeted goals and corrective feedback at runtime.</p></li>
+</ul>
+</div>
+<section id="static-vs-dynamic-instruction-separation">
+<h2>Static vs. Dynamic Instruction Separation<a class="headerlink" href="#static-vs-dynamic-instruction-separation" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Concept:</strong></p>
+<ul class="simple">
+<li><p>Traditional LLM apps send the entire system prompt (rules, schemas, safety) with every single turn. This is expensive and slow.</p></li>
+<li><p>The ADK Solution: Separate Static Instructions from Turn Instructions</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Changes?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">static_instruction</span></code></p></td>
+<td><p>Invariant policies, schemas, safety rules, tool definitions - “Laws of the Land.”</p></td>
+<td><p>Never (or rarely)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">instruction</span></code></p></td>
+<td><p>Per-turn goal, style, tenant scope, corrective feedback</p></td>
+<td><p>Every turn</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="implementation-static-instruction-instruction">
+<h3>Implementation: <code class="docutils literal notranslate"><span class="pre">static_instruction</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">instruction</span></code><a class="headerlink" href="#implementation-static-instruction-instruction" title="Link to this heading"></a></h3>
+<div class="admonition-code-snippet instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Code snippet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_POLICY_HEADER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are a strict policy assistant...</span>
+<span class="s2">Follow this exact JSON schema...</span>
+<span class="s2">Safety: Never provide medical or legal advice...&quot;&quot;&quot;</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;policy_agent&quot;</span><span class="p">,</span>
+    <span class="n">static_instruction</span><span class="o">=</span><span class="n">STATIC_POLICY_HEADER</span><span class="p">,</span> <span class="c1"># Invariant</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="s2">&quot;Default: be concise...&quot;</span>      <span class="c1"># Initial dynamic turn</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="context-caching">
+<h2>Context Caching<a class="headerlink" href="#context-caching" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Concept:</strong></p>
+<ul class="simple">
+<li><p>Even if you separate instructions, the LLM provider still has to “re-read” the system prompt every time, leading to high latency</p></li>
+<li><p>ADK Solution:</p>
+<ul>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">ContextCacheConfig</span></code> to tell the infrastructure to keep the static part “warm” in the model’s memory.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="operationalizing-context-caching">
+<h3>Operationalizing Context Caching<a class="headerlink" href="#operationalizing-context-caching" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Static header is clearly marked as “policy”</p></li>
+<li><p>ADK can compute KV representation of <code class="docutils literal notranslate"><span class="pre">static_instruction</span></code> once and reuse it across many requests,</p>
+<ul>
+<li><p>Pay the full token cost on the first request (and after the TTL expires)</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-code-snippet instructor-note admonition" id="instructor-note-1">
+<p class="admonition-title">Code snippet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;policy_qa_app&quot;</span><span class="p">,</span>
+    <span class="n">context_cache_config</span><span class="o">=</span><span class="n">ContextCacheConfig</span><span class="p">(</span>
+        <span class="n">ttl_seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>     <span class="c1"># Keep the static header cached for 1 hour</span>
+        <span class="n">min_tokens</span><span class="o">=</span><span class="mi">1000</span>       <span class="c1"># Only cache if the prompt is large enough to matter</span>
+    <span class="p">),</span>
+    <span class="n">root_agent</span><span class="o">=</span><span class="n">agent</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Engineering Impact:</strong></p>
+<p>By caching the 1000+ token policy header, subsequent turns only bill you for the tiny user_message and turn_instruction.</p>
+</section>
+</section>
+<section id="structured-turn-steering">
+<h2>Structured Turn Steering<a class="headerlink" href="#structured-turn-steering" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Concept:</strong></p>
+<p>The Problem: Shoveling raw history into the window causes “Lost in the Middle” syndrome.
+The ADK Solution: Treat the prompt as a rendered view. Use a “Controller” (the SteeringInputs class) to compile a clean set of directives for the current turn only.</p>
+</div>
+<section id="generate-compiled-view-steering">
+<h3>Generate “Compiled View” (Steering)<a class="headerlink" href="#generate-compiled-view-steering" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Rather than assembling turn instructions by string concatenation, ADK encourages you to treat turn steering as a <strong>typed, structured object</strong></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">SteeringInputs</span></code> dataclass codifies every knob we might want to adjust at runtime</p>
+<ul>
+<li><p>i.e., ADK use a structured <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> to represent the “Knobs” we want to turn</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-code-snippet instructor-note admonition" id="instructor-note-2">
+<p class="admonition-title">Code snippet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SteeringInputs</span><span class="p">:</span>
+    <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span>             <span class="c1"># Current mission</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span>            <span class="c1"># Aesthetic/Vibe</span>
+    <span class="n">max_cites</span><span class="p">:</span> <span class="nb">int</span>        <span class="c1"># Constraint enforcement</span>
+    <span class="n">tenant_hint</span><span class="p">:</span> <span class="nb">str</span>      <span class="c1"># Context filtering (e.g., EU vs US)</span>
+    <span class="n">corrective</span><span class="p">:</span> <span class="nb">str</span>       <span class="c1"># Feedback loop for self-correction</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">build_turn_instruction</span></code> function acts as the Compiler, turning these clean variables into a optimized instruction string for the LLM</p></li>
+<li><p>Each field maps directly to a control surface in the final prompt:</p></li>
+</ul>
+<div class="admonition-code-snippet instructor-note admonition" id="instructor-note-3">
+<p class="admonition-title">Code snippet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_turn_instruction</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">SteeringInputs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;Goal: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">goal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;Style: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;Constraints: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;include at most </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">max_cites</span><span class="si">}</span><span class="s2"> citations; &quot;</span>
+            <span class="s2">&quot;refuse medical/legal advice; &quot;</span>
+            <span class="s2">&quot;if info is missing, ask one targeted question; &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;return &#39;confidence&#39; between </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">confidence_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">confidence_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">tenant_hint</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tenant: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">tenant_hint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">corrective</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correction: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">corrective</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="intent-based-routing-error-correction">
+<h2>Intent-Based Routing &amp; Error Correction<a class="headerlink" href="#intent-based-routing-error-correction" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Concept:</strong></p>
+<ul class="simple">
+<li><p>Agents can ignore instructions if the user message is complex</p></li>
+<li><p>Analyze the intent before the agent runs, and inject specific corrective feedback if the last turn failed.</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>The chat function performs “Just-in-Time” context assembly</p>
+<ul>
+<li><p>The chat handler translates raw user input into a structured goal</p></li>
+<li><p>Structured goal is then fed to <code class="docutils literal notranslate"><span class="pre">SteeringInputs</span></code> through a lightweight intent router</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-code-snippet instructor-note admonition" id="instructor-note-4">
+<p class="admonition-title">Code snippet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span><span class="w"> </span><span class="nf">route_intent</span><span class="p">(</span><span class="n">user_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">user_message</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;compare&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;compare&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;list&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;control&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;list_controls&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;summarize&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;summarize&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;answer&quot;</span>
+
+
+<span class="n">INTENT_TO_GOAL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;summarize&quot;</span><span class="p">:</span> <span class="s2">&quot;Summarize ACME-42 in plain English.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;list_controls&quot;</span><span class="p">:</span> <span class="s2">&quot;List mandatory controls from ACME-42 with one-line rationales.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compare&quot;</span><span class="p">:</span> <span class="s2">&quot;Compare ACME-42 to ISO 27001 at a high level, return a short markdown table inside the JSON &#39;answer&#39;.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer the user directly.&quot;</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="c1"># 1. Intent Mapping: Clean the goal before the agent sees it</span>
+    <span class="n">intent</span> <span class="o">=</span> <span class="n">route_intent</span><span class="p">(</span><span class="n">user_message</span><span class="p">)</span>
+    <span class="n">goal</span> <span class="o">=</span> <span class="n">INTENT_TO_GOAL</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+
+    <span class="c1"># 2. Corrective Steering: If the last turn broke a rule, tell the agent EXPLICITLY</span>
+    <span class="n">corrective</span> <span class="o">=</span> <span class="n">get_last_validation_error</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span> 
+    
+    <span class="c1"># 3. Compiling the View</span>
+    <span class="n">turn_instruction</span> <span class="o">=</span> <span class="n">build_turn_instruction</span><span class="p">(</span>
+        <span class="n">SteeringInputs</span><span class="p">(</span><span class="n">goal</span><span class="o">=</span><span class="n">goal</span><span class="p">,</span> <span class="n">corrective</span><span class="o">=</span><span class="n">corrective</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 4. Execution: Update the dynamic window only</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">turn_instruction</span>
+    <span class="k">return</span> <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">user_message</span><span class="o">=</span><span class="n">user_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="insights-of-intent-routing">
+<h3>Insights of intent routing<a class="headerlink" href="#insights-of-intent-routing" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Without intent routing, you pass the raw user message directly as the goal and rely on the model to infer what format and depth is appropriate</p>
+<ul>
+<li><p>The model may or may not comply</p></li>
+</ul>
+</li>
+<li><p>With intent routing, <em>application code — makes that decision explicitly</em> and encodes it as a structured directive</p></li>
+<li><p>The model’s job is reduced from <em>“figure out what to do and do it well”</em> to <em>“execute this well-defined goal”</em></p>
+<ul>
+<li><p>That is a much easier task, and it leads to more consistent, cacheable, and debuggable outputs</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
+<div class="admonition-python-code instructor-note admonition" id="instructor-note-5">
+<p class="admonition-title">Python Code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------</span>
+<span class="c1"># app_setup.py</span>
+<span class="c1"># ------------</span>
+
+<span class="c1"># An Example of Static Context Policy </span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.apps</span><span class="w"> </span><span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents.context_cache_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextCacheConfig</span>
+
+<span class="n">STATIC_POLICY_HEADER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are a strict policy assistant for internal compliance Q&amp;A.</span>
+
+<span class="s2">Follow this exact JSON schema in every response:</span>
+<span class="s2">{&quot;answer&quot;: str, &quot;citations&quot;: [str], &quot;confidence&quot;: float}</span>
+
+<span class="s2">Safety:</span>
+<span class="s2">- Never provide medical or legal advice; refuse with a brief explanation.</span>
+<span class="s2">- Never invent policy numbers or sections; ask for the missing reference.</span>
+
+<span class="s2">Style:</span>
+<span class="s2">- Use short sentences.</span>
+<span class="s2">- Prefer active voice.</span>
+<span class="s2">- If uncertain, say so and request the missing input.</span>
+
+<span class="s2">Tools:</span>
+<span class="s2">- search: use for public web facts.</span>
+<span class="s2">- bq: use for internal policy tables (read-only).</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;policy_agent&quot;</span><span class="p">,</span>
+    <span class="n">static_instruction</span><span class="o">=</span><span class="n">STATIC_POLICY_HEADER</span><span class="p">,</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="s2">&quot;Default: be concise and include at most two citations.&quot;</span>
+<span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;policy_qa_app&quot;</span><span class="p">,</span>
+    <span class="n">context_cache_config</span><span class="o">=</span><span class="n">ContextCacheConfig</span><span class="p">(</span>
+        <span class="n">ttl_seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>     <span class="c1"># cache the header for 1 hour</span>
+        <span class="n">cache_intervals</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>    <span class="c1"># force a refresh every 5 requests (guardrail)</span>
+        <span class="n">min_tokens</span><span class="o">=</span><span class="mi">1000</span>       <span class="c1"># only cache if header is “worth it”</span>
+    <span class="p">),</span>
+    <span class="n">root_agent</span><span class="o">=</span><span class="n">agent</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------</span>
+<span class="c1"># steering.py</span>
+<span class="c1"># ------------</span>
+
+<span class="c1"># An Example of a runtime controller generating each turn instructions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SteeringInputs</span><span class="p">:</span>
+    <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span>                                  <span class="c1"># this turn’s objective</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;concise&quot;</span>                     <span class="c1"># terse, detailed, crisp, etc.</span>
+    <span class="n">max_cites</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>                         <span class="c1"># runtime knob</span>
+    <span class="n">tenant_hint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># &quot;Answer for EU employees only&quot;</span>
+    <span class="n">corrective</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>           <span class="c1"># &quot;Last reply missed field X; include it&quot;</span>
+    <span class="n">confidence_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build_turn_instruction</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">SteeringInputs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;Goal: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">goal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;Style: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;Constraints: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;include at most </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">max_cites</span><span class="si">}</span><span class="s2"> citations; &quot;</span>
+            <span class="s2">&quot;refuse medical/legal advice; &quot;</span>
+            <span class="s2">&quot;if info is missing, ask one targeted question; &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;return &#39;confidence&#39; between </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">confidence_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">confidence_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">tenant_hint</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tenant: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">tenant_hint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">corrective</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correction: </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">corrective</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span>
+<span class="s2">&quot;.join(parts)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------</span>
+<span class="n">chat_handler</span><span class="o">.</span><span class="n">py</span>
+<span class="c1"># ------------</span>
+
+<span class="c1"># An Example of a chat handler which composes the turn instruction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">steering</span><span class="w"> </span><span class="kn">import</span> <span class="n">SteeringInputs</span><span class="p">,</span> <span class="n">build_turn_instruction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="c1"># agent imported from app_startup.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">route_intent</span><span class="p">(</span><span class="n">user_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">user_message</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;compare&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;compare&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;list&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;control&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;list_controls&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;summarize&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;summarize&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;answer&quot;</span>
+
+<span class="n">INTENT_TO_GOAL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;summarize&quot;</span><span class="p">:</span> <span class="s2">&quot;Summarize ACME-42 in plain English.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;list_controls&quot;</span><span class="p">:</span> <span class="s2">&quot;List mandatory controls from ACME-42 with one-line rationales.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compare&quot;</span><span class="p">:</span> <span class="s2">&quot;Compare ACME-42 to ISO 27001 at a high level, return a short markdown table inside the JSON &#39;answer&#39;.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer the user directly.&quot;</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ui_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">intent</span> <span class="o">=</span> <span class="n">route_intent</span><span class="p">(</span><span class="n">user_message</span><span class="p">)</span>
+    <span class="n">goal</span> <span class="o">=</span> <span class="n">INTENT_TO_GOAL</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">intent</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Answer the user: </span><span class="si">{</span><span class="n">user_message</span><span class="p">[:</span><span class="mi">120</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">style</span> <span class="o">=</span> <span class="n">ui_style</span> <span class="ow">or</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="s2">&quot;style&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;concise&quot;</span><span class="p">)</span>
+    <span class="n">max_cites</span> <span class="o">=</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="s2">&quot;max_citations&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">tenant_hint</span> <span class="o">=</span> <span class="n">get_tenant_hint</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>     <span class="c1"># e.g., &quot;EU employees only&quot; or None</span>
+    <span class="n">corrective</span> <span class="o">=</span> <span class="n">get_last_validation_error</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>  <span class="c1"># None or short string</span>
+
+    <span class="n">turn_instruction</span> <span class="o">=</span> <span class="n">build_turn_instruction</span><span class="p">(</span>
+        <span class="n">SteeringInputs</span><span class="p">(</span>
+            <span class="n">goal</span><span class="o">=</span><span class="n">goal</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">max_cites</span><span class="o">=</span><span class="n">max_cites</span><span class="p">,</span>
+            <span class="n">tenant_hint</span><span class="o">=</span><span class="n">tenant_hint</span><span class="p">,</span>
+            <span class="n">corrective</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your last reply failed validation: </span><span class="si">{</span><span class="n">corrective</span><span class="si">}</span><span class="s2">. Fix it this turn.&quot;</span> <span class="k">if</span> <span class="n">corrective</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">turn_instruction</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">user_message</span><span class="o">=</span><span class="n">user_message</span><span class="p">)</span>
+    <span class="n">validate_and_record</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>     <span class="c1"># optional schema check + feedback</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<section id="policy-agent-in-action">
+<h3>Policy agent in action<a class="headerlink" href="#policy-agent-in-action" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/Policy_Agent.png" /></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../02.BigQuery_Agent_MCP/" class="btn btn-neutral float-left" title="Building a BigQuery &amp; Google Maps Agent with Google ADK &amp; MCP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../04.Context_caching_and_compaction/" class="btn btn-neutral float-right" title="Context Caching &amp; Compaction in Google ADK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

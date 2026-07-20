@@ -1,0 +1,1109 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study &mdash; Learn LLMs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_lesson.css?v=e9df6548" />
+      <link rel="stylesheet" type="text/css" href="../../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=35a8b989"></script>
+      <script src="../../_static/minipres.js?v=a0d29692"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="prev" title="Context Engineering for Stateful AI Agents" href="../03.Context_Engineering/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            Learn LLMs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building Blocks of GPT-2 LLM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/0.Introduction/">Introduction - Building Blocks of GPT-2 LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/01.LLM_intro/">Introduction to Large Language Models (LLMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/02.GPT_intro/">GPT - Generative Pretrained Transformer model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/03.tokenizer/">Introduction to tokenization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/04.Embeddings/">Introduction to embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/05.Transformer_block/">Transformer blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/06.Attention_mechanism/">Self-attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/07.masked_attention/">Masked Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/08.Multihead-attention/">Multi-head self-attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/09.FNN/">Feedforward neural network (FNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10.LM_head/">Language Modeling Head (LM Head)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/10_1.LLM-end-to-end/">Pre-trained GPT-2 model end to end</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/11.LLM_dataflow/">Dataflow across LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GPT-2_LLM/quick-reference/">Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecting Autonomous Systems</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0.Introduction/">Introduction - Architecting Autonomous Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01.Foundations_of_Agentic_Architectures/">Foundations of AI Agentic Architectures and Production Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02.Agent_AI Agent_Interoperability_MCP/">AI Agent Interoperability and MCP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03.Context_Engineering/">Context Engineering for Stateful AI Agents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-1-core-anatomy-and-taxonomy-of-agents">Part 1: Core Anatomy and Taxonomy of Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-an-agent">What Is an Agent?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-agent-s-operational-loop">The Agent’s Operational Loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phase-1-context-preparation-before-agent">Phase 1: Context Preparation (Before Agent)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase-2-agent-reasoning-core-loop">Phase 2: Agent Reasoning (Core Loop)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase-3-tool-execution-tool-integration">Phase 3: Tool Execution (Tool Integration)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase-4-state-persistence-after-agent">Phase 4: State Persistence (After Agent)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-loop-diagram">Complete Loop Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#taxonomy-of-capabilities">Taxonomy of Capabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#observation-perception">1. Observation (Perception)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action-effecting-state">2. Action (Effecting State)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#communication-expression">3. Communication (Expression)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-persistent-knowledge">4. Memory (Persistent Knowledge)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tool-integration-external-capabilities">5. Tool Integration (External Capabilities)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-2-tools-interoperability-and-the-model-context-protocol-mcp">Part 2: Tools, Interoperability, and the Model Context Protocol (MCP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-tools">What Are Tools?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tool-categories-in-our-implementation">Tool Categories in Our Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tool-design-best-practices">Tool Design Best Practices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-responsibility-principle">1. <strong>Single Responsibility Principle</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clear-input-contracts">2. <strong>Clear Input Contracts</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predictable-output-contracts">3. <strong>Predictable Output Contracts</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#explicit-error-handling">4. <strong>Explicit Error Handling</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#state-locality">5. <strong>State Locality</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-model-context-protocol-mcp-architecture">The Model Context Protocol (MCP) Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-mcp">Why MCP?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-mcp-works-in-our-agent">How MCP Works in Our Agent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcp-component-architecture">MCP Component Architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcp-benefits">MCP Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-primitives-and-transport">Technical Primitives and Transport</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transport-stdio-based-json-rpc">Transport: Stdio-Based JSON-RPC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tool-definition-format">Tool Definition Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-3-context-engineering-sessions-and-persistent-memory">Part 3: Context Engineering – Sessions and Persistent Memory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-context">What Is Context?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#session-management">Session Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-a-session">What Is a Session?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-sessions-store-state">How Sessions Store State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#session-state-schema">Session State Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#retrieving-session-state">Retrieving Session State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-architectures">Memory Architectures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tier-1-short-term-memory-session-state">Tier 1: Short-Term Memory (Session State)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tier-2-long-term-memory-persistent-storage">Tier 2: Long-Term Memory (Persistent Storage)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-lifecycle">Memory Lifecycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-memory-informs-behavior">How Memory Informs Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-search-vs-full-retrieval">Memory Search vs. Full Retrieval</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#practical-memory-example-the-learning-journey">Practical Memory Example: The Learning Journey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-4-integration-patterns">Part 4: Integration Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pattern-1-dynamic-instruction-generation">Pattern 1: Dynamic Instruction Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pattern-2-callback-driven-state-management">Pattern 2: Callback-Driven State Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pattern-3-tool-based-state-mutation">Pattern 3: Tool-Based State Mutation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pattern-4-memory-informed-adaptation">Pattern 4: Memory-Informed Adaptation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-the-complete-picture">Summary: The Complete Picture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-agent-stack">The Agent Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">Learn LLMs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pubudusaneth/learn_llm/blob/main/content/Agentic_Architectures/04.Agent_Development_Guide.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="agent-development-guide-using-a-norwegian-language-learning-agent-as-a-case-study">
+<h1>Agent Development Guide: Using a Norwegian Language Learning Agent as a Case Study<a class="headerlink" href="#agent-development-guide-using-a-norwegian-language-learning-agent-as-a-case-study" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This guide explains core concepts in agent development using a real-world implementation: a Norwegian language learning agent built with the Google Agent Development Kit (ADK). The agent orchestrates interactive language practice scenarios, manages user state across sessions, and integrates external tools through the Model Context Protocol.</p>
+</section>
+<section id="part-1-core-anatomy-and-taxonomy-of-agents">
+<h2>Part 1: Core Anatomy and Taxonomy of Agents<a class="headerlink" href="#part-1-core-anatomy-and-taxonomy-of-agents" title="Link to this heading"></a></h2>
+<section id="what-is-an-agent">
+<h3>What Is an Agent?<a class="headerlink" href="#what-is-an-agent" title="Link to this heading"></a></h3>
+<p>An agent is a software system that autonomously perceives its environment, reasons about goals, and takes actions to achieve those goals. Agents operate in a loop: <strong>perceive → reason → act → perceive again</strong>.</p>
+</section>
+<section id="the-agent-s-operational-loop">
+<h3>The Agent’s Operational Loop<a class="headerlink" href="#the-agent-s-operational-loop" title="Link to this heading"></a></h3>
+<p>The agent’s operational loop consists of four phases:</p>
+<section id="phase-1-context-preparation-before-agent">
+<h4>Phase 1: Context Preparation (Before Agent)<a class="headerlink" href="#phase-1-context-preparation-before-agent" title="Link to this heading"></a></h4>
+<p>Before the agent processes any input, it prepares its context:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py: on_before_agent callback</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_before_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+    <span class="n">scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+
+    <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="c1"># Search memory for personalization</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">scenario_id</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">memories</span> <span class="ow">and</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">:</span>
+                <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Kontekst fra tidligere samtaler:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]:</span>
+                    <span class="n">memory_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">...</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="c1"># Dynamically build instruction based on state</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+        <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">new_instruction</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+</pre></div>
+</div>
+<p><strong>What happens here:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>State Retrieval</strong>: The agent accesses persisted session state (current scenario, words practiced, exchange count)</p></li>
+<li><p><strong>Memory Search</strong>: It queries the memory service for past interactions to provide context-aware personalization</p></li>
+<li><p><strong>Dynamic Instruction Building</strong>: The system instruction is reconstructed based on current state, not static</p></li>
+</ol>
+<p><strong>Why this matters:</strong></p>
+<ul class="simple">
+<li><p>The agent’s behavior is context-aware, not one-size-fits-all</p></li>
+<li><p>Session continuity is maintained across conversations</p></li>
+<li><p>The agent’s instruction set evolves based on user progress</p></li>
+</ul>
+</section>
+<section id="phase-2-agent-reasoning-core-loop">
+<h4>Phase 2: Agent Reasoning (Core Loop)<a class="headerlink" href="#phase-2-agent-reasoning-core-loop" title="Link to this heading"></a></h4>
+<p>The agent receives user input, applies tools to gather information, and generates a response:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;norsk_agent&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">instruction</span><span class="o">=</span><span class="n">SYSTEM_INSTRUCTION</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">list_scenarios</span><span class="p">,</span> <span class="n">select_scenario</span><span class="p">,</span> <span class="n">get_vocabulary</span><span class="p">,</span>
+           <span class="n">mark_word_practiced</span><span class="p">,</span> <span class="n">get_progress</span><span class="p">,</span> <span class="n">end_scenario</span><span class="p">,</span>
+           <span class="n">get_user_profile</span><span class="p">,</span> <span class="n">mcp_toolset</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>The internal loop:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Observe</strong>: Receive user utterance (“Jeg vil velge kafé-scenarioet”)</p></li>
+<li><p><strong>Plan</strong>: Reason about which tools to use (e.g., <code class="docutils literal notranslate"><span class="pre">select_scenario</span></code>)</p></li>
+<li><p><strong>Act</strong>: Call the tool with appropriate arguments</p></li>
+<li><p><strong>Observe</strong>: Receive tool output with scenario details</p></li>
+<li><p><strong>Generate</strong>: Compose response based on tool results</p></li>
+</ol>
+</section>
+<section id="phase-3-tool-execution-tool-integration">
+<h4>Phase 3: Tool Execution (Tool Integration)<a class="headerlink" href="#phase-3-tool-execution-tool-integration" title="Link to this heading"></a></h4>
+<p>The agent invokes tools to affect state or retrieve information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example tool call sequence:</span>
+<span class="c1"># User: &quot;Jeg vil velge kafé-scenarioet&quot;</span>
+<span class="c1"># Agent reasoning: &quot;User wants cafe scenario → call select_scenario(&#39;cafe&#39;)&quot;</span>
+<span class="c1"># Tool execution (tools.py):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kjenner ikke til scenarioet &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+
+    <span class="c1"># Modify state</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Return result</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;persona&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;opening_line&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>State mutation happens here</strong>: The agent’s tools modify session state directly.</p>
+</section>
+<section id="phase-4-state-persistence-after-agent">
+<h4>Phase 4: State Persistence (After Agent)<a class="headerlink" href="#phase-4-state-persistence-after-agent" title="Link to this heading"></a></h4>
+<p>After generating a response, the agent persists relevant information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py: on_after_agent callback</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_after_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># Add current session to long-term memory</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">add_session_to_memory</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>What happens:</strong></p>
+<ol class="arabic simple">
+<li><p>Exchange counter is incremented (used to track conversation depth)</p></li>
+<li><p>The entire session is serialized to long-term memory</p></li>
+<li><p>Future conversations can query this memory for context</p></li>
+</ol>
+</section>
+</section>
+<section id="complete-loop-diagram">
+<h3>Complete Loop Diagram<a class="headerlink" href="#complete-loop-diagram" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>User Input
+    ↓
+[1] on_before_agent()
+    ├─ Retrieve session state
+    ├─ Query memory for personalization
+    └─ Rebuild dynamic instruction
+    ↓
+[2] Agent Reasoning
+    ├─ Observe: Parse user intent
+    ├─ Plan: Decide which tools to call
+    ├─ Act: Execute tools
+    └─ Generate: Create response
+    ↓
+[3] Tool Execution
+    ├─ Modify state (active_scenario_id, words_practiced, etc.)
+    └─ Return results to agent
+    ↓
+[4] on_after_agent()
+    ├─ Increment exchange counter
+    └─ Persist session to memory
+    ↓
+Response to User
+</pre></div>
+</div>
+</section>
+<section id="taxonomy-of-capabilities">
+<h3>Taxonomy of Capabilities<a class="headerlink" href="#taxonomy-of-capabilities" title="Link to this heading"></a></h3>
+<p>Agent capabilities fall into distinct categories:</p>
+<section id="observation-perception">
+<h4>1. Observation (Perception)<a class="headerlink" href="#observation-perception" title="Link to this heading"></a></h4>
+<p><strong>How the agent perceives its environment:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 1: Access to session state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+<span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+<span class="n">words_practiced</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">exchange_count</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The agent observes:</p>
+<ul class="simple">
+<li><p>Current scenario ID</p></li>
+<li><p>Words practiced in this session</p></li>
+<li><p>Number of exchanges (conversation depth)</p></li>
+<li><p>User’s cross-session profile (completed scenarios, weak words)</p></li>
+</ul>
+</section>
+<section id="action-effecting-state">
+<h4>2. Action (Effecting State)<a class="headerlink" href="#action-effecting-state" title="Link to this heading"></a></h4>
+<p><strong>How the agent affects its environment:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 2: Direct state mutation through tools</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">if</span> <span class="n">correct</span> <span class="ow">and</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">practiced</span><span class="p">:</span>
+        <span class="n">practiced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span>  <span class="c1"># ← State mutation</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Flott! &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; er markert som lært.&quot;</span>
+</pre></div>
+</div>
+<p>The agent can:</p>
+<ul class="simple">
+<li><p>Change the active scenario</p></li>
+<li><p>Mark words as learned</p></li>
+<li><p>Update user profiles</p></li>
+<li><p>Track progress</p></li>
+</ul>
+</section>
+<section id="communication-expression">
+<h4>3. Communication (Expression)<a class="headerlink" href="#communication-expression" title="Link to this heading"></a></h4>
+<p><strong>How the agent expresses itself:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 3: Natural language generation constrained by instruction</span>
+<span class="n">SYSTEM_INSTRUCTION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Du er en vennlig og tålmodig norsk språkpartner.</span>
+<span class="s2">Bruk alltid norsk.</span>
+<span class="s2">Hold svarene dine svært korte (1-2 små setninger).</span>
+<span class="s2">Dersom brukeren gjør grammatikkfeil, gi en rask og vennlig korreksjon.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The agent is instructed to:</p>
+<ul class="simple">
+<li><p>Speak only Norwegian</p></li>
+<li><p>Keep responses short (1-2 sentences)</p></li>
+<li><p>Provide gentle corrections</p></li>
+<li><p>Adapt persona based on scenario</p></li>
+</ul>
+</section>
+<section id="memory-persistent-knowledge">
+<h4>4. Memory (Persistent Knowledge)<a class="headerlink" href="#memory-persistent-knowledge" title="Link to this heading"></a></h4>
+<p><strong>How the agent remembers:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 4: Long-term memory retrieval and storage</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="c1"># Can query for:</span>
+<span class="c1"># - Completed scenarios</span>
+<span class="c1"># - Weak words (weak_words list)</span>
+<span class="c1"># - Past interactions</span>
+</pre></div>
+</div>
+<p>The agent remembers:</p>
+<ul class="simple">
+<li><p>Which scenarios have been completed</p></li>
+<li><p>Words the user struggles with</p></li>
+<li><p>The trajectory of learning progress</p></li>
+</ul>
+</section>
+<section id="tool-integration-external-capabilities">
+<h4>5. Tool Integration (External Capabilities)<a class="headerlink" href="#tool-integration-external-capabilities" title="Link to this heading"></a></h4>
+<p><strong>How the agent extends itself:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capability 5: Call external tools</span>
+<span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">list_scenarios</span><span class="p">,</span> <span class="n">select_scenario</span><span class="p">,</span> <span class="n">get_vocabulary</span><span class="p">,</span>
+       <span class="n">mark_word_practiced</span><span class="p">,</span> <span class="n">get_progress</span><span class="p">,</span> <span class="n">end_scenario</span><span class="p">,</span>
+       <span class="n">get_user_profile</span><span class="p">,</span> <span class="n">mcp_toolset</span><span class="p">]</span>
+
+<span class="c1"># Including MCP-integrated tools:</span>
+<span class="n">mcp_toolset</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span>
+    <span class="n">connection_params</span><span class="o">=</span><span class="n">StdioServerParameters</span><span class="p">(</span>
+        <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;mcp_vocab_server.py&quot;</span><span class="p">],</span>
+    <span class="p">),</span>
+    <span class="n">use_mcp_resources</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The agent integrates:</p>
+<ul class="simple">
+<li><p>Local tools (scenario management, progress tracking)</p></li>
+<li><p>External MCP services (vocabulary lookup from external registry)</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="part-2-tools-interoperability-and-the-model-context-protocol-mcp">
+<h2>Part 2: Tools, Interoperability, and the Model Context Protocol (MCP)<a class="headerlink" href="#part-2-tools-interoperability-and-the-model-context-protocol-mcp" title="Link to this heading"></a></h2>
+<section id="what-are-tools">
+<h3>What Are Tools?<a class="headerlink" href="#what-are-tools" title="Link to this heading"></a></h3>
+<p>Tools are functions that agents can invoke to interact with their environment. They are the agent’s “hands” for affecting the world.</p>
+<section id="tool-categories-in-our-implementation">
+<h4>Tool Categories in Our Implementation<a class="headerlink" href="#tool-categories-in-our-implementation" title="Link to this heading"></a></h4>
+<p><strong>Category 1: State Management Tools</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Changes the active scenario and resets scenario-specific state.&quot;&quot;&quot;</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><strong>Category 2: Observation Tools</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_progress</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Queries current progress without modifying state.&quot;&quot;&quot;</span>
+    <span class="n">active_scenario_id</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">total_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;practiced_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">practiced</span><span class="p">),</span>
+        <span class="s2">&quot;total_words&quot;</span><span class="p">:</span> <span class="n">total_words</span><span class="p">,</span>
+        <span class="s2">&quot;completion_percentage&quot;</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">practiced</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_words</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Category 3: Complex Multi-Step Tools</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">end_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orchestrates scenario completion, including state analysis and memory updates.&quot;&quot;&quot;</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">active_scenario_id</span><span class="p">]</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">words_practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="c1"># Calculate weak words</span>
+    <span class="n">target_words</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;norwegian&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">}</span>
+    <span class="n">practiced_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words_practiced</span><span class="p">)</span>
+    <span class="n">weak_words</span> <span class="o">=</span> <span class="n">target_words</span> <span class="o">-</span> <span class="n">practiced_set</span>
+
+    <span class="c1"># Update cross-session profile</span>
+    <span class="n">all_weak_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">all_weak_words</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">weak_words</span><span class="p">)</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_weak_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tool-design-best-practices">
+<h3>Tool Design Best Practices<a class="headerlink" href="#tool-design-best-practices" title="Link to this heading"></a></h3>
+<section id="single-responsibility-principle">
+<h4>1. <strong>Single Responsibility Principle</strong><a class="headerlink" href="#single-responsibility-principle" title="Link to this heading"></a></h4>
+<p>Each tool does one thing well:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Focused tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vocabulary</span><span class="p">(</span><span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns vocabulary for a scenario. No side effects.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Cannot find vocabulary for &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">:</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">]}</span>
+
+<span class="c1"># ✗ BAD: Mixing concerns</span>
+<span class="c1"># def get_vocabulary_and_mark_practiced(scenario_id, word, correct):</span>
+<span class="c1">#     &quot;Violates single responsibility - does two things&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="clear-input-contracts">
+<h4>2. <strong>Clear Input Contracts</strong><a class="headerlink" href="#clear-input-contracts" title="Link to this heading"></a></h4>
+<p>Define exactly what parameters are needed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span>
+    <span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span>      <span class="c1"># Always include context for state access</span>
+    <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>                  <span class="c1"># The vocabulary word</span>
+    <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span>               <span class="c1"># Whether user used it correctly</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clear inputs, clear purpose.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="predictable-output-contracts">
+<h4>3. <strong>Predictable Output Contracts</strong><a class="headerlink" href="#predictable-output-contracts" title="Link to this heading"></a></h4>
+<p>Tools always return a consistent structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Consistent return types</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;title_no&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;title_no&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;persona&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;opening_line&quot;</span><span class="p">:</span> <span class="n">scenario</span><span class="p">[</span><span class="s2">&quot;opening_line&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1"># or error:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">}</span>
+
+<span class="c1"># ✗ BAD: Unpredictable returns</span>
+<span class="c1"># def select_scenario(...):</span>
+<span class="c1">#     if ok: return scenario</span>
+<span class="c1">#     else: return None  # Inconsistent!</span>
+</pre></div>
+</div>
+</section>
+<section id="explicit-error-handling">
+<h4>4. <strong>Explicit Error Handling</strong><a class="headerlink" href="#explicit-error-handling" title="Link to this heading"></a></h4>
+<p>Tools should not crash; they return error information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beklager, jeg kjenner ikke til scenarioet &#39;</span><span class="si">{</span><span class="n">scenario_id</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">}</span>
+    <span class="c1"># Happy path follows</span>
+</pre></div>
+</div>
+</section>
+<section id="state-locality">
+<h4>5. <strong>State Locality</strong><a class="headerlink" href="#state-locality" title="Link to this heading"></a></h4>
+<p>Tools access and modify state through the provided context, not global variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: State through context</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="c1"># ✗ BAD: Global state</span>
+<span class="c1"># GLOBAL_STATE = {}</span>
+<span class="c1"># def mark_word_practiced(word, correct):</span>
+<span class="c1">#     GLOBAL_STATE[&quot;words_practiced&quot;] = ...  # Hard to trace!</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-model-context-protocol-mcp-architecture">
+<h3>The Model Context Protocol (MCP) Architecture<a class="headerlink" href="#the-model-context-protocol-mcp-architecture" title="Link to this heading"></a></h3>
+<p>MCP is a standardized protocol for agents to discover and invoke tools provided by external services.</p>
+<section id="why-mcp">
+<h4>Why MCP?<a class="headerlink" href="#why-mcp" title="Link to this heading"></a></h4>
+<p>In our language learning agent, we need to:</p>
+<ol class="arabic simple">
+<li><p>Look up word definitions in an external vocabulary registry</p></li>
+<li><p>Integrate without hardcoding dependencies</p></li>
+<li><p>Allow the vocabulary service to be replaced or updated independently</p></li>
+</ol>
+<p><strong>Solution: MCP</strong></p>
+</section>
+<section id="how-mcp-works-in-our-agent">
+<h4>How MCP Works in Our Agent<a class="headerlink" href="#how-mcp-works-in-our-agent" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From agent.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">StdioServerParameters</span>
+
+<span class="n">mcp_toolset</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span>
+    <span class="n">connection_params</span><span class="o">=</span><span class="n">StdioServerParameters</span><span class="p">(</span>
+        <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>  <span class="c1"># Package manager (Python environment)</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="s2">&quot;mcp_vocab_server.py&quot;</span><span class="p">)],</span>
+    <span class="p">),</span>
+    <span class="n">use_mcp_resources</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Enable resource discovery</span>
+<span class="p">)</span>
+
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">mcp_toolset</span><span class="p">]</span>  <span class="c1"># MCP tools mixed with local tools</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>What’s happening:</strong></p>
+<ol class="arabic simple">
+<li><p>The agent declares an MCP connection to a vocabulary service</p></li>
+<li><p>The service runs as a separate process (stdio-based communication)</p></li>
+<li><p>At runtime, the agent discovers what tools the service provides</p></li>
+<li><p>The agent can call those tools as if they were local</p></li>
+</ol>
+</section>
+<section id="mcp-component-architecture">
+<h4>MCP Component Architecture<a class="headerlink" href="#mcp-component-architecture" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Agent Process
+    │
+    ├─ Local Tools (list_scenarios, select_scenario, etc.)
+    │
+    └─ MCP Toolset
+        │
+        └─ Stdio Connection
+            │
+            ↕ JSON-RPC Protocol
+            │
+        External MCP Server (mcp_vocab_server.py)
+            │
+            ├─ lookup_word tool
+            ├─ search_dictionary tool
+            └─ get_examples tool
+</pre></div>
+</div>
+</section>
+<section id="mcp-benefits">
+<h4>MCP Benefits<a class="headerlink" href="#mcp-benefits" title="Link to this heading"></a></h4>
+<p><strong>Decoupling</strong>: The agent doesn’t depend on vocabulary service internals</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Agent just calls it</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="o">.</span><span class="n">call_tool</span><span class="p">(</span><span class="s2">&quot;lookup_word&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;kaffee&quot;</span><span class="p">})</span>
+<span class="c1"># Service can change implementation without agent knowing</span>
+</pre></div>
+</div>
+<p><strong>Composability</strong>: Multiple MCP servers can be chained</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mcp_toolset1</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span><span class="n">connection_params</span><span class="o">=</span><span class="n">vocab_server</span><span class="p">)</span>
+<span class="n">mcp_toolset2</span> <span class="o">=</span> <span class="n">McpToolset</span><span class="p">(</span><span class="n">connection_params</span><span class="o">=</span><span class="n">pronunciation_server</span><span class="p">)</span>
+<span class="n">root_agent</span> <span class="o">=</span> <span class="n">LlmAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">mcp_toolset1</span><span class="p">,</span> <span class="n">mcp_toolset2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Isolation</strong>: Service failures don’t crash the agent</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c1"># Graceful degradation</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="technical-primitives-and-transport">
+<h3>Technical Primitives and Transport<a class="headerlink" href="#technical-primitives-and-transport" title="Link to this heading"></a></h3>
+<section id="transport-stdio-based-json-rpc">
+<h4>Transport: Stdio-Based JSON-RPC<a class="headerlink" href="#transport-stdio-based-json-rpc" title="Link to this heading"></a></h4>
+<p>Our MCP uses stdio for communication:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StdioServerParameters</span><span class="p">(</span>
+    <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;mcp_vocab_server.py&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Message flow:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Agent writes JSON to server&#39;s stdin:
+{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;method&quot;: &quot;lookup_word&quot;, &quot;params&quot;: {&quot;word&quot;: &quot;kaffe&quot;}}
+    ↓
+Server processes, writes JSON to stdout:
+{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: {&quot;definition&quot;: &quot;a beverage...&quot;}}
+    ↓
+Agent parses response and continues
+</pre></div>
+</div>
+</section>
+<section id="tool-definition-format">
+<h4>Tool Definition Format<a class="headerlink" href="#tool-definition-format" title="Link to this heading"></a></h4>
+<p>Tools are discovered via the MCP protocol. Each tool has:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;lookup_word&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Look up a word in the external vocabulary registry&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;inputSchema&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;word&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The word to look up&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;required&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The agent uses this schema to:</p>
+<ol class="arabic simple">
+<li><p>Know what tools are available</p></li>
+<li><p>Understand parameter requirements</p></li>
+<li><p>Generate appropriate tool calls</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="part-3-context-engineering-sessions-and-persistent-memory">
+<h2>Part 3: Context Engineering – Sessions and Persistent Memory<a class="headerlink" href="#part-3-context-engineering-sessions-and-persistent-memory" title="Link to this heading"></a></h2>
+<section id="what-is-context">
+<h3>What Is Context?<a class="headerlink" href="#what-is-context" title="Link to this heading"></a></h3>
+<p>Context is the complete information the agent needs to make decisions. It includes:</p>
+<ul class="simple">
+<li><p><strong>Immediate context</strong>: Current conversation, active scenario</p></li>
+<li><p><strong>Session context</strong>: User’s state within one session</p></li>
+<li><p><strong>Long-term context</strong>: User’s profile across sessions</p></li>
+</ul>
+</section>
+<section id="session-management">
+<h3>Session Management<a class="headerlink" href="#session-management" title="Link to this heading"></a></h3>
+<section id="what-is-a-session">
+<h4>What Is a Session?<a class="headerlink" href="#what-is-a-session" title="Link to this heading"></a></h4>
+<p>A session represents one continuous interaction between user and agent:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">session_service</span> <span class="o">=</span> <span class="n">SqliteSessionService</span><span class="p">(</span><span class="s2">&quot;sessions.db&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sessions are:</p>
+<ul class="simple">
+<li><p><strong>Persistent</strong>: Stored in a database</p></li>
+<li><p><strong>Isolated</strong>: One user, one conversation thread</p></li>
+<li><p><strong>Stateful</strong>: Maintain variables that evolve during the conversation</p></li>
+</ul>
+</section>
+<section id="how-sessions-store-state">
+<h4>How Sessions Store State<a class="headerlink" href="#how-sessions-store-state" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In tools.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_scenario</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">scenario_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="c1"># These go into session state</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_id</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># In agent.py - on_after_agent callback</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_after_agent</span><span class="p">(</span><span class="n">callback_context</span><span class="p">:</span> <span class="n">CallbackContext</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;exchange_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Persisted</span>
+</pre></div>
+</div>
+</section>
+<section id="session-state-schema">
+<h4>Session State Schema<a class="headerlink" href="#session-state-schema" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span> <span class="n">State</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;active_scenario_id&quot;</span><span class="p">:</span> <span class="s2">&quot;cafe&quot;</span><span class="p">,</span>           <span class="c1"># Current practice scenario</span>
+  <span class="s2">&quot;words_practiced&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;en kaffe&quot;</span><span class="p">,</span> <span class="s2">&quot;å betale&quot;</span><span class="p">],</span>  <span class="c1"># Words learned this session</span>
+  <span class="s2">&quot;exchange_count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>                    <span class="c1"># Number of turns in conversation</span>
+
+  <span class="c1"># Cross-session profile</span>
+  <span class="s2">&quot;user:completed_scenarios&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;user:weak_words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;kort eller kontant?&quot;</span><span class="p">,</span> <span class="s2">&quot;heisen&quot;</span><span class="p">],</span>
+
+  <span class="c1"># Additional context</span>
+  <span class="s2">&quot;user:preferred_difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;intermediate&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="retrieving-session-state">
+<h4>Retrieving Session State<a class="headerlink" href="#retrieving-session-state" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In on_before_agent</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">state</span>
+<span class="n">scenario_id</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+<span class="n">words_practiced</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+<span class="c1"># Used to build dynamic instruction</span>
+<span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="memory-architectures">
+<h3>Memory Architectures<a class="headerlink" href="#memory-architectures" title="Link to this heading"></a></h3>
+<p>Our agent uses <strong>two-tier memory</strong>:</p>
+<section id="tier-1-short-term-memory-session-state">
+<h4>Tier 1: Short-Term Memory (Session State)<a class="headerlink" href="#tier-1-short-term-memory-session-state" title="Link to this heading"></a></h4>
+<p><strong>Scope</strong>: Current conversation only
+<strong>Capacity</strong>: Small (dictionary)
+<strong>Retrieval</strong>: Instant (in-memory access)
+<strong>Content</strong>: Active scenario, current words practiced, exchange count</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessed every turn</span>
+<span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;active_scenario_id&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tier-2-long-term-memory-persistent-storage">
+<h4>Tier 2: Long-Term Memory (Persistent Storage)<a class="headerlink" href="#tier-2-long-term-memory-persistent-storage" title="Link to this heading"></a></h4>
+<p><strong>Scope</strong>: Across all sessions
+<strong>Capacity</strong>: Large (database)
+<strong>Retrieval</strong>: On-demand (memory search)
+<strong>Content</strong>: Completed scenarios, weak words, interaction history</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From on_before_agent</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">memories</span> <span class="ow">and</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">:</span>
+    <span class="n">memory_info</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Kontekst fra tidligere samtaler:</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]:</span>  <span class="c1"># Last 3 memories</span>
+        <span class="n">memory_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">...</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="memory-lifecycle">
+<h4>Memory Lifecycle<a class="headerlink" href="#memory-lifecycle" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Turn 1 of Session A:
+    ├─ Short-term: empty
+    ├─ Long-term: search for past completions
+    └─ Add personalization to instruction
+
+Turn 2 of Session A:
+    ├─ Short-term: words_practiced = [&quot;en kaffe&quot;]
+    └─ Update persists in session
+
+Turn 3 of Session A:
+    ├─ on_after_agent: serialize session to memory
+    ├─ Long-term: &quot;User practiced scenario:cafe, learned 1 words&quot;
+    └─ Memory serves future sessions
+
+Session B (next day):
+    ├─ Short-term: reset (new session)
+    ├─ Long-term: &quot;User completed cafe scenario before&quot;
+    └─ Memory retrieval enables personalization (&quot;Glad to see you back!&quot;)
+</pre></div>
+</div>
+</section>
+<section id="how-memory-informs-behavior">
+<h4>How Memory Informs Behavior<a class="headerlink" href="#how-memory-informs-behavior" title="Link to this heading"></a></h4>
+<p><strong>Dynamic Instruction Building Using Memory</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From prompts.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">weak_words</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user:weak_words&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="c1"># Memory informs instruction</span>
+    <span class="k">if</span> <span class="n">weak_words</span><span class="p">:</span>
+        <span class="n">instruction</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;VIKTIG: In previous conversations, the user struggled with: </span><span class="si">{</span><span class="n">weak_words</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">instruction</span> <span class="o">+=</span> <span class="s2">&quot;Try to incorporate them into the conversation.</span><span class="se">\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>The instruction evolves based on:</p>
+<ol class="arabic simple">
+<li><p><strong>Immediate session state</strong> (active scenario)</p></li>
+<li><p><strong>Long-term memory</strong> (weak words from past attempts)</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Session 1:
+  User struggles with: &quot;kort eller kontant?&quot; (card or cash?)
+  → Stored in memory as weak_word
+
+Session 2 (next day):
+  on_before_agent loads memory
+  build_instruction includes: &quot;Try to use &#39;kort eller kontant?&#39; in conversation&quot;
+  → Agent naturally steers conversation to practice this phrase
+</pre></div>
+</div>
+</section>
+<section id="memory-search-vs-full-retrieval">
+<h4>Memory Search vs. Full Retrieval<a class="headerlink" href="#memory-search-vs-full-retrieval" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selective retrieval - only get relevant memories</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="c1"># Instead of: all_memories = memory_service.get_all()</span>
+
+<span class="c1"># Filter by recency</span>
+<span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="o">.</span><span class="n">memories</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]:</span>  <span class="c1"># Last 3 only</span>
+    <span class="n">memory_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="o">...</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p><strong>Efficiency</strong>: Only relevant memories retrieved</p></li>
+<li><p><strong>Relevance</strong>: Recent memories prioritized</p></li>
+<li><p><strong>Scalability</strong>: System works with large memory stores</p></li>
+</ul>
+</section>
+</section>
+<section id="practical-memory-example-the-learning-journey">
+<h3>Practical Memory Example: The Learning Journey<a class="headerlink" href="#practical-memory-example-the-learning-journey" title="Link to this heading"></a></h3>
+<p>Let’s trace how memory enables adaptive learning across sessions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>DAY 1 - Session 1:
+┌─ User selects &quot;café&quot; scenario
+├─ on_before_agent: no memory (first time)
+│  └─ Instruction: basic introduction
+├─ Conversation: user practices 8/12 words
+│  └─ Weak: &quot;kort eller kontant?&quot;, &quot;kvittering&quot;
+├─ on_after_agent: session → memory
+│  └─ Memory: &quot;completed scenario:cafe, weak_words: [...]&quot;
+└─ Session ends
+
+DAY 2 - Session 2:
+┌─ User starts fresh (new session)
+├─ on_before_agent: search memory &quot;scenario fullført&quot;
+│  ├─ Found: &quot;User completed café scenario&quot;
+│  └─ Instruction += &quot;Context: User has practiced café before.\n&quot;
+│  └─ Instruction += &quot;Try to use: &#39;kort eller kontant?&#39;, &#39;kvittering&#39;\n&quot;
+├─ Conversation: agent naturally steers toward weak words
+│  └─ Agent: &quot;Hvordan vil du betale – kort eller kontant?&quot;
+│  └─ User: &quot;Kort, takk!&quot;
+│  └─ weak_words now practiced!
+├─ on_after_agent: updated memory
+│  └─ Memory: weak_words reduced, user profile updated
+└─ Session ends
+
+DAY 7 - Session 3:
+┌─ User tries &quot;hotel&quot; scenario
+├─ on_before_agent: search memory for context
+│  ├─ Found: &quot;User completed café, weak words practiced&quot;
+│  └─ Instruction += &quot;User is advancing to new scenario\n&quot;
+│  └─ Instruction += &quot;Build on café vocabulary where it applies\n&quot;
+├─ Conversation: new scenario with continuity
+└─ Session ends
+</pre></div>
+</div>
+</section>
+</section>
+<section id="part-4-integration-patterns">
+<h2>Part 4: Integration Patterns<a class="headerlink" href="#part-4-integration-patterns" title="Link to this heading"></a></h2>
+<section id="pattern-1-dynamic-instruction-generation">
+<h3>Pattern 1: Dynamic Instruction Generation<a class="headerlink" href="#pattern-1-dynamic-instruction-generation" title="Link to this heading"></a></h3>
+<p>The agent doesn’t have a static system prompt. Instead, it’s constructed based on state:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on_before_agent</span>
+<span class="k">if</span> <span class="n">scenario_id</span> <span class="ow">and</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="n">SCENARIOS</span><span class="p">:</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">SCENARIOS</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+    <span class="n">new_instruction</span> <span class="o">=</span> <span class="n">build_instruction</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">new_instruction</span>  <span class="c1"># ← Dynamic assignment</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+</pre></div>
+</div>
+<p><strong>Why dynamic?</strong></p>
+<ul class="simple">
+<li><p>Reduces context window usage (only relevant info included)</p></li>
+<li><p>Enables precision (instruction tailored to current scenario)</p></li>
+<li><p>Supports learning (instruction references weak words, completed scenarios)</p></li>
+</ul>
+</section>
+<section id="pattern-2-callback-driven-state-management">
+<h3>Pattern 2: Callback-Driven State Management<a class="headerlink" href="#pattern-2-callback-driven-state-management" title="Link to this heading"></a></h3>
+<p>The agent doesn’t directly manage state. Instead, callbacks hook into the agent’s lifecycle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>User Input
+    ↓
+on_before_agent() ← Prepare context
+    ↓
+Agent Reasoning Loop
+    ↓
+on_after_agent() ← Persist state
+    ↓
+Response
+</pre></div>
+</div>
+<p><strong>Why callbacks?</strong></p>
+<ul class="simple">
+<li><p><strong>Separation of concerns</strong>: Agent reasoning separate from state management</p></li>
+<li><p><strong>Testability</strong>: Callbacks can be mocked</p></li>
+<li><p><strong>Extensibility</strong>: New concerns added without modifying agent core</p></li>
+</ul>
+</section>
+<section id="pattern-3-tool-based-state-mutation">
+<h3>Pattern 3: Tool-Based State Mutation<a class="headerlink" href="#pattern-3-tool-based-state-mutation" title="Link to this heading"></a></h3>
+<p>State changes only happen through tools, never directly in callbacks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ GOOD: Tool modifies state</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mark_word_practiced</span><span class="p">(</span><span class="n">tool_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">practiced</span> <span class="o">=</span> <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">tool_context</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;words_practiced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">practiced</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="c1"># ✗ BAD: Callback modifies state</span>
+<span class="c1"># async def on_after_agent(callback_context):</span>
+<span class="c1">#     callback_context.state[&quot;words_practiced&quot;].append(word)  # Side effect!</span>
+</pre></div>
+</div>
+<p><strong>Why?</strong></p>
+<ul class="simple">
+<li><p><strong>Auditability</strong>: All state changes are tool calls (logged)</p></li>
+<li><p><strong>Consistency</strong>: State mutations always go through validation (error checking in tool)</p></li>
+<li><p><strong>Understandability</strong>: Reading tools shows what state changes are possible</p></li>
+</ul>
+</section>
+<section id="pattern-4-memory-informed-adaptation">
+<h3>Pattern 4: Memory-Informed Adaptation<a class="headerlink" href="#pattern-4-memory-informed-adaptation" title="Link to this heading"></a></h3>
+<p>Memory is consulted during context preparation, not during reasoning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on_before_agent (called BEFORE reasoning)</span>
+<span class="n">memories</span> <span class="o">=</span> <span class="k">await</span> <span class="n">callback_context</span><span class="o">.</span><span class="n">search_memory</span><span class="p">(</span><span class="s2">&quot;scenario fullført&quot;</span><span class="p">)</span>
+<span class="c1"># Memory informs instruction...</span>
+<span class="n">root_agent</span><span class="o">.</span><span class="n">instruction</span> <span class="o">=</span> <span class="n">SYSTEM_INSTRUCTION</span> <span class="o">+</span> <span class="n">memory_info</span>
+
+<span class="c1"># Agent reasoning (happens AFTER memory consultation)</span>
+<span class="c1"># Agent has memory-informed instruction in context window</span>
+</pre></div>
+</div>
+<p><strong>Why separate?</strong></p>
+<ul class="simple">
+<li><p><strong>Efficiency</strong>: No need to query memory multiple times per turn</p></li>
+<li><p><strong>Clarity</strong>: Memory influence is transparent (in the instruction)</p></li>
+<li><p><strong>Control</strong>: Agent doesn’t autonomously decide what memories to use</p></li>
+</ul>
+</section>
+</section>
+<section id="summary-the-complete-picture">
+<h2>Summary: The Complete Picture<a class="headerlink" href="#summary-the-complete-picture" title="Link to this heading"></a></h2>
+<section id="the-agent-stack">
+<h3>The Agent Stack<a class="headerlink" href="#the-agent-stack" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────────────────────┐
+│         User (Natural Language)                 │
+└──────────────────────┬──────────────────────────┘
+                       ↓
+        ┌──────────────────────────────┐
+        │   on_before_agent Callback   │
+        │  - Retrieve session state    │
+        │  - Search memory for context │
+        │  - Build dynamic instruction │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  Agent Reasoning Loop        │
+        │  (Gemini 2.5 Flash)          │
+        │  - Perceive user intent      │
+        │  - Select tools to invoke    │
+        │  - Generate response         │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │       Tool Invocation        │
+        ├──────────────────────────────┤
+        │  Local Tools:                │
+        │  - select_scenario           │
+        │  - mark_word_practiced       │
+        │  - get_progress              │
+        │  - end_scenario              │
+        │  - get_user_profile          │
+        │                              │
+        │  MCP Tools:                  │
+        │  - lookup_word (external)    │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │  on_after_agent Callback     │
+        │  - Increment exchange count  │
+        │  - Persist session to memory │
+        └──────────────────┬───────────┘
+                           ↓
+        ┌──────────────────────────────┐
+        │   State Persistence Layer    │
+        ├──────────────────────────────┤
+        │  Session Store:              │
+        │  - SqliteSessionService      │
+        │  - Current: state dict       │
+        │                              │
+        │  Long-Term Memory:           │
+        │  - InMemoryMemoryService     │
+        │  - Historical: completed     │
+        │    scenarios, weak words     │
+        └──────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="key-takeaways">
+<h3>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Agents are autonomous reasoners</strong> operating in a perceive-reason-act loop</p></li>
+<li><p><strong>Tools are the agent’s interface</strong> to affect state and gather information</p></li>
+<li><p><strong>MCP enables decoupled tool integration</strong> through a standard protocol</p></li>
+<li><p><strong>Sessions provide short-term context</strong> that evolves during a conversation</p></li>
+<li><p><strong>Memory provides long-term context</strong> that enables continuity across sessions</p></li>
+<li><p><strong>Dynamic instructions</strong> adapt agent behavior based on current state and historical context</p></li>
+</ol>
+<p>This Norwegian language learning agent demonstrates how these concepts combine to create an agent that’s both powerful and maintainable.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../03.Context_Engineering/" class="btn btn-neutral float-left" title="Context Engineering for Stateful AI Agents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Pubudu Samarakoon, 2026.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
